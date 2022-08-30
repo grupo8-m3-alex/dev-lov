@@ -1,4 +1,5 @@
 import './App.css'
+import Header from './components/Header';
 import RoutesMain from './routes';
 
 function App() {
@@ -6,7 +7,8 @@ function App() {
 
   return (
     <div className="App">
-      <RoutesMain />
+      {/* <RoutesMain /> */}
+      <Header/>
     </div>
   )
 }
