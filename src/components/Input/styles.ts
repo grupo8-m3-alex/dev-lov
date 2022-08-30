@@ -1,10 +1,13 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const BoxInput = styled.div`
-  width: 100%;
+interface IBoxInput {
+  widthInput: number
+}
+
+const BoxInput = styled.div<IBoxInput>`
+  width: ${({ widthInput }) => `${widthInput || 100}%`};
   display: flex;
   flex-direction: column;
-  max-width: 330px;
 
   label {
     color: white;
@@ -27,9 +30,11 @@ const BoxInput = styled.div`
     &::placeholder {
       color: white;
     }
+
+    &:focus {
+      outline: 2px solid white;
+    }
   }
-
-
 
 `;
 

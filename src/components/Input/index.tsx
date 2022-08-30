@@ -5,13 +5,13 @@ import BoxInput from "./styles";
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   register?: UseFormRegisterReturn;
-  typeStyle?: string;
+  widthInput?: number;
 }
 
-const Input = ({ label, register, type, ...rest }:IInput) => {
+const Input = ({ label, register, widthInput, ...rest }:IInput) => {
 
   return (
-    <BoxInput>
+    <BoxInput widthInput={widthInput || 100} >
       {label && <label htmlFor={label}>{label}</label>}
       <input id={label} {...rest} {...register} type="text"/>
     </BoxInput>
