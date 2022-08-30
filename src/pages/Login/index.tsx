@@ -12,14 +12,14 @@ const Login = () => (
 
       <h1>Cadastro</h1>
 
-      <Input label="Nome" placeholder="Nome" />
-      <Input label="Email" placeholder="Email" />
-      <Input label="Senha" placeholder="Senha" />
+      <Input label="Nome" placeholder="Digite seu nome" />
+      <Input label="Email" placeholder="Digite seu email" />
+      <Input label="Senha" placeholder="Digite sua senha" />
       <Input label="Confirme sua senha" placeholder="Confirme sua senha" />
-      <Input label="Cidade" placeholder="Cidade" />
-      <Input label="Estado" placeholder="Estado" />
-      <Input label="Idade" placeholder="Idade" />
-
+      <Input label="Cidade" placeholder="Digite seu cidade" />
+      <Input label="Estado" placeholder="Digite seu estado" />
+      <Input label="Idade" placeholder="Digite sua idade" />
+      
     </form>
   </Container>
 )

@@ -17,7 +17,7 @@ const BoxInput = styled.div`
     color: white;
     background-color: rgba(255, 255, 255, 0.51);
     height: 50px;
-    border-radius: 9px;
+    border-radius: 18px;
     padding-left: 0.4375rem;
     color: white;
     border: 0;

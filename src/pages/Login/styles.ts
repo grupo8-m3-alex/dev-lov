@@ -3,7 +3,6 @@ import styled from "styled-components";
 const Container = styled.div`
   margin: 0 auto;
   width: 100%;
-  height: 100vh;
   padding: 0 2%;
   background-image: linear-gradient(to bottom, #f20171, #b01956, #731b3c, #3b1521, #000000);
 
@@ -42,7 +41,7 @@ const Container = styled.div`
       font-size: 28px;
       text-align: center;
       font-weight: 300;
-      margin: 30px 0;
+      margin: 18px 0;
     }
   }
 `
