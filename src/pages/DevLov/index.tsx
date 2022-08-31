@@ -1,14 +1,12 @@
 import { CardContainer, DevLovContainer } from "./style";
-import Imagem from "../../Assets/Rectangle 19.png";
-import logo from "../../Assets/logo.png";
-import x from "../../Assets/xDevLov.png";
-import heart from "../../Assets/heartDevLov.png";
+import logo from "../../assets/logo.png";
+import x from "../../assets/xdevlov.png";
+import heart from "../../assets/heartDevLov.png";
 import { AiFillInfoCircle } from "react-icons/ai";
 import ButtonBack from "../../components/ButtonBack";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { number } from "yup";
+import { api } from "../../services/api";
 
 type IFrindList = Omit<IUsers, "password">;
 
@@ -27,14 +25,17 @@ interface IUsers {
 }
 
 const DevLov = () => {
-  const [users, setUsers] = useState<IUsers[]>({} as IUsers[]);
+  const [users, setUsers] = useState<IUsers[]>([]);
   const [count, setCount] = useState(0);
   const [isChange, setIsChange] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
-    axios("https://json-server-apikenzie.herokuapp.com/users").then(
-      (response) => setUsers(response.data)
-    );
+    api.get("users")
+      .then(({ data }) => {
+        setUsers(data);
+      })
+      .catch(err => console.error(err));
   }, []);
 
   const functionNext = () => {
@@ -47,6 +48,7 @@ const DevLov = () => {
       setCount((oldCount: number) => oldCount + 1);
     }
   };
+
   return (
     <DevLovContainer>
       <div className="header__devlov">
