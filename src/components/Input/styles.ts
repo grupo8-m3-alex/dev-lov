@@ -36,6 +36,11 @@ const BoxInput = styled.div<IBoxInput>`
     }
   }
 
+  span {
+    color: yellow;
+    margin-top: 5px;
+  }
+
 `;
 
 export default BoxInput;
