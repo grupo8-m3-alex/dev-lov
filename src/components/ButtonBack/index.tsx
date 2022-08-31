@@ -1,7 +1,11 @@
 import { ContainerButonBack } from "./style";
 
-const ButtonBack = () => {
-  return <ContainerButonBack>Voltar</ContainerButonBack>;
+interface IpropsButton {
+  onClick: () => void;
+}
+
+const ButtonBack = ({ onClick }: IpropsButton) => {
+  return <ContainerButonBack onClick={onClick}>Voltar</ContainerButonBack>;
 };
 
 export default ButtonBack;

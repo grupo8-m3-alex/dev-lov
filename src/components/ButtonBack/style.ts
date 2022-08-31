@@ -10,4 +10,8 @@ export const ContainerButonBack = styled.button`
   font-weight: 600;
   font-size: 1rem;
   border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
 `;

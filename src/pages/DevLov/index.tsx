@@ -7,15 +7,30 @@ import { AiFillInfoCircle } from "react-icons/ai";
 import ButtonBack from "../../components/ButtonBack";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { number } from "yup";
 
-// interface IUsers {
-//   users: any;
-//   setUsers: any;
-// }
+type IFrindList = Omit<IUsers, "password">;
+
+interface IUsers {
+  age: number;
+  bio: string;
+  city: string;
+  email: string;
+  friendList?: IFrindList[];
+  gender: string;
+  id: number;
+  name: string;
+  password: string;
+  state: string;
+  url_avatar: string;
+}
 
 const DevLov = () => {
-  const [users, setUsers] = useState<any>({});
-  const [count, setCount] = useState<any>(0);
+  const [users, setUsers] = useState<IUsers[]>({} as IUsers[]);
+  const [count, setCount] = useState(0);
+  const [isChange, setIsChange] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     axios("https://json-server-apikenzie.herokuapp.com/users").then(
       (response) => setUsers(response.data)
@@ -25,6 +40,10 @@ const DevLov = () => {
   const functionNext = () => {
     if (count === users.length - 1) {
     } else {
+      setIsChange(true);
+      setTimeout(() => {
+        setIsChange(true);
+      }, 1000);
       setCount((oldCount: number) => oldCount + 1);
     }
   };
@@ -32,16 +51,20 @@ const DevLov = () => {
     <DevLovContainer>
       <div className="header__devlov">
         <img src={logo} alt="" />
-        <ButtonBack />
+        <ButtonBack onClick={() => navigate("/home")} />
       </div>
       {users.length > 0 ? (
-        <CardContainer>
+        <CardContainer isChange={isChange}>
           <li>
             <div>
-              <img src={users[count].url_avatar} alt="" />
+              <img
+                className="AvatarImage"
+                src={users[count].url_avatar}
+                alt=""
+              />
               <div className="nameAndinfo">
                 <span>{users[count].name}</span>
-                <AiFillInfoCircle />
+                <AiFillInfoCircle onClick={() => navigate("/profile")} />
               </div>
               <div className="button__container">
                 <button>
