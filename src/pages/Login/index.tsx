@@ -46,7 +46,9 @@ const Login = () => {
   const login = async (data: FormData) => {
     toast.promise(api.post('login', data), {
       loading: 'Autenticando...',
-      success: () => {
+      success: ({ data }) => {
+        localStorage.setItem('@token_devlov', data.accessToken);
+        api.defaults.headers.common['Authorization'] = data.accessToken;
         navigate('/home');
         return 'Autenticado';
       },
