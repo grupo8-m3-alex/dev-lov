@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { number } from "yup";
+import toast, { Toaster } from "react-hot-toast";
+import { AiFillHeart } from "react-icons/ai";
 
 type IFrindList = Omit<IUsers, "password">;
 
@@ -31,13 +33,32 @@ const DevLov = () => {
   const [count, setCount] = useState(0);
   const [isChange, setIsChange] = useState(false);
   const navigate = useNavigate();
+  const icons = <AiFillHeart />;
+  const toastAddFriend = () =>
+    toast("Adicionado a lista de conexões", {
+      duration: 1000,
+      icon: <AiFillHeart color="red" size={24} />,
+    });
+
   useEffect(() => {
-    axios("https://json-server-apikenzie.herokuapp.com/users").then(
-      (response) => setUsers(response.data)
-    );
+    axios("https://json-server-apikenzie.herokuapp.com/users")
+      .then((response) => setUsers(response.data))
+      .catch((error) => console.log(error));
   }, []);
 
   const functionNext = () => {
+    if (count === users.length - 1) {
+      toastAddFriend();
+    } else {
+      toastAddFriend();
+      setIsChange(true);
+      setTimeout(() => {
+        setIsChange(true);
+      }, 1000);
+      setCount((oldCount: number) => oldCount + 1);
+    }
+  };
+  const functionNextx = () => {
     if (count === users.length - 1) {
     } else {
       setIsChange(true);
@@ -68,7 +89,7 @@ const DevLov = () => {
               </div>
               <div className="button__container">
                 <button>
-                  <img onClick={functionNext} src={x} alt="" />
+                  <img onClick={functionNextx} src={x} alt="" />
                 </button>
                 <button>
                   <img onClick={functionNext} src={heart} alt="" />
