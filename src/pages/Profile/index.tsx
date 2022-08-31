@@ -1,5 +1,5 @@
-const Profile = () => (
-  <h1>Profile</h1>
-)
+import ModalAddPost from "../../components/ModalCreatePost";
+
+const Profile = () => <ModalAddPost />;
 
 export default Profile;
