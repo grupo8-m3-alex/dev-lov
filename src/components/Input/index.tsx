@@ -3,16 +3,16 @@ import { DeepMap, FieldError, FieldErrorsImpl, Merge, UseFormRegisterReturn } fr
 import BoxInput from "./styles";
 
 export interface FormDataDefault {
-  name?: string;
-  email?: string;
-  url_avatar?: string;
-  password?: string;
-  confirmPassword?: string;
-  age?: string;
-  bio?: string;
-  city?: string;
-  state?: string;
-  gender?: string;
+  name: string;
+  email: string;
+  url_avatar: string;
+  password: string;
+  confirmPassword: string;
+  age: string;
+  bio: string;
+  city: string;
+  state: string;
+  gender: string;
 }
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { FormDataDefault } from '../components/Input';
 
 const api = axios.create({
   baseURL: 'https://json-server-apikenzie.herokuapp.com/',
@@ -30,10 +31,11 @@ export const userIsValid = async (token, user) => {
       })
 }
 
-export const registerUser = async (data) => {
+export const registerUser = async (data: FormDataDefault) => {
+  const { name, email, url_avatar, password, confirmPassword, age, bio, city, state, gender } = data
   return await
     api
-      .get('register')
+      .post('register', { name, email, url_avatar, password, confirmPassword, age, bio, city, state, gender })
       .then(res => {
         console.log(res);
         return true;
@@ -43,4 +45,3 @@ export const registerUser = async (data) => {
         return false;
       })
 }
-
