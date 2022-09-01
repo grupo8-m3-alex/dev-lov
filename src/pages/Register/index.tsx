@@ -6,11 +6,12 @@ import { useForm } from "react-hook-form";
 import schemaRegister from "../../validations/schemaRegister";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormDataDefault } from "../../components/Input";
-import { registerUser } from "../../services/api";
-import toast from "react-hot-toast";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { registerUser } = useContext(UserContext)
   const logOut = () => navigate("/", { replace: true });
   const { register, handleSubmit, formState: { errors } } = useForm<FormDataDefault>({
     resolver: yupResolver(schemaRegister)
@@ -18,14 +19,7 @@ const Login = () => {
 
 
   const submitForm = (data: FormDataDefault) => {
-    toast.promise(registerUser(data), {
-      loading: 'Verificando dados',
-      success: () => {
-        navigate('/', { replace: true })
-        return 'Registrado com sucesso';
-      },
-      error: 'Erro ao criar o usuario'
-    })
+    registerUser(data);
   };
 
   return (

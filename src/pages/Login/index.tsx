@@ -3,11 +3,9 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaLogin } from '../../validations/schemaLogin';
-
 import { IoEyeSharp } from 'react-icons/io5';
 import { BsFillEyeSlashFill } from 'react-icons/bs';
 import { Button, Container, Form, Password } from './styles';
-
 import logo from '../../assets/Group 29.png';
 import Input from '../../components/Input';
 import { UserContext } from '../../contexts/userContext';

@@ -1,6 +1,7 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FormDataDefault } from "../components/Input";
 import { FormData } from "../pages/Login";
 import { api } from "../services/api";
 
@@ -24,7 +25,8 @@ export interface IUser {
 interface IUserContext {
   user: IUser | null;
   singIn: (dataForm: FormData) => Promise<any>;
-  setIsLoading: Dispatch<SetStateAction<boolean>>
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  registerUser: (data: FormDataDefault) => Promise<any>;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -51,9 +53,9 @@ const UserProvider = ({ children }: IUserProvider) => {
       .get(`users/${user.id}`)
       .then(() => {
         setUser(user);
-
-        const from = location.pathname === '/' ? 'home' : location.pathname || 'home';
-        navigate(from, { replace: true })
+        const from = location.state?.from || 'home';
+        console.log(location.state)
+        navigate(from, { replace: true });
       })
       .catch((err) => console.error(err))
       .finally(() => setIsLoading(false));
@@ -67,11 +69,13 @@ const UserProvider = ({ children }: IUserProvider) => {
         toast.success("Autenticado", {
           id: toastSingIn
         })
+        
         api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
         localStorage.setItem('@token_devlov', accessToken);
         localStorage.setItem('@user_devlov', JSON.stringify(user));
         setUser(user)
-        navigate('home', { replace: true })
+        const from = location.state?.from || 'home';
+        navigate(from, { replace: true })
       })
       .catch((err) => {
         toast.error("Ops! Email ou Senha invalidos.", {
@@ -80,10 +84,52 @@ const UserProvider = ({ children }: IUserProvider) => {
       })
   };
 
+  const registerUser = async (data: FormDataDefault) => {
+    const {
+      name,
+      email,
+      url_avatar,
+      password,
+      confirmPassword,
+      age,
+      bio,
+      city,
+      state,
+      gender,
+    } = data;
+    const toastRegister = toast.loading('Checando dados...');
+    return await api
+      .post('register', {
+        name,
+        email,
+        url_avatar,
+        password,
+        confirmPassword,
+        age,
+        bio,
+        city,
+        state,
+        gender,
+      })
+      .then((res) => {
+        toast.success("Usuario cadastrado", {
+          id: toastRegister
+        })
+        navigate('/', { replace: true });
+        return res.data
+      })
+      .catch((err) => {
+        toast.error("Dados invalidos", {
+          id: toastRegister
+        })
+        return err
+      });
+  };
+
   if (isLoading) return (<h1>Carregando</h1>)
 
   return (
-    <UserContext.Provider value={{ user, singIn, setIsLoading }}>
+    <UserContext.Provider value={{ user, singIn, setIsLoading, registerUser }}>
       {children}
     </UserContext.Provider>
   )
