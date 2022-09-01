@@ -36,6 +36,11 @@ const DevLov = () => {
     axios("https://json-server-apikenzie.herokuapp.com/users").then(
       (response) => setUsers(response.data)
     );
+    setIsChange(true);
+
+    const timer = setTimeout(() => {
+      setIsChange(false);
+    }, 1000);
   }, []);
 
   const functionNext = () => {

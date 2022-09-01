@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-export const ModalAddContainer = createGlobalStyle`
+export const ModalEditContainer = createGlobalStyle`
   .Modal {
     position: absolute;
     top: 50%;
@@ -47,19 +47,39 @@ box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
     form {
         display: flex;
         flex-direction: column;
-        button{
-            background-color: #F20171;
-            opacity: 0.7;
-            color: aliceblue;
-            font-weight: 600;
-            font-size: 1rem;
-            border: none;
-            border-radius: 4px;
-            height: 3rem;
+        .buttonContainer{
+            display: flex;
+            justify-content: space-between;
             width: 100%;
-            &:hover {
+            align-items: center;
+            .buttonDelete{
+                background-color: rgba(0, 0, 0, 0.3);
+                color: white;
+                font-weight: 600;
+                font-size: 1rem;
+                border: none;
+                border-radius: 4px;
+                height: 3rem;
+                width: 30%; 
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.5) 
+                }
+            }
+
+            .buttonPubli{
+                background-color: #F20171;
+                opacity: 0.7;
+                color: aliceblue;
+                font-weight: 600;
+                font-size: 1rem;
+                border: none;
+                border-radius: 4px;
+                height: 3rem;
+                width: 30%;
+                &:hover {
                     opacity: 1;
                 }
+            }
         }
     }
      form> textarea {
