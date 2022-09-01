@@ -33,8 +33,22 @@ export const ContainerComment = styled.div`
   }
  }
 
- p {
-  margin: 5px 30px 10px;
-  text-align: justify;
- }
+  .TextComment {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-wrap: wrap;
+   max-width: 700px;
+   width: 100%;
+  
+   p {
+    padding-right: 10px;
+    max-width: 650px;
+    margin-left: 40px;
+    margin-right: 20px;
+    width: 100%;
+    word-wrap: break-word;
+    text-align: justify;
+   }
+  }
 `

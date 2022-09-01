@@ -34,17 +34,9 @@ const Post = ({ showComments, setShowComments, like, setLike }: IComments) => {
           <HiDotsHorizontal />
         </button>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eos
-        inventore fuga quam ut et atque blanditiis quas consequuntur
-        exercitationem! Lorem ipsum, dolor sit amet consectetur adipisicing
-        elit. Expedita voluptate provident modi laudantium quae perferendis nam
-        doloremque distinctio eum, eveniet quaerat dolorum unde voluptatem ea
-        sequi veniam illo laboriosam impedit. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Sit eligendi quisquam commodi consequatur
-        necessitatibus, omnis inventore deleniti! Magni, atque officia ut, cum
-        ex commodi aut culpa omnis nulla quisquam aspernatur?
-      </p>
+      <div className="Text">
+      <p></p>
+      </div>
       <div className="Buttons">
         <div className="LeftButtons">
           <button id="btnOne" onClick={() => handleLike()}>

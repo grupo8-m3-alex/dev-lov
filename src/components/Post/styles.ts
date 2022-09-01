@@ -20,9 +20,9 @@ export const Content = styled.div`
   margin: 2px 5px 5px 5px;
 
   .InfoUser {
-   display: flex;
-   align-items: center;
-   width: 300px;
+  display: flex;
+  align-items: center;
+  width: 300px;
    
    img {
     border-radius: 100%;
@@ -64,9 +64,25 @@ export const Content = styled.div`
    }
   } 
  }
- p {
-  text-align: justify;
-  margin: 5px 30px 5px 30px;
+ 
+ .Text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 728px;
+    width: 100%;
+  
+    p {
+      max-width: 720px;
+      padding-left: 20px;
+      padding-right: 20px;
+      width: 100%;
+      margin-right: 10px;
+      margin-left: 10px;
+      word-wrap: break-word;
+      text-align: justify;
+    }
  }
 
  .Buttons {

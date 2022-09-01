@@ -6,12 +6,10 @@ const Comment = () => (
      <img src="" alt=""/>
      <h2>Name User</h2>
     </div>
+    <div className="TextComment">
     <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-      obcaecati praesentium doloribus cumque consequuntur dolores eius saepe a
-      animi eos, minus aspernatur voluptatem quo similique. Ad quia deserunt
-      illo et!
-    </p>
+    Em linguística, a noção de texto é ampla e ainda aberta a uma definição mais precisa. Grosso modo, pode ser entendido como manifestação linguística das ideias de um autor, que serão interpretadas pelo leitor de acordo com seus conhecimentos linguísticos e culturais. Seu tamanho é variável      </p>
+    </div>
   </ContainerComment>
 );
 
