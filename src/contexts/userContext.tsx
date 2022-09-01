@@ -81,7 +81,7 @@ const UserProvider = ({ children }: IUserProvider) => {
       .get(`users/${user.id}`)
       .then(() => {
         setUser(user);
-        const from = location.state?.from || location.pathname;
+        const from = location.state?.from || location.pathname === '/' ? 'home' : location.pathname;
         console.log(location.state)
         navigate(from, { replace: true });
       })

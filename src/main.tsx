@@ -5,14 +5,17 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from "react-hot-toast"
 import UserProvider from './contexts/userContext';
+import { AnimatePresence } from 'framer-motion'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
-        <Toaster />
-        <App />
-      </UserProvider>
+      <AnimatePresence>
+        <UserProvider>
+            <Toaster />
+            <App />
+        </UserProvider>
+      </AnimatePresence>
     </BrowserRouter>
   </React.StrictMode>
 )
