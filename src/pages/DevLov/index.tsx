@@ -1,6 +1,6 @@
 import { Container } from "./style";
-import Imagem from "../../Assets/Rectangle 19.png";
-import logo from "../../Assets/Group 29.png";
+import Imagem from "../../Assets/person_img.png";
+import logo from "../../Assets/logo.png";
 
 const DevLov = () => (
   <>
