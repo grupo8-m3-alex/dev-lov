@@ -59,6 +59,8 @@ const UserProvider = ({ children }: IUserProvider) => {
   }, []);
 
   const registerUser = async (data: FormDataDefault) => {
+    data.friendList = [];
+    data.unFriendsList = [];
     const toastRegister = toast.loading('Verificando dados...');
     return await api
       .post('/register', data)

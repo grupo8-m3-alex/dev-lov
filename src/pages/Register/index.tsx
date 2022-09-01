@@ -19,7 +19,27 @@ const Login = () => {
 
 
   const submitForm = (data: FormDataDefault) => {
-    registerUser(data);
+    const { name,
+      email,
+      url_avatar,
+      password,
+      age,
+      bio,
+      city,
+      state,
+      gender
+    }: FormDataDefault = data
+
+    registerUser({ name,
+      email,
+      url_avatar,
+      password,
+      age,
+      bio,
+      city,
+      state,
+      gender
+    });
   };
 
   return (
