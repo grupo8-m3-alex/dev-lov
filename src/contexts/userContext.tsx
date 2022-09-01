@@ -24,7 +24,13 @@ export interface IUser {
 interface IUserContext {
   user: IUser | null;
   singIn: (dataForm: FormData) => Promise<any>;
-  setIsLoading: Dispatch<SetStateAction<boolean>>
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  getPosts: () => Promise<void>;
+  getUser: (id: string) => Promise<void>;
+  deletePost: (id: string) => Promise<void>;
+  updateUser: (id: string, data: any) => Promise<void>;
+  isLoading: boolean;
+  createPost: (data: any) => Promise<void>;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -80,10 +86,43 @@ const UserProvider = ({ children }: IUserProvider) => {
       })
   };
 
-  if (isLoading) return (<h1>Carregando</h1>)
+  const getPosts = async () => {
+    return await api
+      .get('posts')
+      .then(({ data }) => console.log(data))
+      .catch(err => console.error(err))
+  }
+
+  const deletePost = async (id: string) => {
+    return await api
+      .delete(`posts/${id}`)
+      .then(res => console.log(res.data))
+      .catch(err => console.error(err))
+  }
+
+  const createPost = async (data: any) => {
+    return await api
+      .post('posts', data)
+      .then(res => console.log(res))
+      .catch(err => console.error(err))
+  }
+
+  const getUser = async (id: string) => {
+    return await api
+      .get(`users/${id}`)
+      .then(({ data }) => console.log(data))
+      .catch(err => console.log(err))
+  }
+
+  const updateUser = async (id: string, data:any) => {
+    return await api
+      .patch(`users/${id}`, data)
+      .then(res => console.log(res))
+      .catch(err => console.error(err))
+  }
 
   return (
-    <UserContext.Provider value={{ user, singIn, setIsLoading }}>
+    <UserContext.Provider value={{ user, singIn, setIsLoading, getPosts, deletePost, getUser, updateUser, isLoading, createPost }}>
       {children}
     </UserContext.Provider>
   )
