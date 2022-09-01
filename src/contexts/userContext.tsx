@@ -1,12 +1,18 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Location, useLocation, useNavigate } from "react-router-dom";
 import { FormDataDefault } from "../components/Input";
 import { FormData } from "../pages/Login";
 import { api } from "../services/api";
 
 interface IUserProvider {
   children: ReactNode;
+}
+
+interface ILocationState extends Location {
+  state: {
+    from: string | null;
+  };
 }
 
 export interface IUser {
@@ -41,7 +47,7 @@ const UserProvider = ({ children }: IUserProvider) => {
   const [user, setUser] = useState<IUser | null>(null as IUser | null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation() as ILocationState;
 
   useEffect(() => {
     const token = localStorage.getItem('@token_devlov');
@@ -75,7 +81,7 @@ const UserProvider = ({ children }: IUserProvider) => {
       .get(`users/${user.id}`)
       .then(() => {
         setUser(user);
-        const from = location.state?.from || 'home';
+        const from = location.state?.from || location.pathname;
         console.log(location.state)
         navigate(from, { replace: true });
       })
