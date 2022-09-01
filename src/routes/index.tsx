@@ -8,15 +8,15 @@ import ProtectRouets from "./ProtectRoutes";
 
 const RoutesMain = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route element={<ProtectRouets />}>
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/devlov" element={<DevLov />} />
-      </Route>
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route element={<ProtectRouets />}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/devlov" element={<DevLov />} />
+        </Route>
+      </Routes>
   )
 }
 
