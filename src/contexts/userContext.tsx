@@ -1,6 +1,7 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FormDataDefault } from "../components/Input";
 import { FormData } from "../pages/Login";
 import { api } from "../services/api";
 
@@ -31,6 +32,7 @@ interface IUserContext {
   updateUser: (id: string, data: any) => Promise<void>;
   isLoading: boolean;
   createPost: (data: any) => Promise<void>;
+  registerUser: (data: FormDataDefault) => Promise<any>;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -57,9 +59,9 @@ const UserProvider = ({ children }: IUserProvider) => {
       .get(`users/${user.id}`)
       .then(() => {
         setUser(user);
-
-        const from = location.pathname === '/' ? 'home' : location.pathname || 'home';
-        navigate(from, { replace: true })
+        const from = location.state?.from || 'home';
+        console.log(location.state)
+        navigate(from, { replace: true });
       })
       .catch((err) => console.error(err))
       .finally(() => setIsLoading(false));
@@ -73,11 +75,13 @@ const UserProvider = ({ children }: IUserProvider) => {
         toast.success("Autenticado", {
           id: toastSingIn
         })
+        
         api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
         localStorage.setItem('@token_devlov', accessToken);
         localStorage.setItem('@user_devlov', JSON.stringify(user));
         setUser(user)
-        navigate('home', { replace: true })
+        const from = location.state?.from || 'home';
+        navigate(from, { replace: true })
       })
       .catch((err) => {
         toast.error("Ops! Email ou Senha invalidos.", {

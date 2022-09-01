@@ -9,7 +9,7 @@ const ProtectRouets = () => {
   return user ? (
     <Outlet />
   ) : (
-    <Navigate to='/' replace state={{ from: location.pathname } as { from: string}} />
+    <Navigate to='/' replace state={{ from: location.pathname }} />
   );
 }
 
