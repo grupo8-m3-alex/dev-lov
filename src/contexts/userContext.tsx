@@ -50,7 +50,23 @@ const UserProvider = ({ children }: IUserProvider) => {
     if (token !== null && user !== null) {
       userIsValid(token, JSON.parse(user));
     }
-  }, [])
+  }, []);
+
+  const registerUser = async (data: FormDataDefault) => {
+    const toastRegister = toast.loading('Verificando dados...');
+    return await api
+      .post('/register', data)
+      .then(res => {
+        toast.success('Usuario registrado com sucesso', {
+          id: toastRegister
+        });
+        navigate('/', { replace: true })
+      })
+      .catch(err => {
+        toast.error('Dados invalidos')
+        console.error(err)
+      })
+  }
 
   const userIsValid = async (token : string, user: IUser) => {
     setIsLoading(true);
@@ -126,7 +142,7 @@ const UserProvider = ({ children }: IUserProvider) => {
   }
 
   return (
-    <UserContext.Provider value={{ user, singIn, setIsLoading, getPosts, deletePost, getUser, updateUser, isLoading, createPost }}>
+    <UserContext.Provider value={{ user, singIn, setIsLoading, getPosts, deletePost, getUser, updateUser, isLoading, createPost, registerUser }}>
       {children}
     </UserContext.Provider>
   )
