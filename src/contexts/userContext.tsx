@@ -26,6 +26,12 @@ interface IUserContext {
   user: IUser | null;
   singIn: (dataForm: FormData) => Promise<any>;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  getPosts: () => Promise<void>;
+  getUser: (id: string) => Promise<void>;
+  deletePost: (id: string) => Promise<void>;
+  updateUser: (id: string, data: any) => Promise<void>;
+  isLoading: boolean;
+  createPost: (data: any) => Promise<void>;
   registerUser: (data: FormDataDefault) => Promise<any>;
 }
 
@@ -84,52 +90,43 @@ const UserProvider = ({ children }: IUserProvider) => {
       })
   };
 
-  const registerUser = async (data: FormDataDefault) => {
-    const {
-      name,
-      email,
-      url_avatar,
-      password,
-      confirmPassword,
-      age,
-      bio,
-      city,
-      state,
-      gender,
-    } = data;
-    const toastRegister = toast.loading('Checando dados...');
+  const getPosts = async () => {
     return await api
-      .post('register', {
-        name,
-        email,
-        url_avatar,
-        password,
-        confirmPassword,
-        age,
-        bio,
-        city,
-        state,
-        gender,
-      })
-      .then((res) => {
-        toast.success("Usuario cadastrado", {
-          id: toastRegister
-        })
-        navigate('/', { replace: true });
-        return res.data
-      })
-      .catch((err) => {
-        toast.error("Dados invalidos", {
-          id: toastRegister
-        })
-        return err
-      });
-  };
+      .get('posts')
+      .then(({ data }) => console.log(data))
+      .catch(err => console.error(err))
+  }
 
-  if (isLoading) return (<h1>Carregando</h1>)
+  const deletePost = async (id: string) => {
+    return await api
+      .delete(`posts/${id}`)
+      .then(res => console.log(res.data))
+      .catch(err => console.error(err))
+  }
+
+  const createPost = async (data: any) => {
+    return await api
+      .post('posts', data)
+      .then(res => console.log(res))
+      .catch(err => console.error(err))
+  }
+
+  const getUser = async (id: string) => {
+    return await api
+      .get(`users/${id}`)
+      .then(({ data }) => console.log(data))
+      .catch(err => console.log(err))
+  }
+
+  const updateUser = async (id: string, data:any) => {
+    return await api
+      .patch(`users/${id}`, data)
+      .then(res => console.log(res))
+      .catch(err => console.error(err))
+  }
 
   return (
-    <UserContext.Provider value={{ user, singIn, setIsLoading, registerUser }}>
+    <UserContext.Provider value={{ user, singIn, setIsLoading, getPosts, deletePost, getUser, updateUser, isLoading, createPost }}>
       {children}
     </UserContext.Provider>
   )
