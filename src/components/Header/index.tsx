@@ -3,10 +3,12 @@ import heart from "../../Assets/heart.png";
 import { Header_ } from "./styled";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { UserContext } from "../../contexts/userContext";
+import { useContext } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
-  
+  const {user} = useContext(UserContext)
   const redirectDevlov = () => {
     toast.success("Entrando em DevLov", {
       duration: 3000,
@@ -29,7 +31,7 @@ const Header = () => {
           <img src={heart} alt="S2" />
         </button>
         <button id="btnProfile">
-          <img src="" alt="" />
+          <img src={user?.url_avatar} alt="" />
         </button>
       </div>
     </div>

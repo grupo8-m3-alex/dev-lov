@@ -19,3 +19,7 @@ body::-webkit-scrollbar-thumb {
  background-color: rgb(77, 77, 77);    
  border-radius: 20px;
 }
+
+.App {
+  width: 100%;
+}

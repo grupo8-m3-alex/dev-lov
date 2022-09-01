@@ -23,7 +23,6 @@ export const ContainerHome = styled.div`
     width: 60px;
     height: 60px;
     border-radius: 100%;
-    background-color: black;
     margin: 10px;
    }
 
