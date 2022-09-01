@@ -1,5 +1,5 @@
-import ModalAddPost from "../../components/ModalCreatePost";
+import ModalFriendList from "../../components/ModalFriendList";
 
-const Profile = () => <ModalAddPost />;
+const Profile = () => <ModalFriendList />;
 
 export default Profile;
