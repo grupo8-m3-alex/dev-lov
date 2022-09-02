@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AiFillHeart } from "react-icons/ai";
 import { api } from "../../services/api";
-import { UserContext } from "../../contexts/userContext";
+import { IUser, UserContext } from "../../contexts/userContext";
 import axios from "axios";
 import ModalLoading from "../../components/ModalLoading";
 
@@ -36,7 +36,8 @@ const DevLov = () => {
   const navigate = useNavigate();
   const icons = <AiFillHeart />;
 
-  const { updateUser, user, isLoading } = useContext(UserContext);
+  const { updateUser, isLoading, user, userIsValid, setUser } =
+    useContext(UserContext);
 
   const toastAddFriend = () =>
     toast("Adicionado a lista de conexões", {
@@ -52,13 +53,26 @@ const DevLov = () => {
     api
       .get("users")
       .then(({ data }) => {
-        setUsers(data);
+        const filterUser = data.filter((elem: any) => elem.id !== user?.id);
+        const filterFriends = filterUser.filter((elem: any) => {
+          if (!user?.friendsList.some((item) => item.id === elem.id)) {
+            return elem;
+          }
+        });
+
+        const unFilterFriends = filterFriends.filter((elem: any) => {
+          if (!user?.unFriendsList.some((item: any) => item === elem.id)) {
+            return elem;
+          }
+        });
+        setUsers(unFilterFriends);
       })
       .catch((err) => console.error(err));
   }, []);
+
   function addConection(event: any) {
     const idFriend = +event.target.id;
-    const usersFilter: any = users.filter((user) => user.id == idFriend);
+    const usersFilter = users.filter((user) => user.id == idFriend);
     const userFriends = {
       url_avatar: usersFilter[0].url_avatar,
       name: usersFilter[0].name,
@@ -66,14 +80,18 @@ const DevLov = () => {
       id: usersFilter[0].id,
     };
     if (user) {
-      updateUser(user.id, { friendsList: [...user.friendsList, userFriends] });
+      updateUser(user.id, {
+        friendsList: [...user.friendsList, userFriends],
+      });
     }
   }
-  console.log(user);
+
   function addNoConection(event: any) {
     const idFriend = +event.target.id;
     if (user) {
-      updateUser(user.id, { unFriendsList: [...user.unFriendsList, idFriend] });
+      updateUser(user.id, {
+        unFriendsList: [...user.unFriendsList, idFriend],
+      });
     }
   }
 
@@ -104,6 +122,7 @@ const DevLov = () => {
     }
   };
 
+  console.log(user);
   const navigateToProfile = (event: any) => {
     const idProfile = event.target.parentNode.id;
     navigate(`/profile/${idProfile}`);
