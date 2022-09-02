@@ -7,7 +7,9 @@ export interface FormDataDefault {
   email: string;
   url_avatar: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
+  friendList?: [];
+  unFriendsList?: [];
   age: string;
   bio: string;
   city: string;

@@ -11,6 +11,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { api } from "../../services/api";
 import { UserContext } from "../../contexts/userContext";
 import axios from "axios";
+import ModalLoading from "../../components/ModalLoading";
 
 type IFrindList = Omit<IUsers, "password">;
 
@@ -35,9 +36,7 @@ const DevLov = () => {
   const navigate = useNavigate();
   const icons = <AiFillHeart />;
 
-  const { updateUser, user } = useContext(UserContext);
-
-  console.log(user);
+  const { updateUser, user, isLoading } = useContext(UserContext);
 
   const toastAddFriend = () =>
     toast("Adicionado a lista de conexões", {
@@ -46,6 +45,10 @@ const DevLov = () => {
     });
 
   useEffect(() => {
+    setIsChange(true);
+    setTimeout(() => {
+      setIsChange(false);
+    }, 1000);
     api
       .get("users")
       .then(({ data }) => {
@@ -55,19 +58,23 @@ const DevLov = () => {
   }, []);
   function addConection(event: any) {
     const idFriend = +event.target.id;
+    const usersFilter: any = users.filter((user) => user.id == idFriend);
+    const userFriends = {
+      url_avatar: usersFilter[0].url_avatar,
+      name: usersFilter[0].name,
+      age: usersFilter[0].age,
+      id: usersFilter[0].id,
+    };
     if (user) {
-      updateUser(user.id, { friendsList: [...user.friendsList, idFriend] });
+      updateUser(user.id, { friendsList: [...user.friendsList, userFriends] });
     }
   }
-
+  console.log(user);
   function addNoConection(event: any) {
     const idFriend = +event.target.id;
-    console.log(event.target);
-    console.log(idFriend);
     if (user) {
       updateUser(user.id, { unFriendsList: [...user.unFriendsList, idFriend] });
     }
-    console.log(user);
   }
 
   const functionNext = (event: any) => {
@@ -97,50 +104,61 @@ const DevLov = () => {
     }
   };
 
+  const navigateToProfile = (event: any) => {
+    const idProfile = event.target.parentNode.id;
+    navigate(`/profile/${idProfile}`);
+  };
+  // return <ModalLoading />;
   return (
-    <DevLovContainer>
-      <div className="header__devlov">
-        <img src={logo} alt="" />
-        <ButtonBack onClick={() => navigate("/home")} />
-      </div>
-      {users.length > 0 ? (
-        <CardContainer isChange={isChange}>
-          <li>
-            <div>
-              <img
-                className="AvatarImage"
-                src={users[count].url_avatar}
-                alt=""
-              />
-              <div className="nameAndinfo">
-                <span>{users[count].name}</span>
-                <AiFillInfoCircle onClick={() => navigate("/profile")} />
-              </div>
-              <div className="button__container">
-                <button>
-                  <img
-                    onClick={functionNextx}
+    <>
+      <DevLovContainer>
+        <div className="header__devlov">
+          <img src={logo} alt="" />
+          <ButtonBack onClick={() => navigate("/home")} />
+        </div>
+
+        {users.length > 0 ? (
+          <CardContainer isChange={isChange}>
+            <li>
+              <div>
+                <img
+                  className="AvatarImage"
+                  src={users[count].url_avatar}
+                  alt=""
+                />
+                <div className="nameAndinfo" id={users[count].id.toString()}>
+                  <span>{users[count].name}</span>
+                  <AiFillInfoCircle
                     id={users[count].id.toString()}
-                    src={x}
-                    alt=""
+                    onClick={navigateToProfile}
                   />
-                </button>
-                <button>
-                  <img
-                    onClick={functionNext}
-                    src={heart}
-                    id={users[count].id.toString()}
-                    alt=""
-                  />
-                </button>
+                </div>
+                <div className="button__container">
+                  <button>
+                    <img
+                      onClick={functionNextx}
+                      id={users[count].id.toString()}
+                      src={x}
+                      alt=""
+                    />
+                  </button>
+                  <button>
+                    <img
+                      onClick={functionNext}
+                      src={heart}
+                      id={users[count].id.toString()}
+                      alt=""
+                    />
+                  </button>
+                </div>
               </div>
-            </div>
-          </li>
-        </CardContainer>
-      ) : (
-        <></>
-      )}
-    </DevLovContainer>
+            </li>
+          </CardContainer>
+        ) : (
+          <></>
+        )}
+      </DevLovContainer>
+    </>
   );
 };
 
