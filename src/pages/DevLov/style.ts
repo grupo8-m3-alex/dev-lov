@@ -1,22 +1,15 @@
-import { ReactNode } from "react";
 import styled from "styled-components";
-
-interface IDevLovContainer {
-  Container: ReactNode;
-}
 
 interface IPropsDevLov {
   isChange: boolean;
 }
 
 export const DevLovContainer = styled.div`
-  * {
-    font-family: "Inter";
-  }
   padding-top: 2rem;
   width: 100vw;
   height: 100vh;
   background-image: linear-gradient(rgba(245, 1, 114, 1), #271d22);
+
   > div {
     display: flex;
     align-items: center;
@@ -25,6 +18,7 @@ export const DevLovContainer = styled.div`
     max-width: 22.5rem;
     margin: auto;
     margin-bottom: 4rem;
+
     img {
       width: 12rem;
     }
@@ -40,12 +34,14 @@ export const CardContainer = styled.ul<IPropsDevLov>`
       transform: translatey(1);
     }
   }
+
   animation-name: ${({ isChange }) => (isChange ? "identifier" : "")};
   animation-duration: 0.5s;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
+
   > li {
     display: flex;
     justify-content: center;
@@ -73,6 +69,7 @@ export const CardContainer = styled.ul<IPropsDevLov>`
         font-weight: 600;
         color: aliceblue;
       }
+
       svg {
         cursor: pointer;
       }
@@ -94,6 +91,7 @@ export const CardContainer = styled.ul<IPropsDevLov>`
       padding: 0;
       background-color: transparent;
       width: 3.375rem;
+
       img {
         width: 100%;
         cursor: pointer;
@@ -107,6 +105,7 @@ export const CardContainer = styled.ul<IPropsDevLov>`
         top: 360px;
       }
     }
+
     span {
       font-size: 1.5rem;
     }

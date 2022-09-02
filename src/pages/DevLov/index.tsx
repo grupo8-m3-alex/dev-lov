@@ -1,16 +1,16 @@
 import { CardContainer, DevLovContainer } from "./style";
-import Imagem from "../../Assets/Rectangle 19.png";
-import logo from "../../Assets/logo.png";
-import x from "../../Assets/xDevLov.png";
-import heart from "../../Assets/heartDevLov.png";
+import logo from "../../assets/logo.png";
+import x from "../../assets/xdevlov.png";
+import heart from "../../assets/heartDevLov.png";
 import { AiFillInfoCircle } from "react-icons/ai";
 import ButtonBack from "../../components/ButtonBack";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { number } from "yup";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { AiFillHeart } from "react-icons/ai";
+import { api } from "../../services/api";
+import { UserContext } from "../../contexts/userContext";
+import axios from "axios";
 
 type IFrindList = Omit<IUsers, "password">;
 
@@ -19,7 +19,7 @@ interface IUsers {
   bio: string;
   city: string;
   email: string;
-  friendList?: IFrindList[];
+  friendList?: number[];
   gender: string;
   id: number;
   name: string;
@@ -29,11 +29,16 @@ interface IUsers {
 }
 
 const DevLov = () => {
-  const [users, setUsers] = useState<IUsers[]>({} as IUsers[]);
+  const [users, setUsers] = useState<IUsers[]>([]);
   const [count, setCount] = useState(0);
   const [isChange, setIsChange] = useState(false);
   const navigate = useNavigate();
   const icons = <AiFillHeart />;
+
+  const { updateUser, user } = useContext(UserContext);
+
+  console.log(user);
+
   const toastAddFriend = () =>
     toast("Adicionado a lista de conexões", {
       duration: 1000,
@@ -41,15 +46,36 @@ const DevLov = () => {
     });
 
   useEffect(() => {
-    axios("https://json-server-apikenzie.herokuapp.com/users")
-      .then((response) => setUsers(response.data))
-      .catch((error) => console.log(error));
+    api
+      .get("users")
+      .then(({ data }) => {
+        setUsers(data);
+      })
+      .catch((err) => console.error(err));
   }, []);
+  function addConection(event: any) {
+    const idFriend = +event.target.id;
+    if (user) {
+      updateUser(user.id, { friendsList: [...user.friendsList, idFriend] });
+    }
+  }
 
-  const functionNext = () => {
+  function addNoConection(event: any) {
+    const idFriend = +event.target.id;
+    console.log(event.target);
+    console.log(idFriend);
+    if (user) {
+      updateUser(user.id, { unFriendsList: [...user.unFriendsList, idFriend] });
+    }
+    console.log(user);
+  }
+
+  const functionNext = (event: any) => {
     if (count === users.length - 1) {
       toastAddFriend();
+      addConection(event);
     } else {
+      addConection(event);
       toastAddFriend();
       setIsChange(true);
       setTimeout(() => {
@@ -58,9 +84,11 @@ const DevLov = () => {
       setCount((oldCount: number) => oldCount + 1);
     }
   };
-  const functionNextx = () => {
+  const functionNextx = (event: any) => {
     if (count === users.length - 1) {
+      addNoConection(event);
     } else {
+      addNoConection(event);
       setIsChange(true);
       setTimeout(() => {
         setIsChange(true);
@@ -68,6 +96,7 @@ const DevLov = () => {
       setCount((oldCount: number) => oldCount + 1);
     }
   };
+
   return (
     <DevLovContainer>
       <div className="header__devlov">
@@ -89,10 +118,20 @@ const DevLov = () => {
               </div>
               <div className="button__container">
                 <button>
-                  <img onClick={functionNextx} src={x} alt="" />
+                  <img
+                    onClick={functionNextx}
+                    id={users[count].id.toString()}
+                    src={x}
+                    alt=""
+                  />
                 </button>
                 <button>
-                  <img onClick={functionNext} src={heart} alt="" />
+                  <img
+                    onClick={functionNext}
+                    src={heart}
+                    id={users[count].id.toString()}
+                    alt=""
+                  />
                 </button>
               </div>
             </div>

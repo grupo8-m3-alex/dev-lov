@@ -1,17 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaLogin } from '../../validations/schemaLogin';
-
 import { IoEyeSharp } from 'react-icons/io5';
 import { BsFillEyeSlashFill } from 'react-icons/bs';
 import { Button, Container, Form, Password } from './styles';
-
-import logo from '../../Assets/Group 29.png';
-import toast, { Toaster } from 'react-hot-toast';
-import { api } from '../../services/api';
+import logo from '../../assets/Group 29.png';
 import Input from '../../components/Input';
+import { UserContext } from '../../contexts/userContext';
 
 export interface FormData {
   email: string;
@@ -19,12 +16,14 @@ export interface FormData {
 }
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { singIn } = useContext(UserContext);
+  const [isFocused, setIsFocused] = useState(false);
+  
   const [values, setValues] = useState({
     password: '',
     showPassword: false,
   });
-
-  const [isFocused, setIsFocused] = useState(false);
 
   const {
     handleSubmit,
@@ -34,8 +33,6 @@ const Login = () => {
     resolver: yupResolver(schemaLogin),
   });
 
-  const navigate = useNavigate();
-
   const handleClickShowPassword = () => {
     setValues({
       ...values,
@@ -43,17 +40,8 @@ const Login = () => {
     });
   };
 
-  const login = async (data: FormData) => {
-    toast.promise(api.post('login', data), {
-      loading: 'Autenticando...',
-      success: ({ data }) => {
-        localStorage.setItem('@token_devlov', data.accessToken);
-        api.defaults.headers.common['Authorization'] = data.accessToken;
-        navigate('/home');
-        return 'Autenticado';
-      },
-      error: 'Ops! Email ou Senha incorretas',
-    });
+  const login = (data: FormData) => {
+    singIn(data)
   };
 
   return (
@@ -105,7 +93,6 @@ const Login = () => {
           </Form>
         </div>
       </Container>
-      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 };

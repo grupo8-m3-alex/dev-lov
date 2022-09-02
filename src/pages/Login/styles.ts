@@ -103,7 +103,7 @@ export const Password = styled.div<Props>`
 
   margin-bottom: 10px;
 
-  border: 2px solid ${({ isFocused }) => (isFocused ? '#FFF' : 'none')};
+  outline: 2px solid ${({ isFocused }) => (isFocused ? '#FFF' : 'none')};
   padding: 0 0.4375rem;
   border-radius: 20px;
   height: 50px;
@@ -118,10 +118,16 @@ export const Password = styled.div<Props>`
     border: none;
     font-size: 1.25rem;
     outline: none;
+    color: white;
+
+    &::placeholder {
+      color: white;
+    }
   }
 
   & > div {
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
 `;
