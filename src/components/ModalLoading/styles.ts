@@ -20,7 +20,7 @@ const ModalLoadingStyle = styled.div<IModalLoading>`
       opacity: 0.5;
     }
     75% {
-      transform: scale(1.6);
+      transform: scale(1.3);
       opacity: 0.5;
     }
     100% {

@@ -4,7 +4,7 @@ import x from "../../assets/xdevlov.png";
 import heart from "../../assets/heartDevLov.png";
 import { AiFillInfoCircle } from "react-icons/ai";
 import ButtonBack from "../../components/ButtonBack";
-import { useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AiFillHeart } from "react-icons/ai";
@@ -15,6 +15,11 @@ import ModalLoading from "../../components/ModalLoading";
 
 type IFrindList = Omit<IUsers, "password">;
 
+type IEvent = {
+  event: EventTarget;
+  target: HTMLElement;
+};
+
 interface IUsers {
   age: number;
   bio: string;
@@ -24,7 +29,7 @@ interface IUsers {
   gender: string;
   id: number;
   name: string;
-  password: string;
+  password?: string;
   state: string;
   url_avatar: string;
 }
@@ -36,8 +41,7 @@ const DevLov = () => {
   const navigate = useNavigate();
   const icons = <AiFillHeart />;
 
-  const { updateUser, isLoading, user, userIsValid, setUser } =
-    useContext(UserContext);
+  const { updateUser, user } = useContext(UserContext);
 
   const toastAddFriend = () =>
     toast("Adicionado a lista de conexões", {
@@ -53,24 +57,28 @@ const DevLov = () => {
     api
       .get("users")
       .then(({ data }) => {
-        const filterUser = data.filter((elem: any) => elem.id !== user?.id);
-        const filterFriends = filterUser.filter((elem: any) => {
+        const filterUser: IUser[] = data.filter(
+          (elem: IUser) => elem.id !== user?.id
+        );
+        const filterFriends: any = filterUser.filter((elem) => {
           if (!user?.friendsList.some((item) => item.id === elem.id)) {
             return elem;
           }
         });
 
-        const unFilterFriends = filterFriends.filter((elem: any) => {
-          if (!user?.unFriendsList.some((item: any) => item === elem.id)) {
-            return elem;
+        const unFilterFriends: IUsers[] = filterFriends.filter(
+          (elem: IUser) => {
+            if (!user?.unFriendsList.some((item: number) => item === elem.id)) {
+              return elem;
+            }
           }
-        });
+        );
         setUsers(unFilterFriends);
       })
       .catch((err) => console.error(err));
   }, []);
 
-  function addConection(event: any) {
+  function addConection(event: IEvent) {
     const idFriend = +event.target.id;
     const usersFilter = users.filter((user) => user.id == idFriend);
     const userFriends = {
@@ -86,7 +94,7 @@ const DevLov = () => {
     }
   }
 
-  function addNoConection(event: any) {
+  function addNoConection(event: IEvent) {
     const idFriend = +event.target.id;
     if (user) {
       updateUser(user.id, {
