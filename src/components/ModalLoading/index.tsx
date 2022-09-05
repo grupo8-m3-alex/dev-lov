@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import ModalLoadingStyle from "./styles";
 import { AiFillHeart } from "react-icons/ai";
 
