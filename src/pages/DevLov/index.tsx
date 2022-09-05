@@ -37,13 +37,14 @@ interface IUsers {
 const DevLov = () => {
   const [users, setUsers] = useState<IUsers[]>([]);
   const [count, setCount] = useState(0);
-  const [isChange, setIsChange] = useState(false);
   const navigate = useNavigate();
   const icons = <AiFillHeart />;
   const [haveUsers, setHaveUsers] = useState(true);
+  const [cardClassAnimation, setCardClassAnimation] = useState("");
 
   const { updateUser, user } = useContext(UserContext);
 
+  console.log(cardClassAnimation);
   const toastAddFriend = () =>
     toast("Adicionado a lista de conexões", {
       duration: 1000,
@@ -51,10 +52,6 @@ const DevLov = () => {
     });
 
   useEffect(() => {
-    setIsChange(true);
-    setTimeout(() => {
-      setIsChange(false);
-    }, 1000);
     api
       .get("users")
       .then(({ data }) => {
@@ -109,31 +106,36 @@ const DevLov = () => {
       const findUser = !user?.friendsList.find(
         (elem) => elem.id === +event.target.id
       );
-      // location.reload();
       if (findUser) {
         toastAddFriend();
         setHaveUsers(false);
       }
 
-      addConection(event);
+      // addConection(event);
     } else {
-      addConection(event);
+      // addConection(event);
+      setCardClassAnimation("heart");
       toastAddFriend();
-      setIsChange(true);
       setTimeout(() => {
-        setIsChange(true);
-      }, 1000);
+        setCardClassAnimation("");
+      }, 500);
       setCount((oldCount: number) => oldCount + 1);
     }
   };
   const functionNextx = (event: any) => {
     if (count === users.length - 1) {
-      addNoConection(event);
+      const findUser = !user?.unFriendsList.find(
+        (elem: number) => elem === +event.target.id
+      );
+      if (findUser) {
+        setHaveUsers(false);
+      }
+      // addNoConection(event);
     } else {
-      addNoConection(event);
-      setIsChange(true);
+      // addNoConection(event);
+      setCardClassAnimation("noHeart");
       setTimeout(() => {
-        setIsChange(true);
+        setCardClassAnimation("");
       }, 1000);
       setCount((oldCount: number) => oldCount + 1);
     }
@@ -158,8 +160,8 @@ const DevLov = () => {
           <div className="border3"></div>
           <div className="border4"></div>
           <img className="imgNoFriends" src={user?.url_avatar} alt="" />
+          <span className="searchNewUsers">Procurando novos usuarios...</span>
         </div>
-        <span className="searchNewUsers">Procurando novos usuarios...</span>
       </DevLovContainer>
     );
   }
@@ -172,7 +174,7 @@ const DevLov = () => {
         </div>
 
         {users.length > 0 ? (
-          <CardContainer isChange={isChange}>
+          <CardContainer cardAnimation={cardClassAnimation}>
             <li>
               <div>
                 <img

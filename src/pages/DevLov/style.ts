@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface IPropsDevLov {
-  isChange: boolean;
+  cardAnimation: string;
 }
 
 export const DevLovContainer = styled.div`
@@ -29,13 +29,13 @@ export const DevLovContainer = styled.div`
       opacity: 0.3;
     }
     50% {
-      opacity: 0.1;
+      opacity: 0;
     }
     85% {
       opacity: 0.3;
     }
     100% {
-      opacity: 0.1;
+      opacity: 0;
     }
   }
   @keyframes Friends {
@@ -55,13 +55,13 @@ export const DevLovContainer = styled.div`
       opacity: 0.3;
     }
     50% {
-      opacity: 0.1;
+      opacity: 0;
     }
     80% {
       opacity: 0.3;
     }
     100% {
-      opacity: 0.1;
+      opacity: 0;
     }
   }
 
@@ -73,13 +73,13 @@ export const DevLovContainer = styled.div`
       opacity: 0.3;
     }
     50% {
-      opacity: 0.1;
+      opacity: 0;
     }
     70% {
       opacity: 0.3;
     }
     100% {
-      opacity: 0.1;
+      opacity: 0;
     }
   }
   @keyframes noFriends4 {
@@ -90,13 +90,13 @@ export const DevLovContainer = styled.div`
       opacity: 0.3;
     }
     50% {
-      opacity: 0.1;
+      opacity: 0;
     }
     60% {
       opacity: 0.3;
     }
     100% {
-      opacity: 0.1;
+      opacity: 0;
     }
   }
 
@@ -158,19 +158,42 @@ export const DevLovContainer = styled.div`
   }
 `;
 
+const animationCard: any = {
+  heart: css`
+    animation-name: identifier;
+  `,
+  noHeart: css`
+    animation-name: identifier2;
+  `,
+};
+
 export const CardContainer = styled.ul<IPropsDevLov>`
-  @keyframes identifier {
-    from {
-      transform: rotateY(90deg);
+  @keyframes cardToRight {
+    0% {
+      transform: translateX(0px) rotate(0deg);
+      opacity: 1;
     }
-    to {
-      transform: rotateY(0deg);
+    50% {
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(300px) rotate(-25deg);
+      opacity: 0;
     }
   }
-
-  animation-name: ${({ isChange }) => (isChange ? "identifier" : "")};
-  animation-duration: 0.5s;
-
+  @keyframes cardToLeft {
+    0% {
+      transform: translateX(0px) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(-300px) rotate(25deg);
+      opacity: 0;
+    }
+  }
   width: 100vw;
   display: flex;
   align-items: center;
@@ -187,6 +210,20 @@ export const CardContainer = styled.ul<IPropsDevLov>`
     border-radius: 8px;
     align-items: baseline;
     padding-top: 10px;
+
+    ${({ cardAnimation }) => {
+      if (cardAnimation === "heart") {
+        return css`
+          animation: cardToRight 0.5s;
+        `;
+      } else if (cardAnimation === "noHeart") {
+        return css`
+          animation: cardToLeft 0.5s;
+        `;
+      } else {
+        return css``;
+      }
+    }}
 
     .nameAndinfo {
       position: absolute;
