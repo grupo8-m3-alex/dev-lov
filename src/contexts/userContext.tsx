@@ -47,6 +47,8 @@ interface IUserContext {
   isLoading: boolean;
   createPost: (data: any) => Promise<void>;
   registerUser: (data: FormDataDefault) => Promise<any>;
+  setUser: Dispatch<SetStateAction<IUser | null>>;
+  userIsValid: any;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -89,8 +91,8 @@ const UserProvider = ({ children }: IUserProvider) => {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     return await api
       .get(`users/${user.id}`)
-      .then(() => {
-        setUser(user);
+      .then((resp) => {
+        setUser(resp.data);
         const from =
           location.state?.from || location.pathname === "/"
             ? "home"
@@ -173,6 +175,8 @@ const UserProvider = ({ children }: IUserProvider) => {
         isLoading,
         createPost,
         registerUser,
+        setUser,
+        userIsValid,
       }}
     >
       {children}

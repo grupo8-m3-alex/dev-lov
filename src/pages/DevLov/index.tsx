@@ -4,16 +4,21 @@ import x from "../../assets/xdevlov.png";
 import heart from "../../assets/heartDevLov.png";
 import { AiFillInfoCircle } from "react-icons/ai";
 import ButtonBack from "../../components/ButtonBack";
-import { useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { AiFillHeart } from "react-icons/ai";
 import { api } from "../../services/api";
-import { UserContext } from "../../contexts/userContext";
+import { IUser, UserContext } from "../../contexts/userContext";
 import axios from "axios";
 import ModalLoading from "../../components/ModalLoading";
 
 type IFrindList = Omit<IUsers, "password">;
+
+type IEvent = {
+  event: EventTarget;
+  target: HTMLElement;
+};
 
 interface IUsers {
   age: number;
@@ -24,7 +29,7 @@ interface IUsers {
   gender: string;
   id: number;
   name: string;
-  password: string;
+  password?: string;
   state: string;
   url_avatar: string;
 }
@@ -36,7 +41,7 @@ const DevLov = () => {
   const navigate = useNavigate();
   const icons = <AiFillHeart />;
 
-  const { updateUser, user, isLoading } = useContext(UserContext);
+  const { updateUser, user } = useContext(UserContext);
 
   const toastAddFriend = () =>
     toast("Adicionado a lista de conexões", {
@@ -52,13 +57,30 @@ const DevLov = () => {
     api
       .get("users")
       .then(({ data }) => {
-        setUsers(data);
+        const filterUser: IUser[] = data.filter(
+          (elem: IUser) => elem.id !== user?.id
+        );
+        const filterFriends: any = filterUser.filter((elem) => {
+          if (!user?.friendsList.some((item) => item.id === elem.id)) {
+            return elem;
+          }
+        });
+
+        const unFilterFriends: IUsers[] = filterFriends.filter(
+          (elem: IUser) => {
+            if (!user?.unFriendsList.some((item: number) => item === elem.id)) {
+              return elem;
+            }
+          }
+        );
+        setUsers(unFilterFriends);
       })
       .catch((err) => console.error(err));
   }, []);
-  function addConection(event: any) {
+
+  function addConection(event: IEvent) {
     const idFriend = +event.target.id;
-    const usersFilter: any = users.filter((user) => user.id == idFriend);
+    const usersFilter = users.filter((user) => user.id == idFriend);
     const userFriends = {
       url_avatar: usersFilter[0].url_avatar,
       name: usersFilter[0].name,
@@ -66,20 +88,30 @@ const DevLov = () => {
       id: usersFilter[0].id,
     };
     if (user) {
-      updateUser(user.id, { friendsList: [...user.friendsList, userFriends] });
+      updateUser(user.id, {
+        friendsList: [...user.friendsList, userFriends],
+      });
     }
   }
-  console.log(user);
-  function addNoConection(event: any) {
+
+  function addNoConection(event: IEvent) {
     const idFriend = +event.target.id;
     if (user) {
-      updateUser(user.id, { unFriendsList: [...user.unFriendsList, idFriend] });
+      updateUser(user.id, {
+        unFriendsList: [...user.unFriendsList, idFriend],
+      });
     }
   }
 
   const functionNext = (event: any) => {
     if (count === users.length - 1) {
-      toastAddFriend();
+      const findUser = !user?.friendsList.find(
+        (elem) => elem.id === +event.target.id
+      );
+      if (findUser) {
+        toastAddFriend();
+      }
+
       addConection(event);
     } else {
       addConection(event);
@@ -104,6 +136,7 @@ const DevLov = () => {
     }
   };
 
+  console.log(user);
   const navigateToProfile = (event: any) => {
     const idProfile = event.target.parentNode.id;
     navigate(`/profile/${idProfile}`);
@@ -163,3 +196,12 @@ const DevLov = () => {
 };
 
 export default DevLov;
+
+function baljhds() {
+  return (
+    <div className="dropdoen">
+      <div className="inicial"></div>
+      <div className="divqvdjhdf"></div>
+    </div>
+  );
+}
