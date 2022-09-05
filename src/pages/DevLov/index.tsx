@@ -105,7 +105,13 @@ const DevLov = () => {
 
   const functionNext = (event: any) => {
     if (count === users.length - 1) {
-      toastAddFriend();
+      const findUser = !user?.friendsList.find(
+        (elem) => elem.id === +event.target.id
+      );
+      if (findUser) {
+        toastAddFriend();
+      }
+
       addConection(event);
     } else {
       addConection(event);
@@ -190,3 +196,12 @@ const DevLov = () => {
 };
 
 export default DevLov;
+
+function baljhds() {
+  return (
+    <div className="dropdoen">
+      <div className="inicial"></div>
+      <div className="divqvdjhdf"></div>
+    </div>
+  );
+}
