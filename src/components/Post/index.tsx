@@ -2,20 +2,17 @@ import { Content } from "./styles";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { FaRegComment } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
-import { BsHeartFill } from "react-icons/bs";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { color } from "@mui/system";
 import { useState, useContext, useEffect } from "react";
 import Comments from "../Comments";
 import { v4 as uuidv4 } from "uuid";
 import NoComments from "../NoComments";
 import { UserContext } from "../../contexts/userContext";
-import ModalAddComment from "../ModalCreateComment";
-import { motion } from "framer-motion";
+import DropdownPost from "../DropdownPost";
 
 const Post = ({ post }) => {
- const { showAddComment, setShowAddComment, menuEdit, setMenuEdit } = useContext(UserContext);
+ const { setShowAddComment, menuEdit, setMenuEdit } = useContext(UserContext);
  const [showComments, setShowComments] = useState<boolean>(false);
  const [like, setLike] = useState<boolean>(false);
 
@@ -81,6 +78,7 @@ const Post = ({ post }) => {
      </li>
     )}
    </ul>
+   {menuEdit && (<DropdownPost id={post?.id} deletePostProps={del} />)}
   </>
  );
 };

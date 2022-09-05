@@ -1,4 +1,3 @@
-import { defaultListboxReducer } from "@mui/base";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/userContext";
 import { All } from "./styled";
@@ -12,10 +11,10 @@ const schema = yup.object().shape({text: yup.string().required("A mensagem não 
 const ModalAddPost = () => { 
   const { user, setShowAddPost, createPost, posts, getPosts} = useContext(UserContext);
 
-  useEffect(() => {
-    const showPosts = () => getPosts()
-    showPosts();
-  }, posts);
+  // useEffect(() => {
+  //   const showPosts = () => getPosts()
+  //   showPosts();
+  // }, posts);
 
   const {
     register,
@@ -40,7 +39,7 @@ const ModalAddPost = () => {
     }
 
   return (
-    <All >
+    <All>
       <div className="AddModal">
         <div className="Head">
           <div>

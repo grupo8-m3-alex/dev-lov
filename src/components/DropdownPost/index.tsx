@@ -5,8 +5,8 @@ import { MdLogout } from "react-icons/md";
 import { UserContext } from "../../contexts/userContext";
 import { DropdownEdit } from "./style";
 
-const DropdownPost = (post) => {
- const {showEditPost, setShowEditPost, deletePost} = useContext(UserContext); 
+const DropdownPost = ({id, post, deletePostProps}) => {
+ const {showEditPost, setShowEditPost, deletePost, setMenuEdit} = useContext(UserContext);
 
  return (
    <DropdownEdit
@@ -17,13 +17,15 @@ const DropdownPost = (post) => {
     transition={{ duration: 0.4 }}
    >
     <div className="Menu">
-     <button id="editPost" onClick={() => setShowEditPost(!showEditPost)}>
+     <button id="editPost" onClick={() => {
+      setMenuEdit(false)
+      setShowEditPost(!showEditPost)}}>
       <FiUser />
       <span>Editar</span>
      </button>
-     <button id="deletePost" onClick={() => deletePost(post?.id)}>
+     <button id={id} className="deletePost" onClick={deletePostProps}>
       <MdLogout />
-      <span>Deleter</span>
+      <span>Deletar</span>
      </button>
     </div>
    </DropdownEdit>

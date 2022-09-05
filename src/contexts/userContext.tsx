@@ -1,4 +1,11 @@
-import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import toast from "react-hot-toast";
 import { Location, useLocation, useNavigate } from "react-router-dom";
 import { FormDataDefault } from "../components/Input";
@@ -13,7 +20,7 @@ interface IUserProvider {
 interface ILocationState extends Location {
   state: {
     from: string | null;
-  };
+  }
 }
 
 export interface IUser {
@@ -27,27 +34,17 @@ export interface IUser {
   age: number;
   bio: string;
   friendsList: any[];
-}
-
-export interface IPost {
-  name: string;
-  url_avatar: string;
-  message: string;
-  created_at: Date;
-  updated_at: Date;
-  userId: number;
-  like: number;
-  comments: [];
+  unFriendsList?: any;
 }
 
 interface IUserContext {
-  user: IUser | null;
+  user?: IUser | null;
   singIn: (dataForm: FormData) => Promise<any>;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   getPosts: () => Promise<void>;
   getUser: (id: string) => Promise<void>;
   deletePost: (id: string) => Promise<void>;
-  updateUser: (id: string, data: any) => Promise<void>;
+  updateUser: (id: number, data: any) => Promise<void>;
   isLoading: boolean;
   createPost: (data: any) => Promise<void>;
   registerUser: (data: FormDataDefault) => Promise<any>;
@@ -62,15 +59,18 @@ interface IUserContext {
   setShowEditPost: Dispatch<SetStateAction<boolean>>;
   menuEdit: boolean;
   setMenuEdit: Dispatch<SetStateAction<boolean>>;
+  setUser: Dispatch<SetStateAction<IUser | null>>;
+  userIsValid: any;
+  updatePost: (id: number, data: any) => Promise<void>;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 const UserProvider = ({ children }: IUserProvider) => {
-  const [user, setUser] = useState<IUser | null>(null as IUser | null);
+  const [user, setUser] = useState<IUser>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [menuEdit, setMenuEdit] = useState<boolean>(false);
   const [showAddPost, setShowAddPost] = useState<boolean>(false);
+  const [menuEdit, setMenuEdit] = useState<boolean>(false);
   const [showEditPost, setShowEditPost] = useState<boolean>(false);
   const [showAddComment, setShowAddComment] = useState<boolean>(false);
   const [posts, setPosts] = useState<IPosts[]>([]);
@@ -79,8 +79,8 @@ const UserProvider = ({ children }: IUserProvider) => {
 
 
   useEffect(() => {
-    const token = localStorage.getItem('@token_devlov');
-    const user = localStorage.getItem('@user_devlov');
+    const token = localStorage.getItem("@token_devlov");
+    const user = localStorage.getItem("@user_devlov");
 
     if (token !== null && user !== null) {
       userIsValid(token, JSON.parse(user));
@@ -88,56 +88,59 @@ const UserProvider = ({ children }: IUserProvider) => {
   }, []);
 
   const registerUser = async (data: FormDataDefault) => {
-    const toastRegister = toast.loading('Verificando dados...');
+    data.friendList = [];
+    data.unFriendsList = [];
+    const toastRegister = toast.loading("Verificando dados...");
     return await api
-      .post('/register', data)
-      .then(res => {
-        toast.success('Usuario registrado com sucesso', {
-          id: toastRegister
+      .post("/register", data)
+      .then((res) => {
+        toast.success("Usuario registrado com sucesso", {
+          id: toastRegister,
         });
-        navigate('/', { replace: true })
+        navigate("/", { replace: true });
       })
-      .catch(err => {
-        toast.error('Dados invalidos')
-        console.error(err)
-      })
-  }
+      .catch((err) => {
+        toast.error("Dados invalidos");
+        console.error(err);
+      });
+  };
 
-  const userIsValid = async (token : string, user: IUser) => {
+  const userIsValid = async (token: string, user: IUser) => {
     setIsLoading(true);
-    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`
     return await api
       .get(`users/${user.id}`)
       .then(() => {
         setUser(user);
-        const from = location.state?.from || location.pathname === '/' ? 'home' : location.pathname;
+        const from = location.state?.from || location.pathname === '/' ? 'home' : location.pathname
         navigate(from, { replace: true });
       })
       .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
-  };
-  
+      .finally(() => setIsLoading(false))
+  }
+
   const singIn = async (dataForm: FormData) => {
-    const toastSingIn = toast.loading('Autenticando...');
+    const toastSingIn = toast.loading("Autenticando...");
     return await api
-      .post('login', dataForm)
-      .then(({ data: {accessToken, user} }) => {
+      .post("login", dataForm)
+      .then(({ data: { accessToken, user } }) => {
         toast.success("Autenticado", {
-          id: toastSingIn
-        })
-        
-        api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-        localStorage.setItem('@token_devlov', accessToken);
-        localStorage.setItem('@user_devlov', JSON.stringify(user));
-        setUser(user)
-        const from = location.state?.from || 'home';
-        navigate(from, { replace: true })
+          id: toastSingIn,
+        });
+
+        api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+        localStorage.setItem("@token_devlov", accessToken);
+        localStorage.setItem("@user_devlov", JSON.stringify(user));
+        setUser(user);
+        const from = location.state?.from || "home";
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error("Ops! Email ou Senha invalidos.", {
-          id: toastSingIn
-        })
-      })
+          id: toastSingIn,
+        });
+        console.log(err)
+      });
   };
 
   const getPosts = async () => {
@@ -147,12 +150,13 @@ const UserProvider = ({ children }: IUserProvider) => {
       .catch(err => console.error(err))
   }
 
-  const deletePost = async (id: string) => {
-    return await api
-      .delete(`posts/${id}`)
-      .then(res => console.log(res.data))
-      .catch(err => console.error(err))
-  }
+  const deletePost = async (event: EventTarget) => {
+    console.log(event.target)
+    // return await api
+    //   .delete(`posts/${event.currentTarget.id}`)
+    //   .then((res) => toast.success("A publicação foi excluída"))
+    //   .catch((err) => console.error(err));
+  };
 
   const createPost = async (data: any) => {
     return await api
@@ -169,14 +173,14 @@ const UserProvider = ({ children }: IUserProvider) => {
     return await api
       .get(`users/${id}`)
       .then(({ data }) => console.log(data))
-      .catch(err => console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
 
-  const updateUser = async (id: string, data:any) => {
+  const updateUser = async (id: number, data: any) => {
     return await api
       .patch(`users/${id}`, data)
-      .then(res => console.log(res))
-      .catch(err => console.error(err))
+      .then((res) => setUser(res.data))
+      .catch((err) => console.error(err));
   }
 
   const createComment = async (id: string, data: any) => {
@@ -190,13 +194,22 @@ const UserProvider = ({ children }: IUserProvider) => {
       .catch(err => console.error(err))
   }
 
-  
+  const updatePost = async (id: number, data: any) => {
+    return await api
+      .patch(`posts/${id}`, data)
+      .then(res => {
+        toast.success("Sua publicação foi alterada")
+        console.log(res)
+        setShowEditPost(false)
+      })
+      .catch(err => console.error(err))
+  }
 
   return (
-    <UserContext.Provider value={{ menuEdit, setMenuEdit, showEditPost, setShowEditPost, user, singIn, setIsLoading, getPosts, deletePost, getUser, updateUser, isLoading, createPost, registerUser, showAddPost, setShowAddPost, createComment, posts, setPosts, showAddComment, setShowAddComment }}>
+    <UserContext.Provider value={{ updatePost, userIsValid, menuEdit, setMenuEdit, showEditPost, setShowEditPost, user, singIn, setIsLoading, getPosts, deletePost, getUser, updateUser, isLoading, createPost, registerUser, showAddPost, setShowAddPost, createComment, posts, setPosts, showAddComment, setShowAddComment }}>
       {children}
     </UserContext.Provider>
-  )
-}
+  );
+};
 
 export default UserProvider;

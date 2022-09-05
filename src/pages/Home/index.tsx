@@ -46,6 +46,10 @@ const Home = () => {
   showPosts();
  }, []);
 
+ const del = (event) => {
+  console.log(event.target)
+ }
+
  return (
    <>
    <Header />
@@ -63,12 +67,11 @@ const Home = () => {
     </div>
     {showAddComment && <ModalAddComment />}
     {showAddPost && <ModalAddPost />}
-    {showEditPost && <ModalEditPost />}
     <ul>
      {posts?.map((post) => (
-      <li key={uuidv4()}>
-       <Post post={post} />
-       {menuEdit && (<DropdownPost id={post?.id}/>)}
+       <li key={uuidv4()}>
+       <Post  post={post} />
+       {showEditPost && <ModalEditPost post={post} />}
       </li>
      ))}
     </ul>

@@ -166,10 +166,6 @@ export const All = styled.div`
    &:active {
     box-shadow: 0 0 5px 2px gray;
    }
-
-
-
-
   }
  }
-`;
+`

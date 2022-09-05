@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import styled from "styled-components";
 
 interface IPropsDevLov {
@@ -42,6 +41,7 @@ export const CardContainer = styled.ul<IPropsDevLov>`
 >>>>>>> 4c286bf0214bc9ccb206153a29c068545fb547c2
   animation-name: ${({ isChange }) => (isChange ? "identifier" : "")};
   animation-duration: 0.5s;
+
   width: 100vw;
   display: flex;
   align-items: center;
@@ -110,7 +110,7 @@ export const CardContainer = styled.ul<IPropsDevLov>`
         top: 360px;
       }
     }
-    
+
     span {
       font-size: 1.5rem;
     }

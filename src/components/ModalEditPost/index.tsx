@@ -1,45 +1,57 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import { ModalEditContainer } from "./styled";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../contexts/userContext";
+import { All } from "./styled";
+import { GrClose } from "react-icons/gr"
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
 
-Modal.setAppElement("#root");
+const schema = yup.object().shape({text: yup.string().required("A mensagem não pode ser enviada vazia")})
 
-const ModalEditPost = () => {
-  const [modalIsOpen, setIsOpen] = useState(true);
+const ModalEditPost = (data) => {
+  const { getPosts, user, updatePost, setShowEditPost} = useContext(UserContext);
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  function closeModal() {
-    setIsOpen(false);
+  const editPost = (value) => {
+    const newData = {
+      message: value.text,
+      created_at: data?.created_at,
+      updated_at: new Date()
+    } 
+    updatePost(data?.id, newData)
   }
 
   return (
-    <>
-      <ModalEditContainer />
-      <Modal>
-        <div>
-          <div className="Header_modalAdd">
-            <h3>Editar Publicação</h3>
-            <button onClick={closeModal}>X</button>
-          </div>
-          <div className="imgaAndName">
-            <img src="" alt="" />
-            <span>Joao Vitor Henrique</span>
-          </div>
+      <All>
+      <div className="EditModal">
+        <div className="Head">
           <div>
-            <form>
-              <textarea />
-              <div className="buttonContainer">
-                <button className="buttonDelete">Excluir</button>
-                <button className="buttonPubli">Publicar</button>
-              </div>
-            </form>
+            <h2>Editar publicação</h2>
+            <button onClick={() => setShowEditPost(false)}>
+              <GrClose/>
+            </button>
           </div>
         </div>
-      </Modal>
-    </>
+        <div className="InfoUser">
+          <img src={user?.url_avatar}/>
+          <h2>{user?.name}</h2>
+        </div>
+        <form onSubmit={handleSubmit(editPost)}>
+          <textarea id="text" {...register("text")} placeholder="Digite aqui" />
+          <span>{errors.text?.message}</span>
+          <button type="submit" onClick={() => {
+            setShowEditPost(false)
+            getPosts()}}>Publicar</button>
+        </form>
+      </div>
+    </All>
   );
 };
 

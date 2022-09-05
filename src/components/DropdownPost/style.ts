@@ -68,7 +68,7 @@ export const DropdownEdit = styled.div`
    }
   }
 
-  #logout {
+  .deletePost {
    display: flex;
    align-items: center;
    justify-content: flex-start;
