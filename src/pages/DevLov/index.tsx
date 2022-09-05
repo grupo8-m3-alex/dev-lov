@@ -12,6 +12,7 @@ import { api } from "../../services/api";
 import { IUser, UserContext } from "../../contexts/userContext";
 import axios from "axios";
 import ModalLoading from "../../components/ModalLoading";
+import ModalFriendList from "../../components/ModalFriendList";
 
 type IFrindList = Omit<IUsers, "password">;
 
@@ -136,12 +137,12 @@ const DevLov = () => {
     }
   };
 
-  console.log(user);
+
   const navigateToProfile = (event: any) => {
     const idProfile = event.target.parentNode.id;
     navigate(`/profile/${idProfile}`);
   };
-  // return <ModalLoading />;
+
   return (
     <>
       <DevLovContainer>
