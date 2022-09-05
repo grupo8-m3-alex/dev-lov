@@ -2,11 +2,14 @@ import { CardContainer, DevLovContainer } from "./style";
 import logo from "../../assets/logo.png";
 import x from "../../assets/xdevlov.png";
 import heart from "../../assets/heart.png";
+import Imagem from "../../Assets/Rectangle 19.png";
 import { AiFillInfoCircle } from "react-icons/ai";
 import ButtonBack from "../../components/ButtonBack";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import { number } from "yup";
+import ModalAddPost from "../../components/ModalCreatePost";
 
 type IFrindList = Omit<IUsers, "password">;
 
@@ -30,14 +33,6 @@ const DevLov = () => {
   const [isChange, setIsChange] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    api.get("users")
-      .then(({ data }) => {
-        setUsers(data);
-      })
-      .catch(err => console.error(err));
-  }, []);
-
   const functionNext = () => {
     if (count === users.length - 1) {
     } else {
@@ -50,39 +45,41 @@ const DevLov = () => {
   };
 
   return (
-    <DevLovContainer>
-      <div className="header__devlov">
-        <img src={logo} alt="" />
-        <ButtonBack onClick={() => navigate("/home")} />
-      </div>
-      {users.length > 0 ? (
-        <CardContainer isChange={isChange}>
-          <li>
-            <div>
-              <img
-                className="AvatarImage"
-                src={users[count].url_avatar}
-                alt=""
-              />
-              <div className="nameAndinfo">
-                <span>{users[count].name}</span>
-                <AiFillInfoCircle onClick={() => navigate("/profile")} />
+    <>
+      <DevLovContainer>
+        <div className="header__devlov">
+          <img src={logo} alt="" />
+          <ButtonBack onClick={() => navigate("/home")} />
+        </div>
+        {users.length > 0 ? (
+          <CardContainer isChange={isChange}>
+            <li>
+              <div>
+                <img
+                  className="AvatarImage"
+                  src={users[count].url_avatar}
+                  alt=""
+                />
+                <div className="nameAndinfo">
+                  <span>{users[count].name}</span>
+                  <AiFillInfoCircle onClick={() => navigate("/profile")} />
+                </div>
+                <div className="button__container">
+                  <button>
+                    <img onClick={functionNext} src={x} alt="" />
+                  </button>
+                  <button>
+                    <img onClick={functionNext} src={heart} alt="" />
+                  </button>
+                </div>
               </div>
-              <div className="button__container">
-                <button>
-                  <img onClick={functionNext} src={x} alt="" />
-                </button>
-                <button>
-                  <img onClick={functionNext} src={heart} alt="" />
-                </button>
-              </div>
-            </div>
-          </li>
-        </CardContainer>
-      ) : (
-        <></>
-      )}
-    </DevLovContainer>
+            </li>
+          </CardContainer>
+        ) : (
+          <></>
+        )}
+      </DevLovContainer>
+    </>
   );
 };
 

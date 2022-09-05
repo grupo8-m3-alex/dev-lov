@@ -2,6 +2,7 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState
 import toast from "react-hot-toast";
 import { Location, useLocation, useNavigate } from "react-router-dom";
 import { FormDataDefault } from "../components/Input";
+import { IPosts } from "../pages/Home";
 import { FormData } from "../pages/Login";
 import { api } from "../services/api";
 
@@ -16,7 +17,7 @@ interface ILocationState extends Location {
 }
 
 export interface IUser {
-  id: number;
+  id: number | undefined;
   email: string;
   name: string;
   url_avatar: string;
@@ -26,6 +27,17 @@ export interface IUser {
   age: number;
   bio: string;
   friendsList: any[];
+}
+
+export interface IPost {
+  name: string;
+  url_avatar: string;
+  message: string;
+  created_at: Date;
+  updated_at: Date;
+  userId: number;
+  like: number;
+  comments: [];
 }
 
 interface IUserContext {
@@ -39,15 +51,32 @@ interface IUserContext {
   isLoading: boolean;
   createPost: (data: any) => Promise<void>;
   registerUser: (data: FormDataDefault) => Promise<any>;
+  showAddPost: boolean;
+  setShowAddPost: Dispatch<SetStateAction<boolean>>;
+  createComment: (id: string, data: any) => Promise<void>;
+  posts: IPosts[];
+  setPosts: Dispatch<SetStateAction<IPosts[]>>;
+  showAddComment: boolean;
+  setShowAddComment: Dispatch<SetStateAction<boolean>>;
+  showEditPost: boolean;
+  setShowEditPost: Dispatch<SetStateAction<boolean>>;
+  menuEdit: boolean;
+  setMenuEdit: Dispatch<SetStateAction<boolean>>;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 const UserProvider = ({ children }: IUserProvider) => {
   const [user, setUser] = useState<IUser | null>(null as IUser | null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [menuEdit, setMenuEdit] = useState<boolean>(false);
+  const [showAddPost, setShowAddPost] = useState<boolean>(false);
+  const [showEditPost, setShowEditPost] = useState<boolean>(false);
+  const [showAddComment, setShowAddComment] = useState<boolean>(false);
+  const [posts, setPosts] = useState<IPosts[]>([]);
   const navigate = useNavigate();
   const location = useLocation() as ILocationState;
+
 
   useEffect(() => {
     const token = localStorage.getItem('@token_devlov');
@@ -82,7 +111,6 @@ const UserProvider = ({ children }: IUserProvider) => {
       .then(() => {
         setUser(user);
         const from = location.state?.from || location.pathname === '/' ? 'home' : location.pathname;
-        console.log(location.state)
         navigate(from, { replace: true });
       })
       .catch((err) => console.error(err))
@@ -115,7 +143,7 @@ const UserProvider = ({ children }: IUserProvider) => {
   const getPosts = async () => {
     return await api
       .get('posts')
-      .then(({ data }) => console.log(data))
+      .then(({ data }) => setPosts(data))
       .catch(err => console.error(err))
   }
 
@@ -129,8 +157,12 @@ const UserProvider = ({ children }: IUserProvider) => {
   const createPost = async (data: any) => {
     return await api
       .post('posts', data)
-      .then(res => console.log(res))
-      .catch(err => console.error(err))
+      .then(res => {
+        toast.success("Sua publicação foi enviada")
+        setShowAddPost(false)})
+      .catch(err => {
+        toast.error("Ops... Algo deu errado")
+        console.error(err)})
   }
 
   const getUser = async (id: string) => {
@@ -147,8 +179,21 @@ const UserProvider = ({ children }: IUserProvider) => {
       .catch(err => console.error(err))
   }
 
+  const createComment = async (id: string, data: any) => {
+    return await api
+      .patch(`posts/${id}`, data)
+      .then(res => {
+        toast.success("Seu comentário foi publicado")
+        console.log(res)
+        setShowAddComment(false)
+      })
+      .catch(err => console.error(err))
+  }
+
+  
+
   return (
-    <UserContext.Provider value={{ user, singIn, setIsLoading, getPosts, deletePost, getUser, updateUser, isLoading, createPost, registerUser }}>
+    <UserContext.Provider value={{ menuEdit, setMenuEdit, showEditPost, setShowEditPost, user, singIn, setIsLoading, getPosts, deletePost, getUser, updateUser, isLoading, createPost, registerUser, showAddPost, setShowAddPost, createComment, posts, setPosts, showAddComment, setShowAddComment }}>
       {children}
     </UserContext.Provider>
   )

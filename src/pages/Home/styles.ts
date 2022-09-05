@@ -35,16 +35,24 @@ export const ContainerHome = styled.div`
     height: 40px;
     border: none;
     margin: 10px;
-    transition: 0.1s;
+    transition: 0.2s;
 
     &:hover {
-      transition: 0.1s;
+      transition: 0.2s;
       cursor: pointer;
+      box-shadow: 0 0 4px 4px #F2F2F2;
     }
 
     &:active {
       box-shadow: 0 0 2px 2px black;
     }
   }
+ }
+
+ ul {
+  list-style: none;
+  padding: 0;
+  max-width: 750px;
+  width: 100%;
  }
 ` 

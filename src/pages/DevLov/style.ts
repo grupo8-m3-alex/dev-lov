@@ -29,13 +29,17 @@ export const DevLovContainer = styled.div`
 export const CardContainer = styled.ul<IPropsDevLov>`
   @keyframes identifier {
     from {
-      transform: scale(0.9);
+      transform: rotateY(90deg);
     }
     to {
-      transform: translatey(1);
+      transform: rotateY(0deg);
     }
   }
+<<<<<<< HEAD
 
+=======
+  transform-style: preserve-3d;
+>>>>>>> 4c286bf0214bc9ccb206153a29c068545fb547c2
   animation-name: ${({ isChange }) => (isChange ? "identifier" : "")};
   animation-duration: 0.5s;
   width: 100vw;

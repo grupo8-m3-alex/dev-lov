@@ -20,6 +20,10 @@ body::-webkit-scrollbar-thumb {
  border-radius: 20px;
 }
 
+* {
+  font-family: 'Inter', sans-serif;
+}
+
 .App {
   width: 100%;
 }

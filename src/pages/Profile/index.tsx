@@ -1,5 +1,5 @@
-const Profile = () => (
-  <h1>Profile</h1>
-)
+import ModalFriendList from "../../components/ModalFriendList";
+
+const Profile = () => <ModalFriendList />;
 
 export default Profile;

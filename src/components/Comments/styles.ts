@@ -36,7 +36,6 @@ export const ContainerComment = styled.div`
   .TextComment {
    display: flex;
    align-items: center;
-   justify-content: center;
    flex-wrap: wrap;
    max-width: 700px;
    width: 100%;
