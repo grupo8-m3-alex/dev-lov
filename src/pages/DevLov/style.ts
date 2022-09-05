@@ -23,6 +23,139 @@ export const DevLovContainer = styled.div`
       width: 12rem;
     }
   }
+
+  @keyframes noFriends {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.1;
+    }
+    85% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0.1;
+    }
+  }
+  @keyframes Friends {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes noFriends2 {
+    0% {
+      opacity: 0.3;
+    }
+    10% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.1;
+    }
+    80% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0.1;
+    }
+  }
+
+  @keyframes noFriends3 {
+    0% {
+      opacity: 0.3;
+    }
+    20% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.1;
+    }
+    70% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0.1;
+    }
+  }
+  @keyframes noFriends4 {
+    0% {
+      opacity: 0.3;
+    }
+    30% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.1;
+    }
+    60% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0.1;
+    }
+  }
+
+  .divImgFrinds {
+    position: relative;
+    width: 100vw;
+    height: 25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .border1 {
+      border: 0.5rem solid rgba(255, 255, 255, 0.7);
+      width: 9rem;
+      height: 9rem;
+      border-radius: 50%;
+      animation: noFriends 1.5s infinite;
+      position: absolute;
+    }
+    .border2 {
+      border: 0.5rem solid rgba(255, 255, 255, 0.7);
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      animation: noFriends2 1.5s infinite;
+      position: absolute;
+    }
+    .border3 {
+      border: 0.5rem solid rgba(255, 255, 255, 0.7);
+      width: 7rem;
+      height: 7rem;
+      border-radius: 50%;
+      animation: noFriends3 1.5s infinite;
+      position: absolute;
+    }
+    .border4 {
+      border: 0.5rem solid rgba(255, 255, 255, 0.7);
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      animation: noFriends4 1.5s infinite;
+      position: absolute;
+    }
+  }
+  .imgNoFriends {
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    object-fit: cover;
+    animation: Friends 1.5s infinite;
+    opacity: 0.7;
+  }
+  .searchNewUsers {
+    position: absolute;
+    font-family: "Inter";
+    top: 280px;
+    animation: Friends 1.5s infinite;
+    font-weight: 600;
+  }
 `;
 
 export const CardContainer = styled.ul<IPropsDevLov>`

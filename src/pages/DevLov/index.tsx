@@ -40,6 +40,7 @@ const DevLov = () => {
   const [isChange, setIsChange] = useState(false);
   const navigate = useNavigate();
   const icons = <AiFillHeart />;
+  const [haveUsers, setHaveUsers] = useState(true);
 
   const { updateUser, user } = useContext(UserContext);
 
@@ -108,8 +109,10 @@ const DevLov = () => {
       const findUser = !user?.friendsList.find(
         (elem) => elem.id === +event.target.id
       );
+      // location.reload();
       if (findUser) {
         toastAddFriend();
+        setHaveUsers(false);
       }
 
       addConection(event);
@@ -142,6 +145,24 @@ const DevLov = () => {
     navigate(`/profile/${idProfile}`);
   };
   // return <ModalLoading />;
+  if (!haveUsers) {
+    return (
+      <DevLovContainer>
+        <div className="header__devlov">
+          <img src={logo} alt="" />
+          <ButtonBack onClick={() => navigate("/home")} />
+        </div>
+        <div className="divImgFrinds">
+          <div className="border1"></div>
+          <div className="border2"></div>
+          <div className="border3"></div>
+          <div className="border4"></div>
+          <img className="imgNoFriends" src={user?.url_avatar} alt="" />
+        </div>
+        <span className="searchNewUsers">Procurando novos usuarios...</span>
+      </DevLovContainer>
+    );
+  }
   return (
     <>
       <DevLovContainer>
@@ -188,7 +209,18 @@ const DevLov = () => {
             </li>
           </CardContainer>
         ) : (
-          <></>
+          <>
+            <div className="divImgFrinds">
+              <div className="border1"></div>
+              <div className="border2"></div>
+              <div className="border3"></div>
+              <div className="border4"></div>
+              <img className="imgNoFriends" src={user?.url_avatar} alt="" />
+              <span className="searchNewUsers">
+                Procurando novos usuarios...
+              </span>
+            </div>
+          </>
         )}
       </DevLovContainer>
     </>
