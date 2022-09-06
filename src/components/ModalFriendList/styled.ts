@@ -1,22 +1,22 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const ModalFriendContainer = createGlobalStyle`
-  .Modal {
+  .Modal1 {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    background-color: rgba(242, 242, 242, 0.2);
+    background-color: transparent;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     
   }
-  .Modal > div {
+  .Modal1 > div {
       position: fixed;
-      width: 90%;
+      width: 100%;
       height: 100vh;
     border-radius: 8px;
     max-width: 532px;
@@ -45,13 +45,15 @@ export const ModalFriendContainer = createGlobalStyle`
           color: black;
           font-weight: 600;
           font-size: 1rem;
+
+          cursor: pointer;
           &:active{
               color: red;
           }
       }
   }
 
-  .Modal > div {
+  .Modal1 > div {
       .MainContainer {
           width: 100%;
           display: flex;
@@ -84,6 +86,8 @@ export const ModalFriendContainer = createGlobalStyle`
               border: 1px solid black;
               border-radius: 50%;
               object-fit: cover;
+
+              cursor: pointer;
           }
           div{
               display: flex;
@@ -109,6 +113,7 @@ export const ModalFriendContainer = createGlobalStyle`
             top: 6px;
             right: 10px;
             font-size: 1.5rem;
+            cursor: pointer;
             &:hover{
                 opacity: 1;
             }

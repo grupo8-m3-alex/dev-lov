@@ -120,6 +120,7 @@ const ModalEditProfile = ({
                     value: user?.name,
                   })}
                 />
+                {errors.name && <span>{errors.name.message}</span>}
               </LabelInputGroup>
               <LabelInputGroup>
                 <label htmlFor="url_avatar">Link do avatar:</label>
@@ -130,6 +131,7 @@ const ModalEditProfile = ({
                     value: user?.url_avatar,
                   })}
                 />
+                {errors.url_avatar && <span>{errors.url_avatar.message}</span>}
               </LabelInputGroup>
               <LabelInputGroup>
                 <label htmlFor="city">Cidade:</label>
@@ -140,6 +142,7 @@ const ModalEditProfile = ({
                     value: user?.city,
                   })}
                 />
+                {errors.city && <span>{errors.city.message}</span>}
               </LabelInputGroup>
               <LabelInputGroup>
                 <label htmlFor="state">Estado:</label>
@@ -150,6 +153,7 @@ const ModalEditProfile = ({
                     value: user?.state,
                   })}
                 />
+                {errors.state && <span>{errors.state.message}</span>}
               </LabelInputGroup>
               <LabelInputGroup>
                 <label htmlFor="bio">Bio:</label>
@@ -160,6 +164,7 @@ const ModalEditProfile = ({
                     value: user?.bio,
                   })}
                 />
+                {errors.bio && <span>{errors.bio.message}</span>}
               </LabelInputGroup>
 
               <div className="buttonContainer">

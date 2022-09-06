@@ -21,13 +21,15 @@ export const HeaderStyled = styled.header`
     justify-content: space-between;
     align-items: center;
 
-    max-width: 56.25rem;
+    max-width: 46.875rem;
 
     .logo {
       width: 100%;
-      max-width: 275px;
-      height: 104px;
+      max-width: 12.5rem;
+      height: 6.5rem;
       object-fit: contain;
+
+      cursor: pointer;
     }
 
     & > svg {

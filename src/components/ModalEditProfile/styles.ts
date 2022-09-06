@@ -8,7 +8,7 @@ export const ModalEditContainer = createGlobalStyle`
     transform: translate(-50%, -50%);
     padding: 0 4%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: transparent;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -18,22 +18,25 @@ export const ModalEditContainer = createGlobalStyle`
   .Modal > div {
       position: fixed;
       width: 90%;
-    border-radius: 8px;
-    max-width: 532px;
+    border-radius: 0.5rem;
+    max-width: 33.25rem;
     display: flex;
     background-color: aliceblue;
-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+box-shadow: 0.125rem 0.125rem 0.125rem rgba(0, 0, 0, 0.4);
     align-items: center;
     flex-direction: column;
     padding-bottom: 2rem;
+    max-height: 514px;
+
+  overflow: scroll;
 
     .Header_modalAdd{
         display: flex;
         justify-content: space-between;
         width: 85%;
-        margin: 20px;
-        border-bottom: 1px solid gray;
-        padding-bottom: 10px;
+        margin: 1.25rem;
+        border-bottom: 0.0625rem solid gray;
+        padding-bottom: 0.625rem;
         button{
             border: none;
             background-color: transparent;
@@ -60,7 +63,7 @@ box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
                 font-weight: 600;
                 font-size: 1rem;
                 border: none;
-                border-radius: 4px;
+                border-radius: 0.25rem;
                 height: 3rem;
                 width: 100%;
                 margin-top: 1.5rem;
@@ -95,31 +98,37 @@ box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        gap: 20px;
+        gap: 1.25rem;
     }
 `;
 
 export const LabelInputGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0.3125rem;
 
   margin-top: 0.625rem;
 
   label {
     color: #000;
+    font-size: 0.875rem;
   }
 
   input {
-    padding: 8px;
-    border-radius: 10px;
+    padding: 0.5rem;
+    border-radius: 0.625rem;
     color: #000;
     background: rgba(0, 0, 0, 0.1);
     border: none;
     outline: none;
 
     &:focus {
-      outline: 1px solid rgba(0, 0, 0, 0.5);
+      outline: 0.0625rem solid rgba(0, 0, 0, 0.5);
     }
+  }
+
+  span {
+    font-size: 0.75rem;
+    color: red;
   }
 `;

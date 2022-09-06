@@ -8,31 +8,41 @@ import {
   FaHeart,
   FaSignOutAlt,
 } from 'react-icons/fa';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/userContext';
 import { useNavigate } from 'react-router-dom';
+import ModalFriendList from '../ModalFriendList';
 
 const Header = () => {
   const { user, logOut } = useContext(UserContext);
-
+  const [modalIsOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+
+  const closeModal = () => setIsOpen(false);
 
   return (
     <HeaderStyled>
       <div>
-        <img className="logo" src={logo} />
+        <img
+          className="logo"
+          src={logo}
+          onClick={() => navigate('/home', { replace: true })}
+        />
         <CgMenuRound />
         <div>
           <img className="heart" src={heart} alt="dev-lov" />
           <Figure>
             <img className="avatarUser" src={user?.url_avatar} />
             <Dropmenu>
-              <Button bg="gray">
+              <Button
+                bg="gray"
+                onClick={() => navigate('/dashboard', { replace: true })}
+              >
                 <FaUserAlt />
                 <span>Perfil</span>
               </Button>
 
-              <Button>
+              <Button onClick={() => setIsOpen(true)}>
                 <FaUserFriends />
                 <span>Conexões</span>
               </Button>
@@ -51,6 +61,9 @@ const Header = () => {
           </Figure>
         </div>
       </div>
+      {modalIsOpen && (
+        <ModalFriendList isModalOpen={modalIsOpen} closeModal={closeModal} />
+      )}
     </HeaderStyled>
   );
 };

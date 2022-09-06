@@ -1,10 +1,11 @@
-import { useContext, useEffect } from 'react';
-import { UserContext } from '../../contexts/userContext';
-import { All } from './styled';
-import { GrClose } from 'react-icons/gr';
 import * as yup from 'yup';
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import { UserContext } from '../../contexts/userContext';
+import { GrClose } from 'react-icons/gr';
+import { All } from './styled';
 
 interface IAddPostForm {
   text: string;
@@ -43,6 +44,7 @@ const ModalAddPost = () => {
       comments: [],
     };
     createPost(newData);
+    setShowAddPost(false);
   };
 
   return (

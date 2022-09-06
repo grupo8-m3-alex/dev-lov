@@ -1,50 +1,67 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import { ModalEditContainer } from "./styled";
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/userContext';
+import { All } from './styled';
+import { GrClose } from 'react-icons/gr';
+import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { IPosts } from '../../pages/Home';
 
-Modal.setAppElement("#root");
+const schema = yup.object().shape({
+  text: yup.string().required('A mensagem não pode ser enviada vazia'),
+});
 
-const ModalEditPost = () => {
-  const [modalIsOpen, setIsOpen] = useState(true);
+interface IEditPostForm {
+  text: string;
+}
+interface IModalEditPostProps {
+  post: IPosts;
+}
 
-  function openModal() {
-    setIsOpen(true);
-  }
+const ModalEditPost = ({ post }: IModalEditPostProps) => {
+  const { getPosts, user, updatePost, setShowEditPost, idEditPost } =
+    useContext(UserContext);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<IEditPostForm>({
+    resolver: yupResolver(schema),
+  });
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  const editData = async (data: IEditPostForm) => {
+    const newData = {
+      message: data?.text,
+      created_at: post?.created_at,
+      updated_at: new Date(),
+    };
+    await updatePost(idEditPost, newData);
+    getPosts();
+    setShowEditPost(false);
+  };
 
   return (
-    <>
-      <ModalEditContainer />
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        className="Modal"
-        overlayClassName="Overlay"
-      >
-        <div>
-          <div className="Header_modalAdd">
-            <h3>Editar Publicação</h3>
-            <button onClick={closeModal}>X</button>
-          </div>
-          <div className="imgaAndName">
-            <img src="" alt="" />
-            <span>Joao Vitor Henrique</span>
-          </div>
+    <All>
+      <div className="EditModal">
+        <div className="Head">
           <div>
-            <form>
-              <textarea />
-              <div className="buttonContainer">
-                <button className="buttonDelete">Excluir</button>
-                <button className="buttonPubli">Publicar</button>
-              </div>
-            </form>
+            <h2>Editar publicação</h2>
+            <button onClick={() => setShowEditPost(false)}>
+              <GrClose />
+            </button>
           </div>
         </div>
-      </Modal>
-    </>
+        <div className="InfoUser">
+          <img src={user?.url_avatar} />
+          <h2>{user?.name}</h2>
+        </div>
+        <form onSubmit={handleSubmit(editData)}>
+          <textarea {...register('text')} placeholder="Digite aqui" />
+          <span>{errors?.text?.message}</span>
+          <button type="submit">Editar</button>
+        </form>
+      </div>
+    </All>
   );
 };
 

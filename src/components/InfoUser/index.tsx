@@ -29,7 +29,7 @@ const InfoUser = ({ id }: IInfoUserProps) => {
     getUser(id).then((resp) => {
       setInfoUser(resp);
     });
-  }, [user]);
+  }, [user, id]);
 
   return (
     <Card>

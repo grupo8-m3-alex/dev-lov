@@ -28,10 +28,16 @@ const schema = yup.object().shape({
 });
 
 const ModalAddComment = () => {
-  const { user, setShowAddComment, createComment, posts, updatePost, idPost } =
-    useContext(UserContext);
+  const {
+    user,
+    setShowAddComment,
+    createComment,
+    posts,
+    getPosts,
+    idEditPost,
+  } = useContext(UserContext);
 
-  const findPost = posts.find((post) => post.id === idPost);
+  const findPost = posts.find((post) => post.id === idEditPost);
 
   const {
     register,
@@ -59,11 +65,9 @@ const ModalAddComment = () => {
           },
         ],
       };
-      updatePost(idPost, comments);
-      setShowAddComment(false);
+      createComment(idEditPost, comments);
     }
   };
-
   return (
     <All>
       <div className="AddModal">

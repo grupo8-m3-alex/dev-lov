@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import Modal from 'react-modal';
 import { ModalFriendContainer } from './styled';
 import { MdOutlineGroupOff } from 'react-icons/md';
@@ -7,23 +7,21 @@ import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
-const ModalFriendList = () => {
-  const [modalIsOpen, setIsOpen] = useState(true);
+interface IModalFriendListProps {
+  closeModal: () => void;
+  isModalOpen: boolean;
+}
+
+const ModalFriendList = ({
+  closeModal,
+  isModalOpen,
+}: IModalFriendListProps) => {
   const { user, updateUser } = useContext(UserContext);
-  console.log(user?.friendsList);
+
   const navigate = useNavigate();
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
 
   const deleteFriend = (id: number) => {
     const newFriends = user?.friendsList.filter((friend) => friend.id !== id);
-    console.log(newFriends);
     if (user) {
       updateUser(user?.id, { friendsList: newFriends });
     }
@@ -33,15 +31,15 @@ const ModalFriendList = () => {
     <>
       <ModalFriendContainer />
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={isModalOpen}
         onRequestClose={closeModal}
-        className="Modal"
+        className="Modal1"
         overlayClassName="Overlay"
       >
         <div>
           <div className="header">
             <h1>Conexões</h1>
-            <button>X</button>
+            <button onClick={closeModal}>X</button>
           </div>
           <div className="MainContainer">
             <ul>
@@ -50,7 +48,10 @@ const ModalFriendList = () => {
                   <img
                     src={resp.url_avatar}
                     alt=""
-                    onClick={() => navigate(`/profile/${resp.id}`)}
+                    onClick={() => {
+                      closeModal();
+                      navigate(`/profile/${resp.id}`, { replace: true });
+                    }}
                   />
                   <div>
                     <span>{resp.name}</span>

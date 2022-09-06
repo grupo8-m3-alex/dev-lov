@@ -1,14 +1,15 @@
+import { useContext, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { v4 as uuidv4 } from 'uuid';
+
 import Header from '../../components/Header';
 import Post from '../../components/Post';
-import { ContainerHome } from './styles';
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../contexts/userContext';
-import { v4 as uuidv4 } from 'uuid';
-import ModalAddPost from '../../components/ModalCreatePost';
 import ModalAddComment from '../../components/ModalAddComment';
-import { motion } from 'framer-motion';
-import ModalEditPost from '../../components/ModalEditPost';
+import ModalAddPost from '../../components/ModalCreatePost';
 import DropdownPost from '../../components/DropdownPost';
+import { UserContext } from '../../contexts/userContext';
+
+import { ContainerHome } from './styles';
 
 export interface IUserComment {
   userId: number | string;
@@ -45,7 +46,6 @@ const Home = () => {
     getPosts,
     showAddPost,
     showAddComment,
-    showEditPost,
     menuEdit,
     setMenuEdit,
   } = useContext(UserContext);
@@ -72,7 +72,6 @@ const Home = () => {
         </div>
         {showAddComment && <ModalAddComment />}
         {showAddPost && <ModalAddPost />}
-        {showEditPost && <ModalEditPost />}
         <ul>
           {posts?.map((post) => (
             <li key={uuidv4()}>

@@ -83,7 +83,7 @@ interface IUserContext {
   handleLikeClick: (id: number) => void;
   showAddPost: boolean;
   setShowAddPost: Dispatch<SetStateAction<boolean>>;
-  createComment: (id: string, data: any) => Promise<void>;
+  createComment: (id: number, data: any) => Promise<void>;
   posts: IPosts[];
   setPosts: Dispatch<SetStateAction<IPosts[]>>;
   showAddComment: boolean;
@@ -92,8 +92,8 @@ interface IUserContext {
   setShowEditPost: Dispatch<SetStateAction<boolean>>;
   menuEdit: boolean;
   setMenuEdit: Dispatch<SetStateAction<boolean>>;
-  setIdPost: Dispatch<SetStateAction<number>>;
-  idPost: number;
+  setIdEditPost: Dispatch<SetStateAction<number>>;
+  idEditPost: number;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -101,8 +101,8 @@ export const UserContext = createContext<IUserContext>({} as IUserContext);
 const UserProvider = ({ children }: IUserProvider) => {
   const [user, setUser] = useState<IUser | null>(null as IUser | null);
   const [posts, setPosts] = useState<IPosts[]>([]);
-  const [idPost, setIdPost] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [idEditPost, setIdEditPost] = useState<number>(0);
   const [menuEdit, setMenuEdit] = useState<boolean>(false);
   const [showAddPost, setShowAddPost] = useState<boolean>(false);
   const [showEditPost, setShowEditPost] = useState<boolean>(false);
@@ -123,7 +123,7 @@ const UserProvider = ({ children }: IUserProvider) => {
   }, []);
 
   const registerUser = async (data: FormDataDefault) => {
-    data.friendList = [];
+    data.friendsList = [];
     data.unFriendsList = [];
     const toastRegister = toast.loading('Verificando dados...');
     return await api
@@ -206,7 +206,7 @@ const UserProvider = ({ children }: IUserProvider) => {
   const createPost = async (data: any) => {
     return await api
       .post('posts', data)
-      .then((res) => console.log(res))
+      .then((res) => getPosts())
       .catch((err) => console.error(err));
   };
 
@@ -251,13 +251,14 @@ const UserProvider = ({ children }: IUserProvider) => {
     }
   };
 
-  const createComment = async (id: string, data: any) => {
+  const createComment = async (id: number, data: any) => {
     return await api
       .patch(`posts/${id}`, data)
       .then((res) => {
         toast.success('Seu comentário foi publicado');
         console.log(res);
         setShowAddComment(false);
+        getPosts();
       })
       .catch((err) => console.error(err));
   };
@@ -291,8 +292,8 @@ const UserProvider = ({ children }: IUserProvider) => {
         setShowEditPost,
         menuEdit,
         setMenuEdit,
-        setIdPost,
-        idPost,
+        setIdEditPost,
+        idEditPost,
       }}
     >
       {children}
