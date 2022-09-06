@@ -58,6 +58,7 @@ const UserProvider = ({ children }: IUserProvider) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation() as ILocationState;
+  console.log(user)
 
   useEffect(() => {
     const token = localStorage.getItem("@token_devlov");
