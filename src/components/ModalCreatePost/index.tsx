@@ -1,25 +1,38 @@
-import { useContext, useEffect } from "react";
-import { UserContext } from "../../contexts/userContext";
-import { All } from "./styled";
-import { GrClose } from "react-icons/gr"
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import * as yup from 'yup';
+import { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-const schema = yup.object().shape({text: yup.string().required("A mensagem não pode ser enviada vazia")})
+import { UserContext } from '../../contexts/userContext';
+import { GrClose } from 'react-icons/gr';
+import { All } from './styled';
 
-const ModalAddPost = () => { 
-  const { user, setShowAddPost, createPost, getPosts} = useContext(UserContext);
+interface IAddPostForm {
+  text: string;
+}
+
+const schema = yup.object().shape({
+  text: yup.string().required('A mensagem não pode ser enviada vazia'),
+});
+
+const ModalAddPost = () => {
+  const { user, setShowAddPost, createPost, posts, getPosts } =
+    useContext(UserContext);
+
+  useEffect(() => {
+    const showPosts = () => getPosts();
+    showPosts();
+  }, posts);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IAddPostForm>({
     resolver: yupResolver(schema),
   });
 
-  const newPost = (data:any) => {
+  const newPost = (data: any) => {
     const newData = {
       name: user?.name,
       url_avatar: user?.url_avatar,
@@ -28,11 +41,11 @@ const ModalAddPost = () => {
       updated_at: new Date(),
       userId: user?.id,
       like: 0,
-      comments: []
-      }
-      createPost(newData)
-      getPosts()
-    }
+      comments: [],
+    };
+    createPost(newData);
+    setShowAddPost(false);
+  };
 
   return (
     <All>
@@ -40,21 +53,25 @@ const ModalAddPost = () => {
         <div className="Head">
           <div>
             <h2>Criar publicação</h2>
-            <button onClick={() => setShowAddPost(false)}><GrClose/></button>
+            <button onClick={() => setShowAddPost(false)}>
+              <GrClose />
+            </button>
           </div>
         </div>
         <div className="InfoUser">
-          <img src={user?.url_avatar}/>
+          <img src={user?.url_avatar} />
           <h2>{user?.name}</h2>
         </div>
         <form onSubmit={handleSubmit(newPost)}>
-          <textarea id="text" {...register("text")} placeholder="Digite aqui" />
+          <textarea id="text" {...register('text')} placeholder="Digite aqui" />
           <span>{errors.text?.message}</span>
-          <button type="submit" onClick={() => getPosts()}>Publicar</button>
+          <button type="submit" onClick={() => getPosts()}>
+            Publicar
+          </button>
         </form>
       </div>
     </All>
-  )
+  );
 };
 
 export default ModalAddPost;

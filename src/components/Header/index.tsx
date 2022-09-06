@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { UserContext } from "../../contexts/userContext";
 import { useContext, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import DropdownMenu from "../DropdownMenu";
 
 const Header = () => {
@@ -61,6 +61,6 @@ const Header = () => {
    {menu && <DropdownMenu showMenu={showMenu} logout={logout} />}
   </Header_>
  );
-};
+}
 
 export default Header;

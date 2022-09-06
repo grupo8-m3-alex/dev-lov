@@ -20,6 +20,10 @@ const DropdownMenu = ({ showMenu, logout }) => {
       <FiUser />
       <span>Perfil</span>
      </button>
+     <button id="conections" onClick={() => navigate("/cone")}>
+      <MdLogout />
+      <span>Sair</span>
+     </button>
      <button id="logout" onClick={() => logout()}>
       <MdLogout />
       <span>Sair</span>

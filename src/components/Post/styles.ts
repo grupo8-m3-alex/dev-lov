@@ -104,7 +104,6 @@ export const Content = styled.div`
     flex-wrap: wrap;
     max-width: 728px;
     width: 100%;
-  
     p {
       max-width: 720px;
       padding-left: 20px;

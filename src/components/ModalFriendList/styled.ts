@@ -1,28 +1,28 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const ModalFriendContainer = createGlobalStyle`
-  .Modal {
-    position: absolute;
+  .Modal1 {
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    background-color: rgba(242, 242, 242, 0.2);
+    background-color: transparent;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     
   }
-  .Modal > div {
+  .Modal1 > div {
       position: fixed;
-      width: 90%;
+      width: 100%;
       height: 100vh;
     border-radius: 8px;
     max-width: 532px;
     display: flex;
     background-color: rgba(242, 242, 242, 1);
-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
     align-items: center;
     flex-direction: column;
 
@@ -45,13 +45,15 @@ box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
           color: black;
           font-weight: 600;
           font-size: 1rem;
+
+          cursor: pointer;
           &:active{
               color: red;
           }
       }
   }
 
-  .Modal > div {
+  .Modal1 > div {
       .MainContainer {
           width: 100%;
           display: flex;
@@ -62,6 +64,9 @@ box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
       }
       ul{
           width: 81%;
+          overflow: scroll;
+          max-height: 80vh;
+          padding-bottom: 3.5rem;
       }
       li {
           position: relative;
@@ -80,6 +85,9 @@ box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
               height: 4rem;
               border: 1px solid black;
               border-radius: 50%;
+              object-fit: cover;
+
+              cursor: pointer;
           }
           div{
               display: flex;
@@ -105,6 +113,7 @@ box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
             top: 6px;
             right: 10px;
             font-size: 1.5rem;
+            cursor: pointer;
             &:hover{
                 opacity: 1;
             }
