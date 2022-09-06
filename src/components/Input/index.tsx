@@ -21,6 +21,7 @@ export interface FormDataDefault {
   city: string;
   state: string;
   gender: string;
+  likeList: number[];
 }
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
