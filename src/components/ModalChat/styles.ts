@@ -33,10 +33,16 @@ const ModalGlobal = createGlobalStyle`
         justify-content: space-between;
         align-items: center;
 
-        h2 {
+        > h2 {
           color: var(--color-0);
           font-size: 1.75rem;
           margin-right: 8px;
+        }
+
+        > h3 {
+          color: var(--color-2);
+          text-align: center;
+          margin-left: 12px;
         }
       }
 
@@ -57,28 +63,32 @@ const ModalGlobal = createGlobalStyle`
       justify-content: space-between;
       width: 100%;
 
+      @media screen and (max-width: 500px) {
+        flex-direction: column;
+        justify-content: center;
+      }
+
       > ul {
         list-style: none;
         width: 100%;
         max-width: 120px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: start;
         flex-direction: column;
-        
-        @media screen and (max-width: 450px) {
-          max-width: 50px;
 
-          > li {
-            font-size: 13px;
-          }
+        @media screen and (max-width: 500px) {
+          overflow: auto;
+          max-width: 100%;
+          flex-direction: row;
         }
 
         > li {
+          width: 100%;
           color: var(--color-2);
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
+          justify-content: center;
           align-items: center;
           padding: 10px 0;
           cursor: pointer;
@@ -86,6 +96,12 @@ const ModalGlobal = createGlobalStyle`
           border-width: 1px 0px 1px 0px;
           border-style: solid;
           border-color: black;
+
+          @media screen and (max-width: 500px) {
+            flex-direction: column;
+            border-width: 0px 1px 0px 1px;
+            max-width: 100px;
+          }
 
           p {
             color: black;
@@ -109,17 +125,16 @@ const ModalGlobal = createGlobalStyle`
         flex-direction: column;
         position: relative;
 
-
-        h2 {
-          text-align: center;
-          color: var(--color-2);
-          padding: 10px 0;
+        @media screen and (max-width: 500px) {
+          height: 400px;
+          width: 100%;
+          padding: 0;
         }
 
         h3 {
           text-align: center;
           color: var(--color-2);
-          font-size: 28px;
+          font-size: 1.75rem;
           position: absolute;
           top: 50%;
           left: 50%;
@@ -139,6 +154,19 @@ const ModalGlobal = createGlobalStyle`
           border-radius: 8px 8px 0 0;
           padding: 20px;
           overflow: auto;
+          &::-webkit-scrollbar {
+            width: 8px;            
+          }
+
+          &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background-color: var(--color-0);    
+            border-radius: 8px;      
+            border: 1px solid var(--color-0);
+          }
 
           > li {
             p {
