@@ -118,15 +118,20 @@ export const All = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  max-width: 449px;
+  max-height: 205px;
+  width: 100%;
+  height: 100%;
 
   textarea {
    background: white;
+   resize: none;
    border-radius: 0 0 10px 10px;
    border: 1px solid transparent;
    max-width: 449px;
    max-height: 205px;
-   width: 460px;
-   height: 150px;
+   width: 100%;
+   height: 100%;
    padding: 5px;
    transition: 0.2s;
 

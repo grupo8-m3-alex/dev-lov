@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const All = styled.div`
  position: fixed;
  top: 0;
+ left: 0;
  display: flex;
  align-items: center;
  justify-content: center;
@@ -11,16 +12,16 @@ export const All = styled.div`
  height: 100vh;
  background-image: linear-gradient(
   to bottom,
-  rgba(255, 255, 255, 0.7),
-  rgba(255, 255, 255, 0.8)
+  rgba(255, 255, 255, 0.15),
+  rgba(255, 255, 255, 0.15)
  );
 
- .AddModal {
+ .EditModal {
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #f9f9f9;
-  box-shadow: 0 0px 10px 10px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0px 10px 10px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   max-width: 500px;
   width: 100%;
@@ -118,15 +119,20 @@ export const All = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  max-width: 449px;
+  max-height: 240px;
+  width: 100%;
+  height: 100%;
 
   textarea {
+   resize: none;
    background: #f1f1f1;
    border-radius: 0 0 10px 10px;
    border: 1px solid transparent;
    max-width: 449px;
    max-height: 205px;
-   width: 460px;
-   height: 215px;
+   width: 100%;
+   height: 100%;
    padding: 5px;
    transition: 0.2s;
 

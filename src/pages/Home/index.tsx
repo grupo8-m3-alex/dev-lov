@@ -1,15 +1,13 @@
 import Header from "../../components/Header";
 import Post from "../../components/Post";
 import { ContainerHome } from "./styles";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect} from "react";
 import { UserContext } from "../../contexts/userContext";
-import { ListItem } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import ModalAddPost from "../../components/ModalCreatePost";
 import ModalAddComment from "../../components/ModalCreateComment";
 import { motion } from "framer-motion";
 import ModalEditPost from "../../components/ModalEditPost";
-import DropdownPost from "../../components/DropdownPost";
 
 export interface IUserComment {
  userId: number | string;
@@ -46,10 +44,6 @@ const Home = () => {
   showPosts();
  }, []);
 
- const del = (event) => {
-  console.log(event.target)
- }
-
  return (
    <>
    <Header />
@@ -70,7 +64,7 @@ const Home = () => {
     <ul>
      {posts?.map((post) => (
        <li key={uuidv4()}>
-       <Post  post={post} />
+       <Post post={post} />
        {showEditPost && <ModalEditPost post={post} />}
       </li>
      ))}

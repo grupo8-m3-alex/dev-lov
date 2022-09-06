@@ -61,6 +61,8 @@ interface IUserContext {
   setMenuEdit: Dispatch<SetStateAction<boolean>>;
   setUser: Dispatch<SetStateAction<IUser | null>>;
   userIsValid: any;
+  setIdEditPost: Dispatch<SetStateAction<number>>;
+  idEditPost: number;
   updatePost: (id: number, data: any) => Promise<void>;
 }
 
@@ -73,6 +75,7 @@ const UserProvider = ({ children }: IUserProvider) => {
   const [menuEdit, setMenuEdit] = useState<boolean>(false);
   const [showEditPost, setShowEditPost] = useState<boolean>(false);
   const [showAddComment, setShowAddComment] = useState<boolean>(false);
+  const [idEditPost, setIdEditPost] = useState<number>(0);
   const [posts, setPosts] = useState<IPosts[]>([]);
   const navigate = useNavigate();
   const location = useLocation() as ILocationState;
@@ -150,12 +153,14 @@ const UserProvider = ({ children }: IUserProvider) => {
       .catch(err => console.error(err))
   }
 
-  const deletePost = async (event: EventTarget) => {
-    console.log(event.target)
-    // return await api
-    //   .delete(`posts/${event.currentTarget.id}`)
-    //   .then((res) => toast.success("A publicação foi excluída"))
-    //   .catch((err) => console.error(err));
+  const deletePost = async (id: string) => {
+    return await api
+      .delete(`posts/${id}`)
+      .then(res => {
+        toast.success("A publicação foi excluída")
+        getPosts()
+      })
+      .catch((err) => console.error(err));
   };
 
   const createPost = async (data: any) => {
@@ -190,6 +195,7 @@ const UserProvider = ({ children }: IUserProvider) => {
         toast.success("Seu comentário foi publicado")
         console.log(res)
         setShowAddComment(false)
+        getPosts()
       })
       .catch(err => console.error(err))
   }
@@ -199,14 +205,14 @@ const UserProvider = ({ children }: IUserProvider) => {
       .patch(`posts/${id}`, data)
       .then(res => {
         toast.success("Sua publicação foi alterada")
-        console.log(res)
         setShowEditPost(false)
       })
       .catch(err => console.error(err))
   }
+ 
 
   return (
-    <UserContext.Provider value={{ updatePost, userIsValid, menuEdit, setMenuEdit, showEditPost, setShowEditPost, user, singIn, setIsLoading, getPosts, deletePost, getUser, updateUser, isLoading, createPost, registerUser, showAddPost, setShowAddPost, createComment, posts, setPosts, showAddComment, setShowAddComment }}>
+    <UserContext.Provider value={{ idEditPost, setIdEditPost, updatePost, userIsValid, menuEdit, setMenuEdit, showEditPost, setShowEditPost, user, singIn, setIsLoading, getPosts, deletePost, getUser, updateUser, isLoading, createPost, registerUser, showAddPost, setShowAddPost, createComment, posts, setPosts, showAddComment, setShowAddComment }}>
       {children}
     </UserContext.Provider>
   );

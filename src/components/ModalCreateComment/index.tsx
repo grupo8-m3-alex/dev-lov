@@ -23,14 +23,17 @@ export interface IComment {
 const schema = yup.object().shape({text: yup.string().required("A mensagem não pode ser enviada vazia")})
 
 const ModalAddComment = () => { 
-  const { user, setShowAddComment, createComment, posts, getPosts } = useContext(UserContext);
+  const { user, setShowAddComment, createComment, posts, getPosts, idEditPost } = useContext(UserContext);
   const [allComments, setAllComments] = useState({})
-  useEffect(() => {
-    const showPosts = () => getPosts()
-    showPosts();
+  
+  // useEffect(() => {
+  //   const showPosts = () => getPosts()
+  //   showPosts();
 
-    setAllComments(posts?.comments)
-  }, []);
+  //   setAllComments(posts?.comments)
+  // }, []);
+
+  const findPost = posts.find((post) => post.id === idEditPost);
 
   const {
     register,
@@ -41,7 +44,8 @@ const ModalAddComment = () => {
   });
 
   const newComment = (data:any) => {
-    const comments = { comments: [...allComments,
+    if (findPost) {
+    const comments = { comments: [...findPost?.comments,
       {
       id: uuidv4(),
       user: {
@@ -53,13 +57,10 @@ const ModalAddComment = () => {
         updated_at: new Date()
       }
     }]
-
-    
   }
-    // createComment(1, comments)
-    console.log(posts)
+  createComment(idEditPost, comments)
   }
-
+  }
   return (
     <All >
       <div className="AddModal">

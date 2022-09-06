@@ -9,12 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 const schema = yup.object().shape({text: yup.string().required("A mensagem não pode ser enviada vazia")})
 
 const ModalAddPost = () => { 
-  const { user, setShowAddPost, createPost, posts, getPosts} = useContext(UserContext);
-
-  // useEffect(() => {
-  //   const showPosts = () => getPosts()
-  //   showPosts();
-  // }, posts);
+  const { user, setShowAddPost, createPost, getPosts} = useContext(UserContext);
 
   const {
     register,
@@ -36,6 +31,7 @@ const ModalAddPost = () => {
       comments: []
       }
       createPost(newData)
+      getPosts()
     }
 
   return (

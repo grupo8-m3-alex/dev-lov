@@ -19,6 +19,65 @@ export const Content = styled.div`
   width: 100%;
   margin: 2px 5px 5px 5px;
 
+  .btns {
+    display: flex;
+    max-width: 200px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+
+    .edit {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    background-color: white;
+    border: none;
+    color: gray;
+
+    &:active {
+      color: black;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    span {
+      margin-left: 5px;
+      font-size: 13px;
+    }
+
+    svg {
+      font-size: 16px;
+    }
+  }
+
+  .delete {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    background-color: white;
+    border: none;
+    color: gray;
+    width: max-content;
+    padding: 0;
+
+    &:active {
+      color: black;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    span {
+      margin-left: 5px;
+      font-size: 13px;
+    }
+
+    svg {
+      font-size: 16px;
+    }
+  }
+
+  }
+
   .InfoUser {
   display: flex;
   align-items: center;
@@ -36,35 +95,8 @@ export const Content = styled.div`
     font-size: 20px;
    }
   }
+ } 
 
-  button {
-   width: max-content;
-   border: none;
-   background: none;
-   margin-right: 30px;
-   padding: 0;
-   
-   svg {
-    color: #A3A3A3;
-    font-size: 25px;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    transition: 0.1s;
-
-    &:hover {
-     border-radius: 10px;
-     cursor: pointer;
-     box-shadow: 0 0 2px 2px;
-     transition: 0.1s;
-    }
-
-    &:active {
-     background-color: #CC0066;
-    }
-   }
-  } 
- }
- 
  .Text {
     display: flex;
     align-items: center;

@@ -9,13 +9,15 @@ import Comments from "../Comments";
 import { v4 as uuidv4 } from "uuid";
 import NoComments from "../NoComments";
 import { UserContext } from "../../contexts/userContext";
-import DropdownPost from "../DropdownPost";
+import {AiTwotoneDelete} from "react-icons/ai";
+import { FiEdit3 } from "react-icons/fi";
+import ModalEditPost from "../ModalEditPost";
+import { IPosts } from "../../pages/Home";
 
-const Post = ({ post }) => {
- const { setShowAddComment, menuEdit, setMenuEdit } = useContext(UserContext);
+const Post = ({post}:IPosts) => {
+ const { user, setShowAddComment, deletePost, setShowEditPost, showEditPost, getPosts, setIdEditPost } = useContext(UserContext);
  const [showComments, setShowComments] = useState<boolean>(false);
  const [like, setLike] = useState<boolean>(false);
-
  const handleComments = () => {
   setShowComments(!showComments);
  };
@@ -24,17 +26,36 @@ const Post = ({ post }) => {
   setLike(!like);
  };
 
+ const del = async (event: any) => {
+  await deletePost(`${event.currentTarget.id}`)
+  getPosts()
+ };
+
+ const changeId = (event: any) => {
+  setIdEditPost(+event.currentTarget.id)
+ }
+
  return (
   <>
    <Content>
     <div className="HeadPost">
      <div className="InfoUser">
-      <img src={post?.url_avatar} alt="" />
+      <img src={post?.url_avatar} alt="Foto" />
       <h2>{post?.name}</h2>
      </div>
-     <button onClick={() => setMenuEdit(!menuEdit)}>
-      <HiDotsHorizontal />
+     {post?.userId == user?.id && (<div className="btns">
+     <button className="edit" id={post?.id} onClick={(event) => {
+      changeId(event)
+      setShowEditPost(true)}}>
+      <FiEdit3 />
+      <span>Editar</span>
      </button>
+      {showEditPost && (<ModalEditPost post={post}/>)}
+     <button className="delete" id={post?.id} onClick={del}> 
+      <AiTwotoneDelete id={post?.id} />
+      <span>Deletar</span>
+     </button>
+     </div>)}
     </div>
     <div className="Text">
      <p>{post?.message}</p>
@@ -45,7 +66,9 @@ const Post = ({ post }) => {
        {like === false ? <BiLike /> : <BiLike color="blue" />}
        <span>Curtir</span>
       </button>
-      <button id="btnTwo" onClick={() => setShowAddComment(true)}>
+      <button id="btnTwo" onClick={() => {
+       setIdEditPost(post?.id)
+       setShowAddComment(true)}}>
        <FaRegComment />
        <span>Comentar</span>
       </button>
@@ -78,7 +101,6 @@ const Post = ({ post }) => {
      </li>
     )}
    </ul>
-   {menuEdit && (<DropdownPost id={post?.id} deletePostProps={del} />)}
   </>
  );
 };
