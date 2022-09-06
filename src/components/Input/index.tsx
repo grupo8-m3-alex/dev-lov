@@ -8,7 +8,7 @@ export interface FormDataDefault {
   url_avatar: string;
   password: string;
   confirmPassword?: string;
-  friendList?: [];
+  friendsList?: [];
   unFriendsList?: [];
   age: string;
   bio: string;

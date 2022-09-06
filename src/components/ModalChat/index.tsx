@@ -4,10 +4,17 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { FiAlertCircle } from 'react-icons/fi';
 import { SiGooglemessages } from 'react-icons/si'
 import { FaUserAlt } from 'react-icons/fa';
-import { useContext } from 'react';
-import { ChatContext } from '../../contexts/chatContext';
+import { useContext, useRef } from 'react';
+import { ChatContext, IUser } from '../../contexts/chatContext';
 import { UserContext } from '../../contexts/userContext';
 Modal.setAppElement("#root");
+
+interface IMessage {
+  content: string;
+  from: string;
+  id: string;
+  fromSelf: boolean;
+}
 
 const ModalChat = () => {
   const { setModalChatIsOpen, modalChatIsOpen, userIDSelected, onlineUsers, selectRecipientUser, setMessageContent, submitMessage, recipientUser } = useContext(ChatContext);
@@ -36,7 +43,7 @@ const ModalChat = () => {
         
         <div className='boxChat'>
           <ul>
-            {onlineUsers?.map((user: any )=> {
+            {onlineUsers?.map((user: IUser )=> {
               return !(user.userID === userIDSelected)
               &&
               (userFromContext?.friendsList?.some(({ id }) => id === user.userID)) && (
@@ -52,8 +59,8 @@ const ModalChat = () => {
             {Object.keys(recipientUser).length > 0 
               ? (
               <>
-                <ul className='listMessages'>
-                {recipientUser?.messages?.map((mes: any) => {
+                <ul id='listMessages' className='listMessages'>
+                {recipientUser?.messages?.map((mes: IMessage) => {
                     return (
                       <li key={mes.id} className={mes.fromSelf ? 'me' : ''}>
                         <p>{mes.content}</p>

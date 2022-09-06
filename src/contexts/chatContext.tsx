@@ -6,11 +6,11 @@ interface IChatProvider {
   children: ReactNode;
 }
 
-interface IUser {
+export interface IUser {
   hasNewMessage: boolean;
   messages: []
   socketID: string;
-  userID: string;
+  userID: number;
   username: string;
 }
 
@@ -84,7 +84,7 @@ const ChatProvider = ({ children }: IChatProvider) => {
     }
   }
 
-  const checkSelectedUser = (user: any) => {
+  const checkSelectedUser = (user: IUser) => {
     return user.userID === recipientUser?.userID;
   }
 
@@ -147,7 +147,6 @@ const ChatProvider = ({ children }: IChatProvider) => {
 
   useEffect(() => {
     if (arrivalMessage && onlineUsers.some(({ socketID }) => socketID === arrivalMessage.from)) {
-      console.log(arrivalMessage)
       const indexUser = onlineUsers.findIndex(({ socketID }) => socketID === arrivalMessage.from);
       const userObj: any = onlineUsers.find(({ socketID }) => socketID === arrivalMessage.from);
       userObj.messages.push(arrivalMessage);

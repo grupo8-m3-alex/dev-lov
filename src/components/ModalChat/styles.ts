@@ -66,6 +66,13 @@ const ModalGlobal = createGlobalStyle`
         justify-content: center;
         flex-direction: column;
         
+        @media screen and (max-width: 450px) {
+          max-width: 50px;
+
+          > li {
+            font-size: 13px;
+          }
+        }
 
         > li {
           color: var(--color-2);
@@ -76,11 +83,15 @@ const ModalGlobal = createGlobalStyle`
           padding: 10px 0;
           cursor: pointer;
           margin: 5px 0;
+          border-width: 1px 0px 1px 0px;
+          border-style: solid;
+          border-color: black;
 
           p {
             color: black;
             font-weight: 600;
             margin-right: 10px;
+            text-align: center;
           }
 
           p.select {
@@ -136,6 +147,7 @@ const ModalGlobal = createGlobalStyle`
               max-width: 48%;
               border-radius: 8px;
               padding: 5px;
+              word-break: break-all;
             }
           }
 
