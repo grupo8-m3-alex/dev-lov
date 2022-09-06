@@ -7,6 +7,7 @@ import { FaUserAlt } from 'react-icons/fa';
 import { useContext, useRef } from 'react';
 import { ChatContext, IUser } from '../../contexts/chatContext';
 import { UserContext } from '../../contexts/userContext';
+import { AnyMessageParams } from 'yup/lib/types';
 Modal.setAppElement("#root");
 
 interface IMessage {
@@ -19,7 +20,7 @@ interface IMessage {
 const ModalChat = () => {
   const { setModalChatIsOpen, modalChatIsOpen, userIDSelected, onlineUsers, selectRecipientUser, setMessageContent, submitMessage, recipientUser } = useContext(ChatContext);
   const { user: userFromContext } = useContext(UserContext);
-  const inputSubmit = useRef(null);
+  const inputSubmit: any = useRef({});
 
   const resetInput = () => {
     inputSubmit.current.value = "";
