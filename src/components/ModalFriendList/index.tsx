@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import { ModalFriendContainer } from "./styled";
-import { MdOutlineGroupOff } from "react-icons/md";
+import { useState } from 'react';
+import Modal from 'react-modal';
+import { ModalFriendContainer } from './styled';
+import { MdOutlineGroupOff } from 'react-icons/md';
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
 const ModalFriendList = () => {
   const [modalIsOpen, setIsOpen] = useState(true);

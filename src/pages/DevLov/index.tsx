@@ -1,19 +1,19 @@
-import { CardContainer, DevLovContainer } from "./style";
-import logo from "../../assets/logo.png";
-import x from "../../assets/xdevlov.png";
-import heart from "../../assets/heartDevLov.png";
-import { AiFillInfoCircle } from "react-icons/ai";
-import ButtonBack from "../../components/ButtonBack";
-import { ReactNode, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import { AiFillHeart } from "react-icons/ai";
-import { api } from "../../services/api";
-import { IUser, UserContext } from "../../contexts/userContext";
-import axios from "axios";
-import ModalLoading from "../../components/ModalLoading";
+import { CardContainer, DevLovContainer } from './style';
+import logo from '../../assets/logo.png';
+import x from '../../assets/xdevlov.png';
+import heart from '../../assets/heartDevLov.png';
+import { AiFillInfoCircle } from 'react-icons/ai';
+import ButtonBack from '../../components/ButtonBack';
+import { ReactNode, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { AiFillHeart } from 'react-icons/ai';
+import { api } from '../../services/api';
+import { IUser, UserContext } from '../../contexts/userContext';
+import axios from 'axios';
+import ModalLoading from '../../components/ModalLoading';
 
-type IFrindList = Omit<IUsers, "password">;
+type IFrindList = Omit<IUsers, 'password'>;
 
 type IEvent = {
   event: EventTarget;
@@ -40,20 +40,20 @@ const DevLov = () => {
   const navigate = useNavigate();
   const icons = <AiFillHeart />;
   const [haveUsers, setHaveUsers] = useState(true);
-  const [cardClassAnimation, setCardClassAnimation] = useState("");
+  const [cardClassAnimation, setCardClassAnimation] = useState('');
 
   const { updateUser, user } = useContext(UserContext);
 
   console.log(cardClassAnimation);
   const toastAddFriend = () =>
-    toast("Adicionado a lista de conexões", {
+    toast('Adicionado a lista de conexões', {
       duration: 1000,
       icon: <AiFillHeart color="red" size={24} />,
     });
 
   useEffect(() => {
     api
-      .get("users")
+      .get('users')
       .then(({ data }) => {
         const filterUser: IUser[] = data.filter(
           (elem: IUser) => elem.id !== user?.id
@@ -111,13 +111,13 @@ const DevLov = () => {
         setHaveUsers(false);
       }
 
-      // addConection(event);
+      addConection(event);
     } else {
-      // addConection(event);
-      setCardClassAnimation("heart");
+      addConection(event);
+      setCardClassAnimation('heart');
       toastAddFriend();
       setTimeout(() => {
-        setCardClassAnimation("");
+        setCardClassAnimation('');
       }, 500);
       setCount((oldCount: number) => oldCount + 1);
     }
@@ -130,12 +130,12 @@ const DevLov = () => {
       if (findUser) {
         setHaveUsers(false);
       }
-      // addNoConection(event);
+      addNoConection(event);
     } else {
-      // addNoConection(event);
-      setCardClassAnimation("noHeart");
+      addNoConection(event);
+      setCardClassAnimation('noHeart');
       setTimeout(() => {
-        setCardClassAnimation("");
+        setCardClassAnimation('');
       }, 1000);
       setCount((oldCount: number) => oldCount + 1);
     }
@@ -152,7 +152,7 @@ const DevLov = () => {
       <DevLovContainer>
         <div className="header__devlov">
           <img src={logo} alt="" />
-          <ButtonBack onClick={() => navigate("/home")} />
+          <ButtonBack onClick={() => navigate('/home')} />
         </div>
         <div className="divImgFrinds">
           <div className="border1"></div>
@@ -170,7 +170,7 @@ const DevLov = () => {
       <DevLovContainer>
         <div className="header__devlov">
           <img src={logo} alt="" />
-          <ButtonBack onClick={() => navigate("/home")} />
+          <ButtonBack onClick={() => navigate('/home')} />
         </div>
 
         {users.length > 0 ? (
