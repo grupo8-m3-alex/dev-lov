@@ -19,12 +19,12 @@ export const All = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #f9f9f9;
+    background: #fff;
     box-shadow: 0 0px 10px 10px rgba(0, 0, 0, 0.45);
     border-radius: 15px;
     max-width: 500px;
     width: 100%;
-    height: 400px;
+    height: 350px;
 
     .Head {
       display: flex;
@@ -42,13 +42,13 @@ export const All = styled.div`
         margin-top: 10px;
 
         h2 {
-          color: #000;
           margin: 0 0 0 5px;
           font-size: 17px;
           animation-name: name;
           animation-duration: 1s linear infinite;
           animation-direction: alternate;
           animation-iteration-count: infinite;
+          color: #000;
 
           &:hover {
             cursor: none;
@@ -124,17 +124,17 @@ export const All = styled.div`
     margin-top: 10px;
 
     textarea {
-      color: #000;
-      background: #f1f1f1;
+      background: white;
       border-radius: 0 0 10px 10px;
       border: 1px solid transparent;
       max-width: 449px;
       max-height: 205px;
       width: 460px;
-      height: 215px;
+      height: 150px;
       padding: 5px;
       transition: 0.2s;
       resize: none;
+      color: #000;
 
       &:hover {
         border: 1px solid gray;

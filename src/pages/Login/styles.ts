@@ -21,8 +21,7 @@ export const Container = styled.div`
     align-items: center;
 
     gap: 2.375rem;
-
-    min-height: 100vh;
+    padding-bottom: 3.5rem;
   }
 `;
 
