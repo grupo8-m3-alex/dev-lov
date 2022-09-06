@@ -60,14 +60,14 @@ const DevLov = () => {
           (elem: IUser) => elem.id !== user?.id
         );
         const filterFriends: any = filterUser.filter((elem) => {
-          if (!user?.friendsList.some((item) => item.id === elem.id)) {
+          if (!user?.friendsList?.some((item) => item.id === elem.id)) {
             return elem;
           }
         });
 
         const unFilterFriends: IUsers[] = filterFriends.filter(
           (elem: IUser) => {
-            if (!user?.unFriendsList.some((item: number) => item === elem.id)) {
+            if (!user?.unFriendsList?.some((item: number) => item === elem.id)) {
               return elem;
             }
           }
