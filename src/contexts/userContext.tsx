@@ -70,7 +70,7 @@ const UserProvider = ({ children }: IUserProvider) => {
   }, []);
 
   const registerUser = async (data: FormDataDefault) => {
-    data.friendList = [];
+    data.friendsList = [];
     data.unFriendsList = [];
     const toastRegister = toast.loading("Verificando dados...");
     return await api

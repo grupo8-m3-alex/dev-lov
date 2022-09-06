@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface IPropsDevLov {
-  isChange: boolean;
+  cardAnimation: string;
 }
 
 export const DevLovContainer = styled.div`
@@ -23,21 +23,177 @@ export const DevLovContainer = styled.div`
       width: 12rem;
     }
   }
-`;
 
-export const CardContainer = styled.ul<IPropsDevLov>`
-  @keyframes identifier {
+  @keyframes noFriends {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0;
+    }
+    85% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes Friends {
     from {
-      transform: rotateY(90deg);
+      opacity: 1;
     }
     to {
-      transform: rotateY(0deg);
+      opacity: 0.7;
     }
   }
 
-  animation-name: ${({ isChange }) => (isChange ? "identifier" : "")};
-  animation-duration: 0.5s;
+  @keyframes noFriends2 {
+    0% {
+      opacity: 0.3;
+    }
+    10% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0;
+    }
+    80% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
+  @keyframes noFriends3 {
+    0% {
+      opacity: 0.3;
+    }
+    20% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0;
+    }
+    70% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes noFriends4 {
+    0% {
+      opacity: 0.3;
+    }
+    30% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0;
+    }
+    60% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .divImgFrinds {
+    position: relative;
+    width: 100vw;
+    height: 25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .border1 {
+      border: 0.5rem solid rgba(255, 255, 255, 0.7);
+      width: 9rem;
+      height: 9rem;
+      border-radius: 50%;
+      animation: noFriends 1.5s infinite;
+      position: absolute;
+    }
+    .border2 {
+      border: 0.5rem solid rgba(255, 255, 255, 0.7);
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      animation: noFriends2 1.5s infinite;
+      position: absolute;
+    }
+    .border3 {
+      border: 0.5rem solid rgba(255, 255, 255, 0.7);
+      width: 7rem;
+      height: 7rem;
+      border-radius: 50%;
+      animation: noFriends3 1.5s infinite;
+      position: absolute;
+    }
+    .border4 {
+      border: 0.5rem solid rgba(255, 255, 255, 0.7);
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      animation: noFriends4 1.5s infinite;
+      position: absolute;
+    }
+  }
+  .imgNoFriends {
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    object-fit: cover;
+    animation: Friends 1.5s infinite;
+    opacity: 0.7;
+  }
+  .searchNewUsers {
+    position: absolute;
+    font-family: "Inter";
+    top: 280px;
+    animation: Friends 1.5s infinite;
+    font-weight: 600;
+  }
+`;
+
+const animationCard: any = {
+  heart: css`
+    animation-name: identifier;
+  `,
+  noHeart: css`
+    animation-name: identifier2;
+  `,
+};
+
+export const CardContainer = styled.ul<IPropsDevLov>`
+  @keyframes cardToRight {
+    0% {
+      transform: translateX(0px) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(300px) rotate(-25deg);
+      opacity: 0;
+    }
+  }
+  @keyframes cardToLeft {
+    0% {
+      transform: translateX(0px) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(-300px) rotate(25deg);
+      opacity: 0;
+    }
+  }
   width: 100vw;
   display: flex;
   align-items: center;
@@ -54,6 +210,20 @@ export const CardContainer = styled.ul<IPropsDevLov>`
     border-radius: 8px;
     align-items: baseline;
     padding-top: 10px;
+
+    ${({ cardAnimation }) => {
+      if (cardAnimation === "heart") {
+        return css`
+          animation: cardToRight 0.5s;
+        `;
+      } else if (cardAnimation === "noHeart") {
+        return css`
+          animation: cardToLeft 0.5s;
+        `;
+      } else {
+        return css``;
+      }
+    }}
 
     .nameAndinfo {
       position: absolute;
