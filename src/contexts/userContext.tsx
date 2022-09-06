@@ -3,6 +3,7 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useContext,
   useEffect,
   useState,
 } from 'react';
@@ -12,6 +13,7 @@ import { FormDataDefault } from '../components/Input';
 import { IPosts } from '../pages/Home';
 import { FormData } from '../pages/Login';
 import { api } from '../services/api';
+import { ChatContext } from './chatContext';
 
 interface IUserProvider {
   children: ReactNode;
@@ -107,7 +109,8 @@ const UserProvider = ({ children }: IUserProvider) => {
   const [showAddComment, setShowAddComment] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation() as ILocationState;
-  console.log(user)
+
+  const { sendUserID } = useContext(ChatContext);
 
   useEffect(() => {
     const token = localStorage.getItem('@token_devlov');
@@ -140,10 +143,12 @@ const UserProvider = ({ children }: IUserProvider) => {
   const userIsValid = async (token: string, user: IUser) => {
     setIsLoading(true);
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
     return await api
       .get(`users/${user.id}`)
       .then((resp) => {
         setUser(resp.data);
+        sendUserID(resp.data.id, resp.data.name);
         const from =
           location.state?.from || location.pathname === '/'
             ? 'home'
