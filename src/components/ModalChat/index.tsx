@@ -19,6 +19,11 @@ interface IMessage {
 const ModalChat = () => {
   const { setModalChatIsOpen, modalChatIsOpen, userIDSelected, onlineUsers, selectRecipientUser, setMessageContent, submitMessage, recipientUser } = useContext(ChatContext);
   const { user: userFromContext } = useContext(UserContext);
+  const inputSubmit = useRef(null);
+
+  const resetInput = () => {
+    inputSubmit.current.value = "";
+  }
 
   return (
     <>
@@ -70,8 +75,12 @@ const ModalChat = () => {
                 </ul>
 
                 <div className='boxMessageInput'>
-                  <input onChange={e => setMessageContent(e.target.value)} type="text" placeholder='Digite aqui' />
-                  <button onClick={submitMessage}>Enviar</button>
+                  <input ref={inputSubmit} id='inputSubmit' onChange={e => setMessageContent(e.target.value)} type="text" placeholder='Digite aqui' />
+                  <button onClick={() => {
+                    resetInput();
+                    submitMessage();
+                    setMessageContent("");
+                    }}>Enviar</button>
                 </div>
               </>
             )
