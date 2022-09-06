@@ -107,6 +107,7 @@ const UserProvider = ({ children }: IUserProvider) => {
   const [showAddComment, setShowAddComment] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation() as ILocationState;
+  console.log(user)
 
   useEffect(() => {
     const token = localStorage.getItem('@token_devlov');

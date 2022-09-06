@@ -22,7 +22,7 @@ export const ModalFriendContainer = createGlobalStyle`
     max-width: 532px;
     display: flex;
     background-color: rgba(242, 242, 242, 1);
-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
     align-items: center;
     flex-direction: column;
 
@@ -62,6 +62,9 @@ box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
       }
       ul{
           width: 81%;
+          overflow: scroll;
+          max-height: 80vh;
+          padding-bottom: 3.5rem;
       }
       li {
           position: relative;
@@ -80,6 +83,7 @@ box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
               height: 4rem;
               border: 1px solid black;
               border-radius: 50%;
+              object-fit: cover;
           }
           div{
               display: flex;
