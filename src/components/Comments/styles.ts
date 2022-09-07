@@ -25,6 +25,8 @@ export const ContainerComment = styled.div`
       height: 45px;
       border-radius: 100%;
       margin-left: 30px;
+
+      object-fit: cover;
     }
 
     h2 {
@@ -33,8 +35,8 @@ export const ContainerComment = styled.div`
       color: #000;
 
       @media screen and (max-width: 355px) {
-          font-size: 15px;
-        }
+        font-size: 15px;
+      }
     }
   }
 
