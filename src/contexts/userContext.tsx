@@ -95,6 +95,8 @@ interface IUserContext {
   setMenuEdit: Dispatch<SetStateAction<boolean>>;
   setIdEditPost: Dispatch<SetStateAction<number>>;
   idEditPost: number;
+  menu: boolean; 
+  setMenu: Dispatch<SetStateAction<boolean>>;
 }
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
@@ -108,6 +110,7 @@ const UserProvider = ({ children }: IUserProvider) => {
   const [showAddPost, setShowAddPost] = useState<boolean>(false);
   const [showEditPost, setShowEditPost] = useState<boolean>(false);
   const [showAddComment, setShowAddComment] = useState<boolean>(false);
+  const [menu, setMenu] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation() as ILocationState;
   const { sendUserID } = useContext(ChatContext);
@@ -279,6 +282,8 @@ const UserProvider = ({ children }: IUserProvider) => {
   return (
     <UserContext.Provider
       value={{
+        menu,
+        setMenu,
         user,
         singIn,
         setIsLoading,

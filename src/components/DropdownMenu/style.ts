@@ -3,17 +3,15 @@ import styled from "styled-components";
 export const Dropdown = styled.div`
  position: absolute;
  display: flex;
- top: 85px;
+ top: 70px;
  max-width: 750px;
  width: 100%;
  height: 70px;
  margin: 0;
- justify-content: center;
- 
 
  .Menu {
   position: absolute;
-  right: 3px;
+  right: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -6,7 +6,6 @@ import Header from '../../components/Header';
 import Post from '../../components/Post';
 import ModalAddComment from '../../components/ModalAddComment';
 import ModalAddPost from '../../components/ModalCreatePost';
-import DropdownPost from '../../components/DropdownPost';
 import { UserContext } from '../../contexts/userContext';
 
 import { ContainerHome } from './styles';

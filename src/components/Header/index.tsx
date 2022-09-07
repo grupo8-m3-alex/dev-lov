@@ -10,8 +10,7 @@ import DropdownMenu from "../DropdownMenu";
 
 const Header = () => {
  const navigate = useNavigate();
- const { user } = useContext(UserContext);
- const [menu, setMenu] = useState<boolean>(false);
+ const { user, menu, setMenu } = useContext(UserContext);
  const redirectDevlov = () => {
   toast.success("Entrando em DevLov", {
    duration: 3000,
@@ -47,7 +46,7 @@ const Header = () => {
    animate={{ opacity: 1 }}
    transition={{ duration: 0.5 }}
   >
-   <div>
+   <div className="HeadAux">
     <img src={logo} alt="DevLov_" />
     <div className="Profile">
      <button id="btnDevlov" onClick={() => redirectDevlov()}>
@@ -58,7 +57,7 @@ const Header = () => {
      </button>
     </div>
    </div>
-   {menu && <DropdownMenu showMenu={showMenu} logout={logout} />}
+   {menu && <DropdownMenu logout={logout} />}
   </Header_>
  );
 }

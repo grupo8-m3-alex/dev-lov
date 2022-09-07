@@ -20,7 +20,7 @@ export const Header_ = styled.header`
   height: 70px;
  }
 
- div {
+ .HeadAux {
   display: flex;
   justify-content: space-between;
   align-items: center;

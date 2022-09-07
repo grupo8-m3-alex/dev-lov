@@ -33,6 +33,7 @@ export const Content = styled.div`
     background-color: white;
     border: none;
     color: gray;
+    padding: 0;
 
     &:active {
       color: black;

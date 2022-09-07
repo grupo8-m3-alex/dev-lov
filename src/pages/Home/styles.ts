@@ -20,6 +20,9 @@ export const ContainerHome = styled.div`
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0px 12px 12px 12px;
     margin: 30px 0 20px 0;
+    @media (max-width: 759px) {
+     width: 95%;
+    }
 
     img {
       width: 60px;
