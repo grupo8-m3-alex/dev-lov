@@ -44,12 +44,17 @@ export const Content = styled.div<animationLikeProps>`
         width: 50px;
         height: 45px;
         margin-left: 30px;
+
+        object-fit: cover;
       }
 
       h2 {
         margin-left: 30px;
-        font-size: 20px;
-        color: #000;
+        a {
+          text-decoration: none;
+          font-size: 20px;
+          color: #000;
+        }
 
         @media screen and (max-width: 355px) {
           font-size: 15px;
@@ -169,7 +174,7 @@ export const Content = styled.div<animationLikeProps>`
         > span:first-child {
           margin-right: 25px;
         }
-          
+
         .likeCount {
           position: absolute;
           right: -60px;

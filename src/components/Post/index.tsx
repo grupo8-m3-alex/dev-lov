@@ -16,6 +16,7 @@ import { FiEdit3 } from 'react-icons/fi';
 import { Content } from './styles';
 import toast from 'react-hot-toast';
 import { api } from '../../services/api';
+import { Link } from 'react-router-dom';
 
 interface IPostProps {
   post: IPosts;
@@ -88,7 +89,9 @@ const Post = ({ post }: IPostProps) => {
         <div className="HeadPost">
           <div className="InfoUser">
             <img src={post?.url_avatar} alt="Foto" />
-            <h2>{post?.name}</h2>
+            <h2>
+              <Link to={`/profile/${post.userId}`}>{post?.name}</Link>
+            </h2>
           </div>
           {post?.userId == user?.id && (
             <div className="btns">
