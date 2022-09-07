@@ -75,7 +75,6 @@ const Home = () => {
           {posts?.map((post) => (
             <li key={uuidv4()}>
               <Post post={post} />
-              {menuEdit && <DropdownPost id={post?.id} />}
             </li>
           ))}
         </ul>

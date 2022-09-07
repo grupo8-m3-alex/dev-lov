@@ -7,7 +7,7 @@ import { Dropdown } from "./style";
 import { UserContext } from "../../contexts/userContext";
 import { useContext } from "react"
 
-const DropdownMenu = ({ logout }) => {
+const DropdownMenu = ({ logout }: any) => {
  const navigate = useNavigate();
  const {setMenu} = useContext(UserContext)
 
