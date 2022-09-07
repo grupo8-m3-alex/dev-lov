@@ -51,7 +51,7 @@ const ModalEditPost = ({ post }: IModalEditPostProps) => {
             </button>
           </div>
         </div>
-        <div className="InfoUser">
+        <div className="UserPost">
           <img src={user?.url_avatar} />
           <h2>{user?.name}</h2>
         </div>

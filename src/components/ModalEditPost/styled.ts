@@ -24,8 +24,10 @@ export const All = styled.div`
   box-shadow: 0 0px 10px 10px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   max-width: 500px;
+  margin-left: 10px;
+  margin-right: 10px;
   width: 100%;
-  height: 400px;
+  height: 380px;
 
   .Head {
    display: flex;
@@ -94,9 +96,10 @@ export const All = styled.div`
    }
   }
 
- .InfoUser {
+ .UserPost {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   width: 92%;
   margin-top: 10px;
 
@@ -119,8 +122,10 @@ export const All = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  max-width: 449px;
-  max-height: 240px;
+  margin-left: 10px;
+  margin-right: 10px;
+  max-width: 439px;
+  max-height: 230px;
   width: 100%;
   height: 100%;
 
@@ -129,12 +134,16 @@ export const All = styled.div`
    background: #f1f1f1;
    border-radius: 0 0 10px 10px;
    border: 1px solid transparent;
-   max-width: 449px;
-   max-height: 205px;
+   margin-left: 20px;
+   margin-right: 20px;
    width: 100%;
    height: 100%;
    padding: 5px;
    transition: 0.2s;
+
+   @media (max-width: 510px) {
+    width: 92%;
+   }
 
    &:hover {
     border: 1px solid gray;

@@ -19,7 +19,6 @@ export const All = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ECECEC;
   box-shadow: 0 0px 10px 10px rgba(0, 0, 0, 0.45);
   border-radius: 15px;
   max-width: 500px;
@@ -118,7 +117,7 @@ export const All = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  max-width: 449px;
+  max-width: 429px;
   max-height: 205px;
   width: 100%;
   height: 100%;
@@ -128,7 +127,7 @@ export const All = styled.div`
    resize: none;
    border-radius: 0 0 10px 10px;
    border: 1px solid transparent;
-   max-width: 449px;
+   max-width: 429px;
    max-height: 205px;
    width: 100%;
    height: 100%;

@@ -19,12 +19,14 @@ export const All = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #fff;
+    background: #f9f9f9;
     box-shadow: 0 0px 10px 10px rgba(0, 0, 0, 0.45);
     border-radius: 15px;
     max-width: 500px;
     width: 100%;
     height: 350px;
+    margin-left: 10px;
+    margin-right: 10px;
 
     .Head {
       display: flex;
@@ -122,19 +124,29 @@ export const All = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: 439px;
+    max-height: 200px;
+    width: 100%;
+    height: 100%;
 
     textarea {
-      background: white;
+      background: #f1f1f1;
+      resize: none;
       border-radius: 0 0 10px 10px;
       border: 1px solid transparent;
-      max-width: 449px;
-      max-height: 205px;
-      width: 460px;
-      height: 150px;
+      margin-left: 20px;
+      margin-right: 20px;
+      width: 100%;
+      height: 100%;
       padding: 5px;
       transition: 0.2s;
-      resize: none;
       color: #000;
+
+      @media (max-width: 510px) {
+        width: 90%;
+      }
 
       &:hover {
         border: 1px solid gray;
@@ -154,7 +166,7 @@ export const All = styled.div`
       max-width: 150px;
       width: 100%;
       height: 30px;
-      margin-top: 10px;
+      margin-top: 15px;
       border: 2px solid transparent;
       color: white;
 

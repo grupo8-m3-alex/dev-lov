@@ -43,10 +43,16 @@ export const Content = styled.div`
     span {
       margin-left: 5px;
       font-size: 13px;
+      @media (max-width: 345px) {
+        font-size: 11px;
+      }
     }
 
     svg {
       font-size: 16px;
+      @media (max-width: 345px) {
+        font-size: 13px;
+      }
     }
   }
 
@@ -69,10 +75,16 @@ export const Content = styled.div`
     span {
       margin-left: 5px;
       font-size: 13px;
+      @media (max-width: 345px) {
+        font-size: 11px;
+      }
     }
 
     svg {
       font-size: 16px;
+      @media (max-width: 345px) {
+        font-size: 13px;
+      }
     }
   }
 
@@ -82,7 +94,7 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   width: 300px;
-   
+
    img {
     border-radius: 100%;
     width: 50px;
@@ -93,6 +105,9 @@ export const Content = styled.div`
    h2 {
     margin-left: 30px;
     font-size: 20px;
+    @media (max-width: 360px) {
+     margin-left: 20px;
+    }
    }
   }
  } 

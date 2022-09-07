@@ -25,6 +25,8 @@ export const All = styled.div`
   max-width: 500px;
   width: 100%;
   height: 400px;
+  margin-left: 10px;
+  margin-right: 10px;
 
   .Head {
    display: flex;
@@ -118,7 +120,9 @@ export const All = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  max-width: 449px;
+  margin-left: 10px;
+  margin-right: 10px;
+  max-width: 439px;
   max-height: 240px;
   width: 100%;
   height: 100%;
@@ -128,12 +132,16 @@ export const All = styled.div`
    resize: none;
    border-radius: 0 0 10px 10px;
    border: 1px solid transparent;
-   max-width: 449px;
-   max-height: 240px;
+   margin-left: 20px;
+   margin-right: 20px;
    width: 100%;
    height: 100%;
    padding: 5px;
    transition: 0.2s;
+
+   @media (max-width: 510px) {
+    width: 90%;
+   }
 
    &:hover {
     border: 1px solid gray;
