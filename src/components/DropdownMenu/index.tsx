@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
+import { FaUserFriends } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
 import { MdLogout } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Dropdown } from "./style";
 
-const DropdownMenu = ({ showMenu, logout }) => {
+const DropdownMenu = ({ logout }) => {
  const navigate = useNavigate();
 
  return (
@@ -20,9 +21,9 @@ const DropdownMenu = ({ showMenu, logout }) => {
       <FiUser />
       <span>Perfil</span>
      </button>
-     <button id="conections" onClick={() => navigate("/cone")}>
-      <MdLogout />
-      <span>Sair</span>
+     <button id="conections" onClick={() => navigate("/")}>
+      <FaUserFriends />
+      <span>Conexões</span>
      </button>
      <button id="logout" onClick={() => logout()}>
       <MdLogout />

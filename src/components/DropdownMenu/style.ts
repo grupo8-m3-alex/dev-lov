@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Dropdown = styled.div`
  position: absolute;
  display: flex;
- top: 70px;
+ top: 85px;
  max-width: 750px;
  width: 100%;
  height: 70px;
@@ -18,8 +18,8 @@ export const Dropdown = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  width: 90px;
-  height: 69px;
+  width: 110px;
+  height: 100px;
   margin: 0;
   outline: 1px solid #BCBCBC;
   box-shadow: 0 0 2px 4px #BCBCBC;
@@ -39,7 +39,7 @@ export const Dropdown = styled.div`
    align-items: center;
    justify-content: flex-start;
    background: none;
-   width: 59px;
+   width: 60px;
    height: 22px;
    border: none;
    padding: 0;
@@ -68,24 +68,56 @@ export const Dropdown = styled.div`
    }
   }
 
+  #conections {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background: none;
+   width: 90px;
+   height: 22px;
+   border: none;
+   padding: 0;
+   transition: 0.2s;
+   margin: auto;
+
+    &:hover {
+     cursor: pointer;
+     color: rgba(0, 0, 0, 0.4);
+     transition: 0.2s;
+    }
+
+    &:active {
+      color: white;
+    }
+
+    span {
+     font-size: 13px;
+     line-height: 22px;
+     font-weight: bold;
+     margin-left: 3px;
+    }
+
+    svg {
+     font-size: 22px;
+    }
+  } 
+
   #logout {
    display: flex;
    align-items: center;
-   justify-content: flex-start;
+   justify-content: space-around;
    background: none;
-   width: 50px;
+   width: 60px;
    height: 22px;
    border: none;
    padding: 0;
    margin: auto;
-   margin-left: 17px;
    transition: 0.2s;
    
    span {
      font-size: 13px;
      line-height: 22px;
      font-weight: bold;
-     margin-left: 3.2px;
    }
    
    svg {
