@@ -54,6 +54,11 @@ export const Content = styled.div<animationLikeProps>`
           text-decoration: none;
           font-size: 20px;
           color: #000;
+
+          &:hover {
+            text-decoration: underline;
+            color: #333;
+          }
         }
 
         @media screen and (max-width: 355px) {

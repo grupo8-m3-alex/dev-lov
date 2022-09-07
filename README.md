@@ -15,23 +15,22 @@ O url base da API é https://json-server-apikenzie.herokuapp.com
 ### **Registrar Usuário**
 > post /register
 
-Ao registrar um usuário inicializar `friendsList` como []
+Ao registrar um usuário inicializar `friendsList`, `unFriendsList` e `likeList` como []
 
 ```json
 {
-	{
-		"email": "kenzinho@mail.com",
-		"password": "$2a$10$YQiiz0ANVwIgpOjYXPxc0O9H2XeX3m8OoY1xk7OGgxTnOJnsZU7FO",
-		"name": "Kenzinho",
-		"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
-		"gender": "f",
-		"city": "Manaus",
-		"state": "Am",
-		"age": 38,
-		"bio": "",
-		"friendsList": [],
-		"unFriendsList": []
-	},
+	"email": "kenzinho@mail.com",
+	"password": "$2a$10$YQiiz0ANVwIgpOjYXPxc0O9H2XeX3m8OoY1xk7OGgxTnOJnsZU7FO",
+	"name": "Kenzinho",
+	"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
+	"gender": "Feminino",
+	"city": "Manaus",
+	"state": "Amazonas",
+	"age": 38,
+	"bio": "Desenvolvedora fullstack",
+	"friendsList": [],
+	"unFriendsList": [],
+	"likeList": [],
 }
 
 ```
@@ -39,9 +38,8 @@ output:
 
 ```json
 {
-    {
 	"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvZHJpZ29AbWFpbC5jb20iLCJpYXQiOjE2NjE4Njk4NjQsImV4cCI6MTY2MTg3MzQ2NCwic3ViIjoiMiJ9.MuW7Qf5iKwClSVzndn85heM2_V5fO-UuohxUeoEtF1A",
-	{
+	"user":{
 		"id":1,
 		"email": "kenzinho@mail.com",
 		"password": "$2a$10$YQiiz0ANVwIgpOjYXPxc0O9H2XeX3m8OoY1xk7OGgxTnOJnsZU7FO",
@@ -49,13 +47,13 @@ output:
 		"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
 		"gender": "f",
 		"city": "Manaus",
-		"state": "Am",
+		"state": "Amazonas",
 		"age": 38,
-		"bio": "",
+		"bio": "Desenvolvedora fullstack",
 		"friendsList": [],
-		"unFriendsList": []
-	},
-}
+		"unFriendsList": [],
+		"likeList": [],
+	}
 }
 ```
 
@@ -76,13 +74,14 @@ output:
 		"email": "kenzinho@mail.com",
 		"name": "Kenzinho",
 		"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
-		"gender": "f",
+		"gender": "Feminino",
 		"city": "Manaus",
-		"state": "Am",
+		"state": "Amazonas",
 		"age": 38,
-		"bio": "",
+		"bio": "Desenvolvedora fullstack",
 		"friendsList": [],
-		"unFriendsList": []
+		"unFriendsList": [],
+		"likeList": [],
 	}
 }
 ```
@@ -145,27 +144,29 @@ output:
 		"password": "$2a$10$YQiiz0ANVwIgpOjYXPxc0O9H2XeX3m8OoY1xk7OGgxTnOJnsZU7FO",
 		"name": "Kenzinho",
 		"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
-		"gender": "f",
+		"gender": "Feminino",
 		"city": "Manaus",
-		"state": "Am",
+		"state": "Amazonas",
 		"age": 38,
-		"bio": "",
+		"bio": "Desenvolvedora fullstack",
 		"friendsList": [],
-		"unFriendsList": []
+		"unFriendsList": [],
+		"likeList": [],
 	},
 	{
+		"id": 2,
 		"email": "rodrigo@mail.com",
 		"password": "$2a$10$N9lpvKwjsCJdxOe2rbXij.wp7NEgjIi0I5zpHl8op8nWNG0Tza2NO",
 		"url_avatar": "https://cdn.pixabay.com/photo/2017/02/16/23/10/smile-2072907__340.jpg",
 		"name": "Rodrigo",
-		"gender": "M",
+		"gender": "Masculino",
 		"city": "Manaus",
-		"state": "Am",
+		"state": "Amazonas",
 		"age": 38,
 		"bio": "Teste",
 		"friendsList": [],
 		"unFriendsList": [],
-		"id": 2
+		"likeList": []
 	}
 ]
 ```
@@ -181,12 +182,14 @@ output:
 	"email": "kenzinho@mail.com",
 	"password": "$2a$10$YQiiz0ANVwIgpOjYXPxc0O9H2XeX3m8OoY1xk7OGgxTnOJnsZU7FO",
 	"name": "Kenzinho",
-	"gender": "f",
+	"gender": "Feminino",
 	"city": "Manaus",
-	"state": "Am",
+	"state": "Amazonas",
 	"age": 38,
 	"bio": "",
-	"friendsList": []
+	"friendsList": [],
+	"unFriendsList": [],
+	"likeList": []
 }
 ```
 
@@ -208,13 +211,14 @@ output:
 	"password": "$2a$10$N9lpvKwjsCJdxOe2rbXij.wp7NEgjIi0I5zpHl8op8nWNG0Tza2NO",
 	"url_avatar": "https://cdn.pixabay.com/photo/2017/02/16/23/10/smile-2072907__340.jpg",
 	"name": "Rodrigo",
-	"gender": "M",
+	"gender": "Masculino",
 	"city": "Manaus",
-	"state": "Am",
+	"state": "Amazonas",
 	"age": 38,
 	"bio": "Teste",
 	"friendsList": [],
 	"unFriendsList": [],
+	"likeList":[],
 	"id": 2
 }
 ```
@@ -226,18 +230,11 @@ output:
 {
 	"friendsList": [
 		{
-			
-		"email": "asdas@mail.com",
-		"name": "Rodrigo",
-		"gender": "M",
-		"city": "Manaus",
-		"state": "Am",
-		"age": 38,
-		"bio": "dsadsa",
-		"friendsList": [],
-		"id": 1
-
-        }
+			"url_avatar": "https://cdn.pixabay.com/photo/2018/05/06/03/39/woman-3377839__340.jpg",
+			"name": "Kenzinho",
+			"age": 38,
+			"id": 1
+		},
     ]
 }
 ```
@@ -254,16 +251,11 @@ output:
 	"bio": "dsadsa",
 	"friendsList": [
 		{
-			"email": "asdas@mail.com",
-			"name": "Rodrigo",
-			"gender": "M",
-			"city": "Manaus",
-			"state": "Am",
+			"url_avatar": "https://cdn.pixabay.com/photo/2018/05/06/03/39/woman-3377839__340.jpg",
+			"name": "Kenzinho",
 			"age": 38,
-			"bio": "dsadsa",
-			"friendsList": [],
 			"id": 1
-		}
+		},
 	],
 	"id": 2
 }
