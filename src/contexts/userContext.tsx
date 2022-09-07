@@ -151,9 +151,10 @@ const UserProvider = ({ children }: IUserProvider) => {
         setUser(resp.data);
         sendUserID(resp.data.id, resp.data.name);
         const from =
-          location.state?.from || location.pathname === '/'
+          location.state?.from || location.pathname === '/'|| location.pathname === '/register'
             ? 'home'
             : location.pathname;
+
         navigate(from, { replace: true });
       })
       .catch((err) => {

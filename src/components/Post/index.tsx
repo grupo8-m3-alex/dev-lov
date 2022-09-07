@@ -101,12 +101,10 @@ const Post = ({ post }: IPostProps) => {
                 }}
               >
                 <FiEdit3 />
-                <span>Editar</span>
               </button>
               {showEditPost && <ModalEditPost post={post} />}
               <button className="delete" id={post.id.toString()} onClick={del}>
                 <AiTwotoneDelete id={post.id.toString()} />
-                <span>Deletar</span>
               </button>
             </div>
           )}
