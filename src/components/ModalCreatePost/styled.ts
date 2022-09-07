@@ -16,6 +16,8 @@ export const All = styled.div`
   );
   padding: 1.25rem;
 
+  z-index: 9999;
+
   .AddModal {
     display: flex;
     flex-direction: column;

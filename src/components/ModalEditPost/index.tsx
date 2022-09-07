@@ -1,11 +1,14 @@
 import { useContext } from 'react';
-import { UserContext } from '../../contexts/userContext';
-import { All } from './styled';
-import { GrClose } from 'react-icons/gr';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import toast from 'react-hot-toast';
+
 import { IPosts } from '../../pages/Home';
+import { UserContext } from '../../contexts/userContext';
+
+import { GrClose } from 'react-icons/gr';
+import { All } from './styled';
 
 const schema = yup.object().shape({
   text: yup.string().required('A mensagem não pode ser enviada vazia'),
@@ -35,9 +38,10 @@ const ModalEditPost = ({ post }: IModalEditPostProps) => {
       created_at: post?.created_at,
       updated_at: new Date(),
     };
-    await updatePost(idEditPost, newData);
-    getPosts();
-    setShowEditPost(false);
+    await updatePost(idEditPost, newData).then((res) => {
+      toast.success('Sua publicação foi alterada');
+      setShowEditPost(false);
+    });
   };
 
   return (

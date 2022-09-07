@@ -1,12 +1,13 @@
 import { useContext } from 'react';
+import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaEditProfile } from '../../validations/schemaEditProfile';
-import Modal from 'react-modal';
-import { IUser, UserContext } from '../../contexts/userContext';
-import { LabelInputGroup, ModalEditContainer } from './styles';
 import toast from 'react-hot-toast';
+
+import { IUser, UserContext } from '../../contexts/userContext';
+import { schemaEditProfile } from '../../validations/schemaEditProfile';
 import { api } from '../../services/api';
+import { LabelInputGroup, ModalEditContainer } from './styles';
 
 Modal.setAppElement('#root');
 

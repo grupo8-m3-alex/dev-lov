@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
 import { useContext } from 'react';
+import { motion } from 'framer-motion';
+import { UserContext } from '../../contexts/userContext';
+
 import { FiUser } from 'react-icons/fi';
 import { MdLogout } from 'react-icons/md';
-import { UserContext } from '../../contexts/userContext';
 import { DropdownEdit } from './styles';
 
 interface IDropdownPostProps {

@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 interface animationLikeProps {
   animationLike: boolean;
@@ -155,6 +155,12 @@ export const Content = styled.div<animationLikeProps>`
         border: none;
         border-bottom: 1px solid transparent;
         transition: 0.1s;
+        position: relative;
+
+        .likeCount {
+          position: absolute;
+          right: -65px;
+        }
 
         @media (max-width: 500px) {
           font-size: 12px;
@@ -175,7 +181,7 @@ export const Content = styled.div<animationLikeProps>`
 
         > svg {
           font-size: 18px;
-          animation: ${({ animationLike }) => (animationLike ? like : "")} 0.3s;
+          animation: ${({ animationLike }) => (animationLike ? like : '')} 0.3s;
           @media (max-width: 500px) {
             font-size: 15px;
           }

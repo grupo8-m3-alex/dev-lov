@@ -1,12 +1,6 @@
-import { InputHTMLAttributes, ReactNode } from "react";
-import {
-  DeepMap,
-  FieldError,
-  FieldErrorsImpl,
-  Merge,
-  UseFormRegisterReturn,
-} from "react-hook-form";
-import BoxInput from "./styles";
+import { InputHTMLAttributes, ReactNode } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
+import BoxInput from './styles';
 
 export interface FormDataDefault {
   name: string;

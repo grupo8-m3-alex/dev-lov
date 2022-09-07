@@ -1,11 +1,13 @@
 import { useContext } from 'react';
-import { UserContext } from '../../contexts/userContext';
-import { All } from './styles';
-import { GrClose } from 'react-icons/gr';
+import { v4 as uuidv4 } from 'uuid';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { v4 as uuidv4 } from 'uuid';
+
+import { UserContext } from '../../contexts/userContext';
+
+import { GrClose } from 'react-icons/gr';
+import { All } from './styles';
 
 export interface IComment {
   id: string;
@@ -28,14 +30,8 @@ const schema = yup.object().shape({
 });
 
 const ModalAddComment = () => {
-  const {
-    user,
-    setShowAddComment,
-    createComment,
-    posts,
-    getPosts,
-    idEditPost,
-  } = useContext(UserContext);
+  const { user, setShowAddComment, createComment, posts, idEditPost } =
+    useContext(UserContext);
 
   const findPost = posts.find((post) => post.id === idEditPost);
 

@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
-import { IUser, UserContext } from '../../contexts/userContext';
+
 import ModalEditProfile from '../ModalEditProfile';
-import { Bio, Card, Count, Info } from './styles';
+import { IUser, UserContext } from '../../contexts/userContext';
+
 import { BsPencil } from 'react-icons/bs';
+import { Bio, Card, Count, Info } from './styles';
 
 interface IInfoUserProps {
   id: number;

@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -16,13 +16,8 @@ const schema = yup.object().shape({
 });
 
 const ModalAddPost = () => {
-  const { user, setShowAddPost, createPost, posts, getPosts } =
+  const { user, setShowAddPost, createPost, getPosts } =
     useContext(UserContext);
-
-  useEffect(() => {
-    const showPosts = () => getPosts();
-    showPosts();
-  }, posts);
 
   const {
     register,
@@ -44,7 +39,6 @@ const ModalAddPost = () => {
       comments: [],
     };
     createPost(newData);
-    setShowAddPost(false);
   };
 
   return (

@@ -1,6 +1,9 @@
-import { Button, Dropmenu, Figure, HeaderStyled } from './styles';
-import heart from '../../assets/heart.png';
-import logo from '../../assets/logo.png';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import ModalFriendList from '../ModalFriendList';
+import { UserContext } from '../../contexts/userContext';
+
 import { CgMenuRound } from 'react-icons/cg';
 import {
   FaUserAlt,
@@ -8,10 +11,10 @@ import {
   FaHeart,
   FaSignOutAlt,
 } from 'react-icons/fa';
-import { useContext, useState } from 'react';
-import { UserContext } from '../../contexts/userContext';
-import { useNavigate } from 'react-router-dom';
-import ModalFriendList from '../ModalFriendList';
+import logo from '../../assets/logo.png';
+import heart from '../../assets/heart.png';
+
+import { Button, Dropmenu, Figure, HeaderStyled } from './styles';
 
 const Header = () => {
   const { user, logOut } = useContext(UserContext);

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const All = styled.div`
   position: fixed;
@@ -16,6 +16,7 @@ export const All = styled.div`
     rgba(255, 255, 255, 0.15)
   );
   padding: 1.25rem;
+  z-index: 9999;
 
   .EditModal {
     display: flex;

@@ -13,7 +13,6 @@ export const ModalEditContainer = createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
-    
   }
   .Modal > div {
       position: fixed;
@@ -26,7 +25,7 @@ box-shadow: 0.125rem 0.125rem 0.125rem rgba(0, 0, 0, 0.4);
     align-items: center;
     flex-direction: column;
     padding-bottom: 2rem;
-    max-height: 514px;
+    max-height: 32.125rem;
 
   overflow: scroll;
 
@@ -41,6 +40,8 @@ box-shadow: 0.125rem 0.125rem 0.125rem rgba(0, 0, 0, 0.4);
             border: none;
             background-color: transparent;
             color: black;
+
+            cursor: pointer;
         }
     }
 

@@ -118,8 +118,8 @@ const UserProvider = ({ children }: IUserProvider) => {
 
     if (token !== null && user !== null) {
       userIsValid(token, JSON.parse(user));
+      getPosts();
     }
-    getPosts();
   }, []);
 
   const registerUser = async (data: FormDataDefault) => {
@@ -156,7 +156,11 @@ const UserProvider = ({ children }: IUserProvider) => {
             : location.pathname;
         navigate(from, { replace: true });
       })
-      .catch((err) => console.error(err))
+      .catch((err) => {
+        alert('Token inválido ou expirado!');
+        navigate('/', { replace: true });
+        console.error(err);
+      })
       .finally(() => setIsLoading(false));
   };
 
@@ -200,15 +204,22 @@ const UserProvider = ({ children }: IUserProvider) => {
   const deletePost = async (id: number) => {
     return await api
       .delete(`posts/${id}`)
-      .then((res) => console.log(res.data))
+      .then((res) => res.data)
       .catch((err) => console.error(err));
   };
 
   const createPost = async (data: any) => {
     return await api
       .post('posts', data)
-      .then((res) => getPosts())
-      .catch((err) => console.error(err));
+      .then((res) => {
+        toast.success('Sua publicação foi enviada');
+        getPosts();
+        setShowAddPost(false);
+      })
+      .catch((err) => {
+        toast.error('Ops... Algo deu errado');
+        console.error(err);
+      });
   };
 
   const getUser = async (id: number) => {
@@ -257,7 +268,6 @@ const UserProvider = ({ children }: IUserProvider) => {
       .patch(`posts/${id}`, data)
       .then((res) => {
         toast.success('Seu comentário foi publicado');
-        console.log(res);
         setShowAddComment(false);
         getPosts();
       })

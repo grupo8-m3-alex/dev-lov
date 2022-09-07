@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { UserContext } from '../../contexts/userContext';
+import { IUser, UserContext } from '../../contexts/userContext';
 import { v4 as uuidv4 } from 'uuid';
 import { IPosts } from '../../pages/Home';
 import ModalEditPost from '../ModalEditPost';
@@ -15,6 +15,7 @@ import { FiEdit3 } from 'react-icons/fi';
 
 import { Content } from './styles';
 import toast from 'react-hot-toast';
+import { api } from '../../services/api';
 
 interface IPostProps {
   post: IPosts;
@@ -30,6 +31,7 @@ const Post = ({ post }: IPostProps) => {
     getPosts,
     setIdEditPost,
     handleLikeClick,
+    updateUser,
   } = useContext(UserContext);
   const [showComments, setShowComments] = useState<boolean>(false);
   const [animationLike, setAnimationLike] = useState(false);
@@ -39,10 +41,28 @@ const Post = ({ post }: IPostProps) => {
 
   const del = async (event: any) => {
     const toastSingIn = toast.loading('Deletando...');
-    await deletePost(Number(event.currentTarget.id)).then((resp) => {
+    const idPost = Number(event.currentTarget.id);
+
+    await deletePost(idPost).then((resp) => {
       toast.success('Publicação deletada com sucesso!', {
         id: toastSingIn,
       });
+
+      api.get<IUser[]>('users').then(({ data }) => {
+        data.forEach((userCurrent) => {
+          const newLikeList = userCurrent.likeList.filter(
+            (like) => like !== idPost
+          );
+          api
+            .patch(`users/${userCurrent.id}`, { likeList: newLikeList })
+            .then((resp) => {
+              if (resp.data.id === user?.id && user) {
+                updateUser(user.id, { likeLike: newLikeList });
+              }
+            });
+        });
+      });
+
       getPosts();
     });
   };
@@ -109,6 +129,7 @@ const Post = ({ post }: IPostProps) => {
                 <BiLike />
               )}
               <span>Curtir</span>
+              <span className="likeCount">{post.like}</span>
             </button>
             <button
               id="btnTwo"

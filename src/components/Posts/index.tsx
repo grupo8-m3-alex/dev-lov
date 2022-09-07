@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react';
-import { UserContext } from '../../contexts/userContext';
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { UserContext } from '../../contexts/userContext';
 
 import Post from '../Post';
 
