@@ -50,14 +50,16 @@ export const Content = styled.div<animationLikeProps>`
         margin-left: 30px;
         font-size: 20px;
         color: #000;
+
+        @media screen and (max-width: 355px) {
+          font-size: 15px;
+        }
       }
     }
 
     .edit {
-      width: max-content;
       border: none;
       background: none;
-      margin-right: 30px;
       padding: 0;
 
       svg {
@@ -81,11 +83,18 @@ export const Content = styled.div<animationLikeProps>`
     }
 
     .delete {
-      width: max-content;
       border: none;
       background: none;
-      margin-right: 30px;
+      margin-left: 30px;
       padding: 0;
+
+      @media screen and (max-width: 420px) {
+        margin-left: 15px;
+      }
+
+      @media screen and (max-width: 420px) {
+        margin: 0;
+      }
 
       svg {
         color: #a3a3a3;
@@ -157,9 +166,17 @@ export const Content = styled.div<animationLikeProps>`
         transition: 0.1s;
         position: relative;
 
+        > span:first-child {
+          margin-right: 25px;
+        }
+          
         .likeCount {
           position: absolute;
-          right: -65px;
+          right: -60px;
+
+          @media screen and (max-width: 426px) {
+            right: -50px;
+          }
         }
 
         @media (max-width: 500px) {

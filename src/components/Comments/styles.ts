@@ -31,6 +31,10 @@ export const ContainerComment = styled.div`
       font-size: 20px;
       margin-left: 20px;
       color: #000;
+
+      @media screen and (max-width: 355px) {
+          font-size: 15px;
+        }
     }
   }
 
