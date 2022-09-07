@@ -45,7 +45,6 @@ const DevLov = () => {
 
   const { updateUser, user } = useContext(UserContext);
 
-  console.log(cardClassAnimation);
   const toastAddFriend = () =>
     toast('Adicionado a lista de conexões', {
       duration: 1000,
@@ -67,7 +66,9 @@ const DevLov = () => {
 
         const unFilterFriends: IUsers[] = filterFriends.filter(
           (elem: IUser) => {
-            if (!user?.unFriendsList?.some((item: number) => item === elem.id)) {
+            if (
+              !user?.unFriendsList?.some((item: number) => item === elem.id)
+            ) {
               return elem;
             }
           }

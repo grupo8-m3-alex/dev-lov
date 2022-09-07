@@ -15,6 +15,7 @@ export const All = styled.div`
     rgba(255, 255, 255, 0.15),
     rgba(255, 255, 255, 0.15)
   );
+  padding: 1.25rem;
 
   .EditModal {
     display: flex;
@@ -126,12 +127,13 @@ export const All = styled.div`
     max-height: 15rem;
     width: 100%;
     height: 100%;
+    padding: 0 0.3125rem;
 
     textarea {
       resize: none;
       background: #f1f1f1;
       border-radius: 0 0 0.625rem 0.625rem;
-      border: 0.0625rem solid transparent;
+      border: 0.0625rem solid gray;
       max-width: 28.0625rem;
       max-height: 12.8125rem;
       width: 100%;

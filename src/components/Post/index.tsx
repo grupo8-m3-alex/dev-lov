@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../../contexts/userContext';
 import { v4 as uuidv4 } from 'uuid';
 import { IPosts } from '../../pages/Home';
@@ -32,6 +32,7 @@ const Post = ({ post }: IPostProps) => {
     handleLikeClick,
   } = useContext(UserContext);
   const [showComments, setShowComments] = useState<boolean>(false);
+  const [animationLike, setAnimationLike] = useState(false);
   const handleComments = () => {
     setShowComments(!showComments);
   };
@@ -50,9 +51,20 @@ const Post = ({ post }: IPostProps) => {
     setIdEditPost(+event.currentTarget.id);
   };
 
+  useEffect(() => {
+    let timer: any;
+    timer = setTimeout(() => {
+      setAnimationLike(false);
+    }, 400);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [animationLike]);
+
   return (
     <>
-      <Content>
+      <Content animationLike={animationLike}>
         <div className="HeadPost">
           <div className="InfoUser">
             <img src={post?.url_avatar} alt="Foto" />
@@ -84,7 +96,13 @@ const Post = ({ post }: IPostProps) => {
         </div>
         <div className="Buttons">
           <div className="LeftButtons">
-            <button id="btnOne" onClick={() => handleLikeClick(post.id)}>
+            <button
+              id="btnOne"
+              onClick={() => {
+                setAnimationLike(true);
+                handleLikeClick(post.id);
+              }}
+            >
               {user?.likeList.includes(post.id) ? (
                 <BiLike color="blue" />
               ) : (

@@ -15,6 +15,8 @@ export const All = styled.div`
     rgba(255, 255, 255, 0.8)
   );
 
+  padding: 1.25rem;
+
   .AddModal {
     display: flex;
     flex-direction: column;
@@ -122,14 +124,16 @@ export const All = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
+    width: 100%;
+    padding: 0 0.3125rem;
 
     textarea {
       background: white;
       border-radius: 0 0 10px 10px;
-      border: 1px solid transparent;
+      border: 1px solid gray;
       max-width: 449px;
       max-height: 205px;
-      width: 460px;
+      width: 100%;
       height: 150px;
       padding: 5px;
       transition: 0.2s;

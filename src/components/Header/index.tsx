@@ -28,9 +28,41 @@ const Header = () => {
           src={logo}
           onClick={() => navigate('/home', { replace: true })}
         />
-        <CgMenuRound />
-        <div>
-          <img className="heart" src={heart} alt="dev-lov" />
+        <div className="menuMobile">
+          <CgMenuRound />
+          <Dropmenu>
+            <Button
+              bg="gray"
+              onClick={() => navigate('/dashboard', { replace: true })}
+            >
+              <FaUserAlt />
+              <span>Perfil</span>
+            </Button>
+
+            <Button onClick={() => setIsOpen(true)}>
+              <FaUserFriends />
+              <span>Conexões</span>
+            </Button>
+            <Button
+              bg="gray"
+              onClick={() => navigate('/devlov', { replace: true })}
+            >
+              <FaHeart />
+              <span>DevLov</span>
+            </Button>
+            <Button onClick={logOut}>
+              <FaSignOutAlt />
+              <span>Sair</span>
+            </Button>
+          </Dropmenu>
+        </div>
+        <div className="right">
+          <img
+            onClick={() => navigate('/devlov', { replace: true })}
+            className="heart"
+            src={heart}
+            alt="dev-lov"
+          />
           <Figure>
             <img className="avatarUser" src={user?.url_avatar} />
             <Dropmenu>

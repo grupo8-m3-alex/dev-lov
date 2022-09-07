@@ -8,7 +8,7 @@ export const ContainerHome = styled.div`
   height: 100%;
   background-color: rgba(57, 0, 0, 0.03);
 
-  padding-bottom: 2rem;
+  padding: 0 1.25rem 2rem;
 
   .NovaPublicacao {
     display: flex;

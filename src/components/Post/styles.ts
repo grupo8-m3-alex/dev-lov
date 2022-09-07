@@ -1,23 +1,38 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-export const Content = styled.div`
+interface animationLikeProps {
+  animationLike: boolean;
+}
+
+const like = keyframes`
+  0%{
+    transform: scale(1);
+  }
+
+  100%{
+    transform: scale(1.4);
+  }
+
+`;
+
+export const Content = styled.div<animationLikeProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 750px;
+  max-width: 46.875rem;
   width: 100%;
-  margin-bottom: 10px;
-  border-radius: 0 0 12px 12px;
+  margin-bottom: 0.625rem;
+  border-radius: 0 0 0.75rem 0.75rem;
   background-color: white;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0rem 0.125rem 0.125rem rgba(0, 0, 0, 0.2);
 
   .HeadPost {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 750px;
+    max-width: 46.875rem;
     width: 100%;
-    margin: 2px 5px 5px 5px;
+    margin: 0.125rem 0.3125rem 0.3125rem 0.3125rem;
 
     .InfoUser {
       display: flex;
@@ -113,6 +128,7 @@ export const Content = styled.div`
         border: none;
         border-bottom: 1px solid transparent;
         transition: 0.1s;
+
         @media (max-width: 500px) {
           font-size: 12px;
         }
@@ -130,8 +146,9 @@ export const Content = styled.div`
           transition: 0.1s;
         }
 
-        svg {
+        > svg {
           font-size: 18px;
+          animation: ${({ animationLike }) => (animationLike ? like : '')} 0.3s;
           @media (max-width: 500px) {
             font-size: 15px;
           }
