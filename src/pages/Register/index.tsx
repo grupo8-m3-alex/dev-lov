@@ -1,18 +1,18 @@
-import Container from "./styles";
-import logo from "./../../assets/logo.png";
-import Input from "../../components/Input";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import schemaRegister from "../../validations/schemaRegister";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { FormDataDefault } from "../../components/Input";
-import { useContext } from "react";
-import { UserContext } from "../../contexts/userContext";
+import Container from './styles';
+import logo from './../../assets/logo.png';
+import Input from '../../components/Input';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import schemaRegister from '../../validations/schemaRegister';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { FormDataDefault } from '../../components/Input';
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/userContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const { registerUser } = useContext(UserContext);
-  const logOut = () => navigate("/", { replace: true });
+  const logOut = () => navigate('/', { replace: true });
   const {
     register,
     handleSubmit,
@@ -22,17 +22,8 @@ const Login = () => {
   });
 
   const submitForm = (data: FormDataDefault) => {
-    const {
-      name,
-      email,
-      url_avatar,
-      password,
-      age,
-      bio,
-      city,
-      state,
-      gender,
-    }: FormDataDefault = data;
+    const { name, email, url_avatar, password, age, bio, city, state, gender } =
+      data;
 
     registerUser({
       name,
@@ -66,35 +57,35 @@ const Login = () => {
 
         <Input
           error={errors.name?.message}
-          register={register("name")}
+          register={register('name')}
           type="text"
           label="Nome"
           placeholder="Digite seu nome"
         />
         <Input
           error={errors.email?.message}
-          register={register("email")}
+          register={register('email')}
           type="text"
           label="Email"
           placeholder="Digite seu email"
         />
         <Input
           error={errors.url_avatar?.message}
-          register={register("url_avatar")}
+          register={register('url_avatar')}
           type="url"
           label="Link do Avatar"
           placeholder="Digite o Link"
         />
         <Input
           error={errors.password?.message}
-          register={register("password")}
+          register={register('password')}
           type="password"
           label="Senha"
           placeholder="Digite sua senha"
         />
         <Input
           error={errors.confirmPassword?.message}
-          register={register("confirmPassword")}
+          register={register('confirmPassword')}
           type="password"
           label="Confirme sua senha"
           placeholder="Confirme sua senha"
@@ -102,7 +93,7 @@ const Login = () => {
         <div className="boxInputs">
           <Input
             error={errors.age?.message}
-            register={register("age")}
+            register={register('age')}
             type="text"
             label="Idade"
             placeholder="Digite sua idade"
@@ -112,7 +103,7 @@ const Login = () => {
             <label htmlFor="gender">Sexo</label>
             <select
               defaultValue="Masculino"
-              {...register("gender")}
+              {...register('gender')}
               name="sexo"
               id="sexo"
             >
@@ -124,21 +115,21 @@ const Login = () => {
 
         <Input
           error={errors.bio?.message}
-          register={register("bio")}
+          register={register('bio')}
           type="text"
           label="Bio"
           placeholder="Digite sua bio"
         />
         <Input
           error={errors.city?.message}
-          register={register("city")}
+          register={register('city')}
           type="text"
           label="Cidade"
           placeholder="Digite seu cidade"
         />
         <Input
           error={errors.state?.message}
-          register={register("state")}
+          register={register('state')}
           type="text"
           label="Estado"
           placeholder="Digite seu estado"
