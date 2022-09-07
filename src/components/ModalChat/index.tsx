@@ -7,7 +7,6 @@ import { FaUserAlt } from 'react-icons/fa';
 import { useContext, useRef } from 'react';
 import { ChatContext, IUser } from '../../contexts/chatContext';
 import { UserContext } from '../../contexts/userContext';
-import { AnyMessageParams } from 'yup/lib/types';
 Modal.setAppElement("#root");
 
 interface IMessage {
@@ -26,6 +25,12 @@ const ModalChat = () => {
     inputSubmit.current.value = "";
   }
 
+  const submitMessageChat = () => {
+    resetInput();
+    submitMessage();
+    setMessageContent("");
+  }
+
   return (
     <>
       <ModalGlobal />
@@ -41,6 +46,7 @@ const ModalChat = () => {
           <div>
             <h2>Chat</h2>
             <SiGooglemessages size={30} color='var(--color-0)'/>
+            <h3>{userFromContext?.name}</h3>
           </div>
           <button onClick={() => setModalChatIsOpen(false)}>
             <AiFillCloseCircle size={30} />
@@ -61,7 +67,6 @@ const ModalChat = () => {
             })}
           </ul>
           <div className='containerChat'>
-            <h2>{userFromContext?.name}</h2>
             {Object.keys(recipientUser).length > 0 
               ? (
               <>
@@ -74,14 +79,13 @@ const ModalChat = () => {
                     )
                   })}
                 </ul>
-
                 <div className='boxMessageInput'>
-                  <input ref={inputSubmit} id='inputSubmit' onChange={e => setMessageContent(e.target.value)} type="text" placeholder='Digite aqui' />
-                  <button onClick={() => {
-                    resetInput();
-                    submitMessage();
-                    setMessageContent("");
-                    }}>Enviar</button>
+                  <input onKeyDownCapture={e => {
+                      if (e.key === "Enter") submitMessageChat();
+                    }} 
+                    ref={inputSubmit} id='inputSubmit' onChange={e => setMessageContent(e.target.value)} type="text" placeholder='Digite aqui' />
+                  <button
+                    onClick={submitMessageChat}>Enviar</button>
                 </div>
               </>
             )
