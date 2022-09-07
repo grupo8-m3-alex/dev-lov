@@ -115,6 +115,7 @@ export const All = styled.div`
     h2 {
       font-size: 1.125rem;
       margin: 0 0 0 1.25rem;
+      color: #000;
     }
   }
 

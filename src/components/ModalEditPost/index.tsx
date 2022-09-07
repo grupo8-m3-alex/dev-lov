@@ -60,7 +60,12 @@ const ModalEditPost = ({ post }: IModalEditPostProps) => {
           <h2>{user?.name}</h2>
         </div>
         <form onSubmit={handleSubmit(editData)}>
-          <textarea {...register('text')} placeholder="Digite aqui" />
+          <textarea
+            {...register('text', {
+              value: post.message,
+            })}
+            placeholder="Digite aqui"
+          />
           <span>{errors?.text?.message}</span>
           <button type="submit">Editar</button>
         </form>
