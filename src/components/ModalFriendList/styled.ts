@@ -64,7 +64,7 @@ export const ModalFriendContainer = createGlobalStyle`
       }
       ul{
           width: 81%;
-          overflow: scroll;
+          overflow: auto;
           max-height: 80vh;
           padding-bottom: 3.5rem;
       }

@@ -151,14 +151,15 @@ const UserProvider = ({ children }: IUserProvider) => {
         setUser(resp.data);
         sendUserID(resp.data.id, resp.data.name);
         const from =
-          location.state?.from || location.pathname === '/'|| location.pathname === '/register'
+          location.state?.from ||
+          location.pathname === '/' ||
+          location.pathname === '/register'
             ? 'home'
             : location.pathname;
 
         navigate(from, { replace: true });
       })
       .catch((err) => {
-        alert('Token inválido ou expirado!');
         navigate('/', { replace: true });
         console.error(err);
       })
