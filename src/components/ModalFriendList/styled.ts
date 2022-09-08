@@ -64,7 +64,7 @@ export const ModalFriendContainer = createGlobalStyle`
       }
       ul{
           width: 81%;
-          overflow: scroll;
+          overflow: auto;
           max-height: 80vh;
           padding-bottom: 3.5rem;
       }
@@ -74,7 +74,6 @@ export const ModalFriendContainer = createGlobalStyle`
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         border-radius: 8px;
           width: 100%;
-          /* height: 5rem; */
           justify-content: space-between;
           align-items: center;
           padding-left: 1rem;
