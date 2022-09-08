@@ -92,14 +92,14 @@ const ModalGlobal = createGlobalStyle`
           align-items: center;
           padding: 10px 0;
           cursor: pointer;
-          margin: 5px 0;
-          border-width: 1px 0px 1px 0px;
+          margin: 2px 0;
+          border-width: 0px;
           border-style: solid;
           border-color: black;
 
           @media screen and (max-width: 500px) {
             flex-direction: column;
-            border-width: 0px 1px 0px 1px;
+            border-width: 0px;
             max-width: 100px;
           }
 
