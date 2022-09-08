@@ -15,19 +15,22 @@ O url base da API é https://json-server-apikenzie.herokuapp.com
 ### **Registrar Usuário**
 > post /register
 
-Ao registrar um usuário inicializar `friendsList` como []
+Ao registrar um usuário inicializar `friendsList`, `unFriendsList` e `likeList` como []
 
 ```json
 {
-    "email": "rodrigo@mail.com",
-    "password": "123456",
-    "name": "Rodrigo",
-    "gender": "M",
-    "city": "Manaus",
-    "state": "Am",
-    "age": 38,
-    "bio": "dsadsa",
-    "friendsList": []
+	"email": "kenzinho@mail.com",
+	"password": "$2a$10$YQiiz0ANVwIgpOjYXPxc0O9H2XeX3m8OoY1xk7OGgxTnOJnsZU7FO",
+	"name": "Kenzinho",
+	"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
+	"gender": "Feminino",
+	"city": "Manaus",
+	"state": "Amazonas",
+	"age": 38,
+	"bio": "Desenvolvedora fullstack",
+	"friendsList": [],
+	"unFriendsList": [],
+	"likeList": [],
 }
 
 ```
@@ -35,25 +38,27 @@ output:
 
 ```json
 {
-    {
 	"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvZHJpZ29AbWFpbC5jb20iLCJpYXQiOjE2NjE4Njk4NjQsImV4cCI6MTY2MTg3MzQ2NCwic3ViIjoiMiJ9.MuW7Qf5iKwClSVzndn85heM2_V5fO-UuohxUeoEtF1A",
-	"user": {
-		"email": "rodrigo@mail.com",
-		"name": "Rodrigo",
-		"gender": "M",
+	"user":{
+		"id":1,
+		"email": "kenzinho@mail.com",
+		"password": "$2a$10$YQiiz0ANVwIgpOjYXPxc0O9H2XeX3m8OoY1xk7OGgxTnOJnsZU7FO",
+		"name": "Kenzinho",
+		"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
+		"gender": "f",
 		"city": "Manaus",
-		"state": "Am",
+		"state": "Amazonas",
 		"age": 38,
-		"bio": "dsadsa",
+		"bio": "Desenvolvedora fullstack",
 		"friendsList": [],
-		"id": 2
+		"unFriendsList": [],
+		"likeList": [],
 	}
-}
 }
 ```
 
 ### Autenticar Usuário
-> post /users/login
+> post /login
 ```json
 {
     "email": "kenzinho@mail.com",
@@ -63,17 +68,20 @@ output:
 output:
 ```json
 {
-	"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjYxODc3MjgyLCJleHAiOjE2NjE4ODA4ODIsInN1YiI6IjEifQ.OVzG75LP0x5Q-34fCxGf6VC2o4Xe09mKoYFgbCsUtEY",
+	"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbnppbmhvQG1haWwuY29tIiwiaWF0IjoxNjYyMTE2NTk4LCJleHAiOjE2NjIxMjAxOTgsInN1YiI6IjEifQ.W_O3LyJZkC5u8a28PL7TVX0KlTKTYZwuzaJ7l1SV5Rg",
 	"user": {
 		"id": 1,
 		"email": "kenzinho@mail.com",
 		"name": "Kenzinho",
-		"gender": "f",
+		"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
+		"gender": "Feminino",
 		"city": "Manaus",
-		"state": "Am",
+		"state": "Amazonas",
 		"age": 38,
-		"bio": "",
-		"friendsList": []
+		"bio": "Desenvolvedora fullstack",
+		"friendsList": [],
+		"unFriendsList": [],
+		"likeList": [],
 	}
 }
 ```
@@ -87,9 +95,9 @@ output:
 ```json
 [
 	{
-		"id": 2,
-		"name": "Nome 1",
-		"url_avatar": "path",
+		"id": 1,
+		"name": "Kenzinho",
+		"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
 		"message": "Teste 1",
 		"created_at": "2022-08-29T19:24:25.145Z",
 		"updated_at": "2022-08-29T19:24:25.145Z",
@@ -99,9 +107,9 @@ output:
 			{
 				"id": 1,
 				"user": {
-					"userId": 1,
-					"name": "Nome 1",
-					"url_avatar": "path",
+					"userId": 2,
+					"name": "rodrigo",
+					"url_avatar": "https://cdn.pixabay.com/photo/2017/02/16/23/10/smile-2072907__340.jpg",
 					"message": "Teste 1",
 					"created_at": "2022-08-29T19:24:25.145Z",
 					"updated_at": "2022-08-29T19:24:25.145Z"
@@ -110,20 +118,21 @@ output:
 		]
 	},
 	{
-		"name": "Nome 2",
-		"url_avatar": "path",
+		"name": "Kenzinho",
+		"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
 		"message": "Teste 2",
 		"created_at": "2022-08-29T19:24:25.145Z",
 		"updated_at": "2022-08-29T19:24:25.145Z",
 		"userId": 1,
 		"like": 0,
 		"comments": [],
+		"friendsList": [],
 		"id": 2
 	}
 ]
 ```
 
-### **Listar todos os usuarios**
+### **Listar todos os usuários**
 
 > get /users
 
@@ -134,56 +143,53 @@ output:
 		"email": "kenzinho@mail.com",
 		"password": "$2a$10$YQiiz0ANVwIgpOjYXPxc0O9H2XeX3m8OoY1xk7OGgxTnOJnsZU7FO",
 		"name": "Kenzinho",
-		"gender": "f",
+		"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
+		"gender": "Feminino",
 		"city": "Manaus",
-		"state": "Am",
+		"state": "Amazonas",
 		"age": 38,
-		"bio": "",
-		"friendsList": []
+		"bio": "Desenvolvedora fullstack",
+		"friendsList": [],
+		"unFriendsList": [],
+		"likeList": [],
 	},
 	{
+		"id": 2,
 		"email": "rodrigo@mail.com",
 		"password": "$2a$10$N9lpvKwjsCJdxOe2rbXij.wp7NEgjIi0I5zpHl8op8nWNG0Tza2NO",
+		"url_avatar": "https://cdn.pixabay.com/photo/2017/02/16/23/10/smile-2072907__340.jpg",
 		"name": "Rodrigo",
-		"gender": "M",
+		"gender": "Masculino",
 		"city": "Manaus",
-		"state": "Am",
+		"state": "Amazonas",
 		"age": 38,
 		"bio": "Teste",
-		"friendsList": [
-			{
-				"email": "asdas@mail.com",
-				"name": "Rodrigo",
-				"gender": "M",
-				"city": "Manaus",
-				"state": "Am",
-				"age": 38,
-				"bio": "dsadsa",
-				"friendsList": [],
-				"id": 1
-			}
-		],
-		"id": 2
+		"friendsList": [],
+		"unFriendsList": [],
+		"likeList": []
 	}
 ]
 ```
 
-### **Procurar por um usuario**
+### **Procurar por um usuário**
 
 > get /users/:user_id
 
+output:
 ```json
 {
 	"id": 1,
 	"email": "kenzinho@mail.com",
 	"password": "$2a$10$YQiiz0ANVwIgpOjYXPxc0O9H2XeX3m8OoY1xk7OGgxTnOJnsZU7FO",
 	"name": "Kenzinho",
-	"gender": "f",
+	"gender": "Feminino",
 	"city": "Manaus",
-	"state": "Am",
+	"state": "Amazonas",
 	"age": 38,
 	"bio": "",
-	"friendsList": []
+	"friendsList": [],
+	"unFriendsList": [],
+	"likeList": []
 }
 ```
 
@@ -199,29 +205,20 @@ output:
 ```
 output: 
 
-```
+```json
 {
 	"email": "rodrigo@mail.com",
 	"password": "$2a$10$N9lpvKwjsCJdxOe2rbXij.wp7NEgjIi0I5zpHl8op8nWNG0Tza2NO",
+	"url_avatar": "https://cdn.pixabay.com/photo/2017/02/16/23/10/smile-2072907__340.jpg",
 	"name": "Rodrigo",
-	"gender": "M",
+	"gender": "Masculino",
 	"city": "Manaus",
-	"state": "Am",
+	"state": "Amazonas",
 	"age": 38,
 	"bio": "Teste",
-	"friendsList": [
-		{
-			"email": "asdas@mail.com",
-			"name": "Rodrigo",
-			"gender": "M",
-			"city": "Manaus",
-			"state": "Am",
-			"age": 38,
-			"bio": "dsadsa",
-			"friendsList": [],
-			"id": 1
-		}
-	],
+	"friendsList": [],
+	"unFriendsList": [],
+	"likeList":[],
 	"id": 2
 }
 ```
@@ -233,18 +230,11 @@ output:
 {
 	"friendsList": [
 		{
-			
-		"email": "asdas@mail.com",
-		"name": "Rodrigo",
-		"gender": "M",
-		"city": "Manaus",
-		"state": "Am",
-		"age": 38,
-		"bio": "dsadsa",
-		"friendsList": [],
-		"id": 1
-
-        }
+			"url_avatar": "https://cdn.pixabay.com/photo/2018/05/06/03/39/woman-3377839__340.jpg",
+			"name": "Kenzinho",
+			"age": 38,
+			"id": 1
+		},
     ]
 }
 ```
@@ -261,16 +251,11 @@ output:
 	"bio": "dsadsa",
 	"friendsList": [
 		{
-			"email": "asdas@mail.com",
-			"name": "Rodrigo",
-			"gender": "M",
-			"city": "Manaus",
-			"state": "Am",
+			"url_avatar": "https://cdn.pixabay.com/photo/2018/05/06/03/39/woman-3377839__340.jpg",
+			"name": "Kenzinho",
 			"age": 38,
-			"bio": "dsadsa",
-			"friendsList": [],
 			"id": 1
-		}
+		},
 	],
 	"id": 2
 }
@@ -359,4 +344,54 @@ output
 Não é necessário um corpo da requisição.
 ```
 
+<h1 align="center">
+  Comments
+</h1>
 
+### Criar um comentário
+Para o id do comentário vamos usar o uuid.
+> patch /posts/:post_id
+```json
+{
+	"comments": [
+		{
+			"id": "bfd7e496-2ab0-11ed-a261-0242ac120002",
+			"user": {
+				"userId": 2,
+				"name": "rodrigo",
+				"url_avatar": "https://cdn.pixabay.com/photo/2017/02/16/23/10/smile-2072907__340.jpg",
+				"message": "Teste 1",
+				"created_at": "2022-08-29T19:24:25.145Z",
+				"updated_at": "2022-08-29T19:24:25.145Z"
+			}
+		}
+	]
+}
+```
+
+output: 
+```json
+{
+	"id": 1,
+	"name": "Kenzinho",
+	"url_avatar": "https://cdn.pixabay.com/photo/2018/03/06/22/57/portrait-3204843__340.jpg",
+	"message": "Teste 1",
+	"created_at": "2022-08-29T19:24:25.145Z",
+	"updated_at": "2022-08-29T19:24:25.145Z",
+	"userId": 1,
+	"like": 0,
+	"comments": [
+		{
+			"id": "bfd7e496-2ab0-11ed-a261-0242ac120002",
+			"user": {
+				"userId": 2,
+				"name": "rodrigo",
+				"url_avatar": "https://cdn.pixabay.com/photo/2017/02/16/23/10/smile-2072907__340.jpg",
+				"message": "Teste 1",
+				"created_at": "2022-08-29T19:24:25.145Z",
+				"updated_at": "2022-08-29T19:24:25.145Z"
+			}
+		}
+	]
+}
+```

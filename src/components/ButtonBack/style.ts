@@ -6,7 +6,6 @@ export const ContainerButonBack = styled.button`
   width: 6rem;
   background-color: white;
   color: black;
-  font-family: "Inter";
   font-weight: 600;
   font-size: 1rem;
   border-radius: 4px;

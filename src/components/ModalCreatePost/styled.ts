@@ -1,102 +1,186 @@
-import { createGlobalStyle } from "styled-components";
+import styled from 'styled-components';
 
-export const ModalAddContainer = createGlobalStyle`
-  .Modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 0 4%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    height: 100vh;
+export const All = styled.div`
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100vw;
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.8)
+  );
+  padding: 1.25rem;
+
+  z-index: 9999;
+
+  .AddModal {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    
-  }
-  .Modal > div {
-      position: fixed;
-      width: 90%;
-      height: 25rem;
-    border-radius: 8px;
-    max-width: 532px;
-    display: flex;
-    background-color: aliceblue;
-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    background: #f9f9f9;
+    box-shadow: 0 0px 10px 10px rgba(0, 0, 0, 0.45);
+    border-radius: 15px;
+    max-width: 500px;
+    width: 100%;
+    height: 400px;
 
-    .Header_modalAdd{
-        display: flex;
-        justify-content: space-between;
-        width: 85%;
-        margin: 20px;
-        border-bottom: 1px solid gray;
-        padding-bottom: 10px;
-        button{
-            border: none;
-            background-color: transparent;
-            color: black;
-        }
-    }
+    .Head {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 92%;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
-    h3{
-        color: black;
-    }
-    form {
-        display: flex;
-        flex-direction: column;
-        button{
-            background-color: #F20171;
-            opacity: 0.7;
-            color: aliceblue;
-            font-weight: 600;
-            font-size: 1rem;
-            border: none;
-            border-radius: 4px;
-            height: 3rem;
-            width: 100%;
-            &:hover {
-                    opacity: 1;
-                }
-        }
-    }
-     form> textarea {
-        background-color: rgba(0, 0, 0, 0.1);
-        width: 100%;
-        height: 10rem;
-        margin-bottom: 10px;
-        border: none;
-        border-radius: 8px;
-        color: black;
-        font-size: 1rem;
-        padding: 1rem;
-        resize: none;
-    }
-  }
-
-  .Modal > div > div {
-      width: 90%;
-      margin: auto;
-  }
-
-   .Modal> div > div >img {
-        width: 4rem;
-        border: 1px solid black;
-        height: 4rem;
-        border-radius: 50%;
-    }
-
-    .Modal> div > div >span {
-        color: black;
-        font-size: 2rem;
-        font-weight: 500;
-    }
-.imgaAndName{
+      div {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-        gap: 20px;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 10px;
+        margin-top: 10px;
+
+        h2 {
+          color: #000;
+          margin: 0 0 0 5px;
+          font-size: 17px;
+          animation-name: name;
+          animation-duration: 1s linear infinite;
+          animation-direction: alternate;
+          animation-iteration-count: infinite;
+
+          &:hover {
+            cursor: none;
+            background-size: auto auto;
+            background-clip: border-box;
+            background-size: 200% auto;
+            background-image: linear-gradient(-225deg, #ff1361 0%, gray 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: name 1s linear infinite;
+            @keyframes name {
+              to {
+                background-position: 200% center;
+              }
+            }
+          }
+        }
+      }
+
+      button {
+        background: none;
+        padding: 0;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        border: none;
+
+        &:active {
+          color: white;
+          background: #aeaeb5;
+          border-radius: 2px;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
     }
+  }
+
+  .InfoUser {
+    display: flex;
+    align-items: center;
+    width: 92%;
+    margin-top: 10px;
+
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 100%;
+      margin-left: 5px;
+      object-fit: cover;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin: 0 0 0 20px;
+      color: #000;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+    padding: 0 0.3125rem;
+
+    textarea {
+      color: #000;
+      background: #f1f1f1;
+      border-radius: 0 0 10px 10px;
+      border: 1px solid gray;
+      max-width: 449px;
+      max-height: 205px;
+      width: 100%;
+      height: 215px;
+      padding: 5px;
+      transition: 0.2s;
+      resize: none;
+
+      &:hover {
+        border: 1px solid gray;
+        transition: 0.2s;
+      }
+    }
+
+    span {
+      color: red;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    button {
+      background: #f20171;
+      border-radius: 5px;
+      max-width: 150px;
+      width: 100%;
+      height: 30px;
+      margin-top: 10px;
+      border: 2px solid transparent;
+      color: white;
+
+      &:hover {
+        cursor: pointer;
+        animation: backBtn 0.5s linear infinite alternate;
+        animation-iteration-count: infinite;
+
+        @keyframes backBtn {
+          from {
+            background-color: #f20171;
+          }
+          to {
+            background-color: #ac0050;
+          }
+        }
+      }
+
+      &:active {
+        box-shadow: 0 0 5px 2px gray;
+      }
+    }
+  }
 `;

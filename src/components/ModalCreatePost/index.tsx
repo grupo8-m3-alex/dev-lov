@@ -1,48 +1,70 @@
-import { defaultListboxReducer } from "@mui/base";
-import React, { useState } from "react";
-import Modal from "react-modal";
-import { ModalAddContainer } from "./styled";
+import * as yup from 'yup';
+import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-Modal.setAppElement("#root");
+import { UserContext } from '../../contexts/userContext';
+import { GrClose } from 'react-icons/gr';
+import { All } from './styled';
+
+interface IAddPostForm {
+  text: string;
+}
+
+const schema = yup.object().shape({
+  text: yup.string().required('A mensagem não pode ser enviada vazia'),
+});
 
 const ModalAddPost = () => {
-  const [modalIsOpen, setIsOpen] = useState(true);
+  const { user, setShowAddPost, createPost, getPosts } =
+    useContext(UserContext);
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IAddPostForm>({
+    resolver: yupResolver(schema),
+  });
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  const newPost = (data: any) => {
+    const newData = {
+      name: user?.name,
+      url_avatar: user?.url_avatar,
+      message: data?.text,
+      created_at: new Date(),
+      updated_at: new Date(),
+      userId: user?.id,
+      like: 0,
+      comments: [],
+    };
+    createPost(newData);
+  };
 
   return (
-    <>
-      <ModalAddContainer />
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        className="Modal"
-        overlayClassName="Overlay"
-      >
-        <div>
-          <div className="Header_modalAdd">
-            <h3>Criar Publicação</h3>
-            <button onClick={closeModal}>X</button>
-          </div>
-          <div className="imgaAndName">
-            <img src="" alt="" />
-            <span>Joao Vitor Henrique</span>
-          </div>
+    <All>
+      <div className="AddModal">
+        <div className="Head">
           <div>
-            <form>
-              <textarea />
-              <button>Publicar</button>
-            </form>
+            <h2>Criar publicação</h2>
+            <button onClick={() => setShowAddPost(false)}>
+              <GrClose />
+            </button>
           </div>
         </div>
-      </Modal>
-    </>
+        <div className="InfoUser">
+          <img src={user?.url_avatar} />
+          <h2>{user?.name}</h2>
+        </div>
+        <form onSubmit={handleSubmit(newPost)}>
+          <textarea id="text" {...register('text')} placeholder="Digite aqui" />
+          <span>{errors.text?.message}</span>
+          <button type="submit" onClick={() => getPosts()}>
+            Publicar
+          </button>
+        </form>
+      </div>
+    </All>
   );
 };
 

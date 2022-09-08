@@ -1,61 +1,67 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import { ModalFriendContainer } from "./styled";
-import { MdOutlineGroupOff } from "react-icons/md";
+import { useContext } from 'react';
+import Modal from 'react-modal';
+import { ModalFriendContainer } from './styled';
+import { MdOutlineGroupOff } from 'react-icons/md';
+import { UserContext } from '../../contexts/userContext';
+import { useNavigate } from 'react-router-dom';
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
-const ModalFriendList = () => {
-  const [modalIsOpen, setIsOpen] = useState(true);
+interface IModalFriendListProps {
+  closeModal: () => void;
+  isModalOpen: boolean;
+}
 
-  function openModal() {
-    setIsOpen(true);
-  }
+const ModalFriendList = ({
+  closeModal,
+  isModalOpen,
+}: IModalFriendListProps) => {
+  const { user, updateUser } = useContext(UserContext);
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  const navigate = useNavigate();
+
+  const deleteFriend = (id: number) => {
+    const newFriends = user?.friendsList.filter((friend) => friend.id !== id);
+    if (user) {
+      updateUser(user?.id, { friendsList: newFriends });
+    }
+  };
 
   return (
     <>
       <ModalFriendContainer />
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={isModalOpen}
         onRequestClose={closeModal}
-        className="Modal"
+        className="Modal1"
         overlayClassName="Overlay"
       >
         <div>
           <div className="header">
             <h1>Conexões</h1>
-            <button>X</button>
+            <button onClick={closeModal}>X</button>
           </div>
           <div className="MainContainer">
             <ul>
-              <li>
-                <img src="" alt="" />
-                <div>
-                  <span>Joao Vitor Henrique</span>
-                  <span>25 anos</span>
-                </div>
-                <MdOutlineGroupOff />
-              </li>
-              <li>
-                <img src="" alt="" />
-                <div>
-                  <span>Joao Vitor Henrique</span>
-                  <span>25 anos</span>
-                </div>
-                <MdOutlineGroupOff />
-              </li>
-              <li>
-                <img src="" alt="" />
-                <div>
-                  <span>Joao Vitor Henrique</span>
-                  <span>25 anos</span>
-                </div>
-                <MdOutlineGroupOff />
-              </li>
+              {user?.friendsList.map((resp) => (
+                <li key={resp.id}>
+                  <img
+                    src={resp.url_avatar}
+                    alt=""
+                    onClick={() => {
+                      closeModal();
+                      navigate(`/profile/${resp.id}`, { replace: true });
+                    }}
+                  />
+                  <div>
+                    <span>{resp.name}</span>
+                    <span>{resp.age} anos</span>
+                  </div>
+                  <button onClick={() => deleteFriend(resp.id)}>
+                    <MdOutlineGroupOff />
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
