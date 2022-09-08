@@ -14,6 +14,7 @@ export const ModalFriendContainer = createGlobalStyle`
     justify-content: flex-end;
     
   }
+
   .Modal1 > div {
       position: fixed;
       width: 100%;
@@ -45,7 +46,6 @@ export const ModalFriendContainer = createGlobalStyle`
           color: black;
           font-weight: 600;
           font-size: 1rem;
-
           cursor: pointer;
           &:active{
               color: red;
@@ -71,8 +71,8 @@ export const ModalFriendContainer = createGlobalStyle`
       li {
           position: relative;
           display: flex;
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
+          box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+          border-radius: 8px;
           width: 100%;
           justify-content: space-between;
           align-items: center;
@@ -85,7 +85,6 @@ export const ModalFriendContainer = createGlobalStyle`
               border: 1px solid black;
               border-radius: 50%;
               object-fit: cover;
-
               cursor: pointer;
           }
           div{

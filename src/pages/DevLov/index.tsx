@@ -232,12 +232,3 @@ const DevLov = () => {
 };
 
 export default DevLov;
-
-function baljhds() {
-  return (
-    <div className="dropdoen">
-      <div className="inicial"></div>
-      <div className="divqvdjhdf"></div>
-    </div>
-  );
-}
